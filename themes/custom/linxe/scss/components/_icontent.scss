@@ -1,0 +1,96 @@
+body.institucional{
+    ul.nav-tabs{
+        border-bottom: none;
+        display: flex;
+        justify-content: center;
+        li.nav-item{
+            a{
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border: none;
+                border-bottom: 3px solid transparent;
+                font-size: 2rem;
+                color: $color7;
+                text-transform: uppercase;
+                &.active{color: $color1; border-bottom-color: $color1;}
+            }
+            @media(max-width: $breakpoint-md){
+                a{
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+    h3{font-size: 1.2rem;}
+    p{line-height: 1.5;}
+    p.bloques{font-size: .8rem;}
+
+    .accordion{
+        .card{
+            border-radius: 0;
+            border: none;
+            .card-header{
+                padding:0;
+                background: $color1;
+                border-top: 1px solid $color4;
+                h3{
+                    button{
+                        color: white;
+                        font-size: .95rem;
+                        padding: 1rem 2rem 1rem 1rem;
+                        &::after{
+                            content: "\f078";
+                            font-family: "Font Awesome 5 Free";
+                            font-weight: 900;
+                            font-size:1.2rem;
+                            position: absolute;
+                            right: 1rem;
+                            transition: $over;
+                        }
+                        &[aria-expanded="true"]{
+                            &::after{
+                                transform: rotate(180deg);
+                            }
+                        }
+                    }
+                }
+            }
+            .card-body{
+                background: rgba($color: $color4, $alpha: .1);
+                padding: 1.5rem 5rem;
+                ul{
+                    padding: 0;
+                    list-style: none;
+                    li{
+                        margin-bottom: .5rem;
+                        &.tenue{
+                            i{
+                                color: $color5;
+                                opacity: .5;
+                            }
+                        }
+                        @media(max-width: $breakpoint-md){
+                            padding: 1rem 2rem;
+                        }
+                    }
+                    &.interes{
+                        li{
+                            padding-left: 2rem;
+                            position: relative;
+                            margin-bottom: 1rem;
+                            &::before{
+                                content: "\f0a4";
+                                font-family: "Font Awesome 5 Free";
+                                font-weight: 900;
+                                color: $color4;
+                                font-size:1rem;
+                                position: absolute;
+                                left: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+        <div class="modal-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 py-5 cont-form">
+                        <form class="formularioin" action="" name="form_help">
+                            <div class="form-group">
+                                <input type="text" id="nombre" name="nombre" data-msj="Escribe tu nombre"/>
+                                <label class="label" for="nombre">Primer Nombre:</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="apellido" name="apellido" data-msj="Escribe tu apellido" />
+                                <label class="label" for="apellido">Primer Apellido:</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="documento" name="documento" data-msj="Digita tu número de documento"/>
+                                <label class="label" for="documento">Número de Documento:</label>
+                            </div>
+                            <div class="form-group">
+                                <select id="empresa" name="empresa" data-msj="Selecciona tu empresa">
+                                    <option value=""></option>
+                                    <option value="Alcaldia de Villavicencio">Alcaldia de Villavicencio</option>
+                                    <option value="Gobernación del Guaviare">Gobernación del Guaviare</option>
+                                    <option value="Cormacarena">Cormacarena</option>
+                                    <option value="Tauramena">Tauramena</option>
+                                    <option value="Gobernación Guainía">Gobernación Guainía</option>
+                                    <option value="San José del Guaviare">San José del Guaviare</option>
+                                </select>
+                                <label class="label" for="empresa">Selecciona tu empresa:</label>
+                            </div>
+                            <input type="submit" id="btn-submit" class="btn1 w-100 mt-md-2" value="Recuperar Contraseña" />
+                            <div id="errorMsj"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

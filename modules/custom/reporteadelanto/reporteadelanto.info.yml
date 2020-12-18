@@ -1,0 +1,5 @@
+name: Reporte de adelanto de nómina
+type: module
+description: Reporte de adelanto de nómina de las empresas.
+core: 8.x
+package: Linxe

@@ -1,0 +1,33 @@
+confirmacionempresas.index:
+  path: '/admin/confirmacionempresas'
+  defaults:
+    _controller: '\Drupal\confirmacionempresas\Controller\ConfirmacionController::index'
+    _title: 'Confirmación de Adelantos de Salario - Empresas'
+  requirements:
+    _permission: 'access confirmacionempresas'
+  options:
+    no_cache: 'TRUE'
+
+confirmacionempresas.rechazar:
+  path: '/admin/confirmacionempresas/rechazar/{id}'
+  defaults:
+    _form: '\Drupal\confirmacionempresas\Form\RechazarAdelanto'
+    _title: 'Rechazar Adelanto Salario'
+  requirements:
+    _permission: 'access confirmacionempresas'
+
+confirmacionempresas.editarcuenta:
+  path: '/admin/confirmacionempresas/editarcuenta/{id}'
+  defaults:
+    _form: '\Drupal\confirmacionempresas\Form\EditarCuenta'
+    _title: 'Editar Cuenta Bancaria Solicitud'
+  requirements:
+    _permission: 'access confirmacionempresas'
+
+confirmacionempresas.aprobartodas:
+  path: '/admin/confirmacionempresas/aprobar'
+  defaults:
+    _form: '\Drupal\confirmacionempresas\Form\AprobarAdelantos'
+    _title: 'Aprobar Adelantos de Salario Pendientes'
+  requirements:
+    _permission: 'access confirmacionempresas'

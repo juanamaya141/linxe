@@ -1,0 +1,5 @@
+name: Dispersión de Nómina
+type: module
+description: Importación datos de adelanto de nómina
+core: 8.x
+package: Linxe

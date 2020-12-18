@@ -1,0 +1,7 @@
+conciliacionadelantos.pagaradelantosfacturados:
+  path: '/admin/conciliaradelantos'
+  defaults:
+    _form: '\Drupal\conciliacionadelantos\Form\ConciliacionAdelantosPagados'
+    _title: 'Conciliar Adelantos de Salario Pagados'
+  requirements:
+    _permission: 'access conciliacionadelantos'

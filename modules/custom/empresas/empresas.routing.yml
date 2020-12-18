@@ -1,0 +1,31 @@
+empresas.registrar_empresa:
+  path: '/admin/empresa/registrar-empresa'
+  defaults:
+    _form: '\Drupal\empresas\Form\RegistrarEmpresa'
+    _title: 'Empresas Register Form'
+  requirements:
+    _permission: 'access empresas'
+  options:
+    no_cache: 'TRUE'
+empresas.eliminar_empresa:
+  path: '/admin/empresa/eliminar/{id}'
+  defaults:
+    _form: '\Drupal\empresas\Form\EliminarEmpresa'
+    _title: 'Eliminar Empresa'
+  requirements:
+    _access: 'TRUE'
+empresas.importar_empresa:
+  path: '/admin/empresa/importar'
+  defaults:
+    _form: '\Drupal\empresas\Form\ImportarEmpresa'
+    _title: 'Importar Empresas'
+  requirements:
+    _permission: 'access empresas'
+  options:
+    no_cache: 'TRUE'
+empresas.index:
+  path: '/admin/empresas'
+  requirements:
+    _permission: 'access empresas'
+  options:
+    no_cache: 'TRUE'

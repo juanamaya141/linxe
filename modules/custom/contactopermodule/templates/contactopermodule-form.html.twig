@@ -1,0 +1,58 @@
+							<form class="formularioin" action="" name="form_contacto_personas" id="contacto_personas">
+                                <div class="form-row">
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                           {{ form.nombre }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                        	{{ form.apellido }}
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="form-row">
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            {{ form.celular }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            {{ form.email }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-12 px-3">
+                                        <div class="form-group">
+                                            {{ form.empresa }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-12 px-3">
+                                        <div class="form-group">
+                                            {{ form.asunto }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-12 px-3">
+                                        <div class="form-group">
+                                            {{ form.mensaje }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row d-flex justify-content-center">
+                                    <div class="col-md-6 text-center">
+                                    	{{ form.actions.submit }}
+
+				        				{{ form.form_build_id }}
+										{{ form.form_token }}
+										{{ form.form_id }}
+                                    </div>
+                                </div>
+                                <div id="errorMsj" class="errorMsj"></div>
+                            </form>

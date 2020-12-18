@@ -1,0 +1,329 @@
+linxecredit.config:
+  path: '/admin/config/development/linxecredit/config'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\LinxeModuleConfigForm'
+    _title: 'Linxe Credit Libranzas Module Configuration'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    no_cache: 'TRUE'
+linxecredit.loginform:
+  path: '/loginform'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\LoginForm'
+    _title: 'Linxe Login Form'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+linxecredit.registerform:
+  path: '/registerform'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\RegisterForm'
+    _title: 'Linxe Register Form'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+linxecredit.get_cargos_tiposcontrato:
+  path: '/servicios/cargosytiposcontrato/{idempresa}'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::getCargosTiposContrato'
+    _title: 'Servicio'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.password-create: 
+  path: '/password-create'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\PasswordForm'
+    _title: 'Linxe Password Create Form'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+linxecredit.showmessage: 
+  path: '/response-message'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::showResponseMessage'
+    _title: 'Mensaje de Respuesta'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.dashboard-seleccion: 
+  path: '/dashboard/seleccion'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardController::getSeleccionCredito'
+    _title: 'Dashboard Selección de Crédito'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.setseleccioncredito:
+  path: '/servicios/setseleccioncredito'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::setSeleccionCredito'
+    _title: 'WS Selección Crédito'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.dashboard-contrato: 
+  path: '/dashboard/contrato'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardController::getContrato'
+    _title: 'Dashboard Contrato'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.dashboard-regresarseleccion: 
+  path: '/dashboard/regresarseleccion'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardController::getRegresarSeleccion'
+    _title: 'Dashboard Regresar Selección'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.firmacontratoform:
+  path: '/firmacontratoform'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\FirmaContratoForm'
+    _title: 'Linxe Firmar Contrato Form'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+linxecredit.lanzarotp:
+  path: '/servicios/lanzarotp'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::lanzarOTP'
+    _title: 'Lanzar envío OTP'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.dashboard-desembolso: 
+  path: '/dashboard/desembolso'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardController::getDesembolso'
+    _title: 'Dashboard Desembolso'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.dashboard-miscreditos: 
+  path: '/dashboard/miscreditos'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardController::getMisCreditos'
+    _title: 'Dashboard Mis Créditos'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.dashboard-informacionpersonal:
+  path: '/dashboard/informacionpersonal'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\InformacionPersonalForm'
+    _title: 'Dashboard Información Personal'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+linxecredit.dashboard-preferenciasform:
+  path: '/dashboard/preferenciasform'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\PreferenciasForm'
+    _title: 'Dashboard Preferencias'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+linxecredit.getpdf:
+  path: '/servicios/getpdfcontrato'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::getPDFContract'
+    _title: 'Get PDF Contrato'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.cerrar-sesion: 
+  path: '/cerrarsesion'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardController::cerrarSesion'
+    _title: 'Cerrar Sesión'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.rememberform:
+  path: '/remember'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\RememberForm'
+    _title: 'Linxe Remember Password Form'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+linxecredit.recoverypassform:
+  path: '/recoverypass'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\RecoveryPassForm'
+    _title: 'Linxe Recovery Password Form'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+linxecredit.setpagareblanco:
+  path: '/servicios/setpagareblanco'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::setPagareBlanco'
+    _title: 'WS Generación Pagaré en Blanco'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+linxecredit.volver-editar-pass: 
+  path: '/volverpass'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardController::volverPass'
+    _title: 'Volver a Editar Password'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.dashboard-adelanto: 
+  path: '/dashboard/adelanto'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardAdelantoController::getSeleccionAdelanto'
+    _title: 'Dashboard Selección de Adelanto de Nómina'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.dashboard-misadelantos: 
+  path: '/dashboard/misadelantos'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardAdelantoController::getMisAdelantos'
+    _title: 'Dashboard Mis Adelantos'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.consultapagare:
+  path: '/consultapagare'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardAdelantoController::getConsultaPagare'
+    _title: 'Dashboard Consulta Pagare'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+
+linxecredit.setseleccionadelanto:
+  path: '/servicios/setseleccionadelanto'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::setSeleccionAdelanto'
+    _title: 'WS Selección Adelanto Nómina'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.sendOTPTest:
+  path: '/sendotptest'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardAdelantoController::getSendOTP'
+    _title: 'Send OTP'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.dashboard-contrato-adelanto: 
+  path: '/dashboard/contrato-adelanto'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardAdelantoController::getContratoAdelanto'
+    _title: 'Dashboard Contrato Adelanto'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.getpdfpagare:
+  path: '/servicios/getpdfpagare'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::getPDFPagare'
+    _title: 'Get PDF Contrato'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+  
+linxecredit.lanzarotpadelanto:
+  path: '/servicios/lanzarotpadelanto'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::lanzarOTPAdelanto'
+    _title: 'Lanzar envío OTP Adelanto'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.datosempresa:
+  path: '/dashboard/datos-empresa'
+  defaults:
+    _form: '\Drupal\linxecredit\Form\DatosEmpresaForm'
+    _title: 'Dashboard Datos Empresa'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.dashboard-desembolsoadelanto: 
+  path: '/dashboard/desembolso-adelanto'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardAdelantoController::getDesembolsoAdelanto'
+    _title: 'Dashboard Desembolso Adelanto'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.get_empresa_by_actividad:
+  path: '/servicios/getempresabyactividad/{actividad}'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\ServiciosController::getEmpresasByActividad'
+    _title: 'Servicio Obtener Empresas por Actividad Económica'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.creacionmasivaempresasDS:
+  path: '/admin/creacionmasivaempresasds'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardAdelantoController::creacionMasivaEmpresasDataScoring'
+    _title: 'Creación Masiva Empresas en Datascoring'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'
+
+linxecredit.creacionmasivausuariosds:
+  path: '/admin/creacionmasivausuariosds'
+  defaults:
+    _controller: '\Drupal\linxecredit\Controller\DashboardAdelantoController::creacionMasivaUsuariosDataScoring'
+    _title: 'Creación Masiva Usuarios en Datascoring'
+  requirements:
+    _permission: 'access linxecredit'
+  options:
+    no_cache: 'TRUE'

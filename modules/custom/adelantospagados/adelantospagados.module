@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Contains adelantospagados.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
+use Drupal\Core\Routing;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormBase;
+use Symfony\Component\HttpFoundation\Response;
+/**
+ * Implements hook_help().
+ */
+
+
+    function obtener_resultados($uid) {
+	    $res = array();
+
+        $db = \Drupal::database();
+        $query = $db->select('liquidaciones_an','liq');
+        $query->join('adelantos_nomina', 'an', 'liq.idsolicitud = an.idadelanto');
+        $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+        $query->join('empresas', 'emp', 'reg.idempresa = emp.idempresa');
+        $query->fields('liq');
+        $query->fields('an',["idadelanto","estado_general_solicitud","cuota_actual","cuotas_pactadas","estado_liquidacion","fecha_hora_liquidacion","fecha_hora_desembolso","saldo_pendiente","valor_solicitado","administracion","seguros","tecnologia","iva"]);
+        $query->fields('reg',["tipodocumento","documento","nombre","primer_apellido","segundo_apellido"]);
+        $query->condition('an.estado_general_solicitud',"en_proceso_liquidacion");
+        $query->condition('liq.estado',"pagado");
+        $query->condition('emp.iduser',$uid);
+        $query->condition('liq.fecha_hora_pago',[date("Y-m-d", strtotime("-1 day")),date("Y-m-d", strtotime("+1 day"))],'BETWEEN');
+
+
+        $results = $query->execute()->fetchAll();
+        $ret = [];
+        
+        foreach ($results as $row) {
+            $valor_adelanto = $row->valor_solicitado + $row->administracion + $row->seguros + $row->tecnologia + $row->iva;
+            if($row->intereses_mora==null)
+            {
+                $row->intereses_mora = 0;
+            }
+
+            $saldo_mora = 0;
+            if($row->intereses_mora > 0)
+            {
+                $saldo_mora = $row->valor - $row->intereses_mora;
+            }
+            $ret[] = [
+                'idadelanto' => $row->idadelanto,
+                'tipoDoc' => $row->tipodocumento,
+                'doc' => $row->documento,
+                'nombre' => $row->nombre.' '.$row->primer_apellido,
+                'valorAdelanto' => '$ '.number_format($valor_adelanto,0,",","."),
+                'saldoCorte' => '$ '.number_format($row->saldo_pendiente,0,",","."),
+                'numCuota' => $row->num_cuota,
+                'saldoMora' => '$ '.number_format($saldo_mora,0,",","."),
+                'interesMora' => '$ '.number_format($row->intereses_mora,0,",","."),
+                'valorFacturado' => '$ '.number_format($row->valor,0,",","."),
+                'valorPagar' => '$ '.number_format($row->valor_pagado,0,",","."),
+            ];
+        }
+        return $ret;
+    }
+
+
+

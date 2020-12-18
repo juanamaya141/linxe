@@ -1,0 +1,608 @@
+/*1024*/
+.logo {
+    width: 170px;
+}
+
+.header-derecha li a, .header-derecha li button{
+    line-height: 72px;
+    padding: 0 20px;
+}
+
+.cotizador {
+    width: 330px;
+    margin-top: 0;
+}
+
+.slide-principal img {
+    width: 124%;
+}
+
+.tab-c .slick-slide {
+    max-width: 290px;
+}
+
+
+
+
+
+
+/*960*/
+@media only screen and (max-width : 960px) {
+    .btn-menu {
+        position: absolute;
+        top: 22px;
+        left: 0;
+        display: inline-block;
+    }
+
+    .cont-menu {
+        position: fixed;
+        background-color: #fff;
+        width: 300px;
+        top: 0;
+        right: -300px;
+        height: 100%;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        text-align: center;
+        transition: 0.5s all;
+    }
+
+    .cont-header {
+        text-align: center;
+    }
+
+    .cont-menu.add-menu {
+        right: 0;
+        transition: 0.5s all;
+    }
+
+    #menu {
+        display: block;
+    }
+
+    #menu ul li {
+        display: block;
+        margin-right: 0;
+        border-bottom: 1px solid #77b0bb;
+    }
+
+    #menu ul li a {
+        /*line-height: 55px;*/
+        text-align: center;
+        display: block;
+    }
+
+    .header-derecha {
+        top: initial;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .header-derecha li {
+        float: none;
+        text-align: center;
+    }
+
+    .cont-slide {
+        max-width: 350px;
+    }
+
+    .movil {
+        width: 62%;
+        top: -70px;
+    }
+
+    .tab-c .slick-slide {
+        max-width: 230px;
+    }
+
+    .slide-principal img {
+        width: 160%;
+    }
+
+    .tab-c .slick-slide {
+        max-width: 290px;
+    }
+
+    .caracteristicas {
+        max-width: 100%;
+    }
+
+    .scrollable-container {
+        overflow-x: scroll;
+    }
+
+    .cont-requisitos {
+        width: 60%;
+    }
+
+    .tab-c .slick-slide {
+        max-width: 220px;
+    }
+
+    footer {
+        margin-bottom: 0;
+    }
+
+    .descrip-expo p {
+        margin: 10% 5% 0 0;
+    }
+
+    .banner-webinar {
+        background-position: -10px 0;
+    }
+
+    .banner-webinar h2{
+        color: #A71229;
+    }
+
+    .banner-webinar h3{
+        color: #0F4E57;
+    }
+
+
+    .tabbers.tabbers-simulador {
+        margin-top: -34%;
+    }
+
+}
+
+
+
+/*728*/
+@media only screen and (max-width : 728px) {
+    .cotizador {
+        width: 96%;
+        position: relative;
+        margin: 0 auto;
+        display: block;
+        top: 0;
+        right: 0;
+    }
+
+    ul.slide-principal {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin-top: 40px;
+    }
+
+
+    .cont-slide {
+        max-width: 100%;
+    }
+
+    .banner-uno {
+        background-position: -90px 0;
+        padding: 50px 5%;
+    }
+
+    .contratos {
+        background-position: -200px 0;
+        padding: 90px 2% 40px 2%;
+    }
+
+    .cont-footer ul {
+        margin-right: 30px;
+    }
+
+    .movil {
+        width: 52%;
+        top: -50px;
+    }
+
+    .copy-modal {
+        margin: 40px 0 20px 20px;
+    }
+
+    .tab-c .slick-slide {
+        max-width: 270px;
+    }
+
+    .cont-slide {
+        bottom: 20%;
+    }
+
+    header .menuBar .cont-login {
+        display: none !important;
+    }
+
+    .info-expo {
+        width: 100%;
+    }
+
+    .descrip-expo {
+        width: 100%;
+    }
+
+    .descrip-expo p {
+        margin: 30px 5% 0 5%;
+    }
+
+    .cont-banner .cont-btn {
+        margin-bottom: -130px;
+        text-align: center;
+    }
+
+    .expositor {
+        padding: 110px 0 50px 0;
+    }
+
+    .cont-banner-webinar {
+        margin-bottom: 50px;
+    }
+
+    .cont-banner-webinar {
+        margin: 260px 0 20px 0;
+    }
+
+
+
+    .tabbers.tabbers-simulador {
+        position: relative !important;
+        top: 0 !important;
+        right: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    .cotizador, .adelanto {
+        width: 100%;
+    }
+
+}
+
+
+/*600*/
+@media only screen and (max-width : 600px) {
+.movil {
+    width: 100%;
+    top: 0;
+    position: relative;
+    margin-bottom: -140px;
+}
+
+.cont-requisitos {
+    width: 100%;
+}
+
+.redes {
+    position: relative;
+    top: 0;
+    right: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.introduccion-webinar h3, .cont-webinar-gratuito {
+    width: 95%;
+}
+
+.tiempo-webinar .cols3 .col {
+    width: 100%;
+}
+
+
+.tab-c .slick-slide {
+    max-width: 220px;
+}
+
+.movil {
+    margin-bottom: -30px;
+}
+
+div#block-contactofooter {
+    display: none;
+}
+
+footer .redes {
+    display: none;
+}
+
+main.pb-md-6.pb-4.class-como-funciona .text4 {
+    margin-top: 0;
+}
+
+div#beneficiosContent {
+    margin: 0 !important;
+}
+
+.cont-slide {
+    bottom: 50px;
+}
+
+body.institucional .accordion .card .card-body ul li {
+    padding: 0;
+}
+
+div#faqs .card-body {
+    padding: 10px;
+}
+
+
+}
+
+
+
+/*480*/
+@media only screen and (max-width : 480px) {
+
+
+.cont-menu {
+    width: 180px;
+    right: -180px;
+}
+
+.slick-dots {
+    bottom: -30px !important;
+}
+
+.movil {
+    margin-bottom: -40px;
+}
+
+.cont-footer ul {
+    margin-right: 0;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.redes {
+    text-align: left;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.copy-foot {
+    text-align: center;
+}
+
+.cont-modal form {
+    max-width: 85%;
+}
+
+.cont-modal {
+    margin-top: 10px;
+}
+
+.cont-slide {
+    text-align: center;
+}
+
+.cont-slide h2 {
+    text-align: center;
+}
+
+.cotizador {
+    padding: 0;
+}
+
+#simulador .form-element .newRange {
+    margin: 0rem auto 0;
+}
+
+.cuota {
+    padding-bottom: 0px;
+}
+
+
+.banner-uno {
+    padding: 300px 5% 20px 5%;
+    background-image: url(../images/onda-linxe-movil.jpg) !important;
+    margin-bottom: 100px;
+}
+
+.cont-banner h2, .cont-banner-webinar h2, .tiempo-webinar h2 {
+    /*color: #fff;*/
+    font-size: calc(30px + (45 - 30) * ((100vw - 300px) / (1500 - 300)));
+}
+
+.cont-banner h3 {
+    /*color: #fff;*/
+    font-size: calc(28px + (35 - 28) * ((100vw - 300px) / (1500 - 300)));
+}
+
+.cont-banner .cont-btn {
+    margin-top: 50px;
+    text-align: center;
+    margin-bottom: -96px;
+}
+
+#block-textorequisitos h2 {
+    font-size: calc(30px + (35 - 30) * ((100vw - 300px) / (1500 - 300)));
+}
+
+.carousel .slick-list.draggable {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.contratos {
+    background-image: url(../images/contrato-virtual-movil.jpg) !important;
+    padding: 20px 2% 300px 2%;
+    margin-bottom: 100px;
+    position: relative;
+}
+
+.contratos h2 strong {
+    color: #A71229;
+}
+
+.contratos .cont-btn {
+    margin-top: 30px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: -77px;
+}
+
+#empleados:after, #empresas:after{
+    display: none;
+}
+
+.aliados h2 {
+    font-size: calc(30px + (35 - 30) * ((100vw - 300px) / (1500 - 300)));
+}
+
+.slide-principal img {
+    width: 200%;
+}
+
+ul#beneficiosTabs {
+    margin-top: 0;
+}
+
+.cont-slide {
+    bottom: 20px;
+}
+
+.expositor {
+    overflow: hidden;
+    padding: 30px 0 50px 0;
+}
+
+
+
+}
+
+
+/*471*/
+@media only screen and (max-width : 471px) {
+.tab-c .slick-slide {
+    max-width: 190px;
+}
+
+
+
+}
+
+/*471*/
+@media only screen and (max-width : 461px) {
+.tab-c .slick-slide {
+    max-width: 180px;
+}
+
+
+
+}
+
+
+
+/*420*/
+@media only screen and (max-width : 420px) {
+.tab-c .slick-slide {
+    max-width: 310px;
+}
+
+.carousel .slick-slide > div {
+    padding: 0 10px;
+}
+
+
+}
+
+
+/*390*/
+@media only screen and (max-width : 390px) {
+.tab-c .slick-slide {
+    max-width: 300px;
+}
+
+
+
+}
+
+
+/*370*/
+@media only screen and (max-width : 370px) {
+.tab-c .slick-slide {
+    max-width: 290px;
+}
+
+
+
+}
+
+
+/*360*/
+@media only screen and (max-width : 360px) {
+.tab-c .slick-slide {
+    max-width: 280px;
+}
+
+
+
+}
+
+/*340*/
+@media only screen and (max-width : 340px) {
+.tab-c .slick-slide {
+    max-width: 270px;
+}
+
+
+
+}
+
+
+/*340*/
+@media only screen and (max-width : 340px) {
+.tab-c .slick-slide {
+    max-width: 255px;
+}
+
+
+
+}
+
+
+/*310*/
+@media only screen and (max-width : 310px) {
+.tab-c .slick-slide {
+    max-width: 245px;
+}
+
+
+
+}
+
+
+/*310*/
+@media only screen and (max-width : 300px) {
+.tab-c .slick-slide {
+    max-width: 235px;
+}
+
+
+
+}
+
+
+/*290*/
+@media only screen and (max-width : 290px) {
+.tab-c .slick-slide {
+    max-width: 218px;
+}
+
+
+
+}
+
+
+@media (max-width: 767px) {
+   input::-webkit-calendar-picker-indicator { 
+      display: none; 
+   }
+   input[type="date"]::-webkit-input-placeholder { 
+      visibility: hidden !important;
+   } 
+}
+
+
+
+.tabbers.tabbers-simulador {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -5%;
+}

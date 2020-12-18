@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Contains dispersion.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
+use Drupal\Core\Routing;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormBase;
+use Symfony\Component\HttpFoundation\Response;
+/**
+ * Implements hook_help().
+ */
+
+
+    function dispersion_theme() {
+    // We use a template file to allow for translation of blocks of content.
+    // Therefore we need to add this content at the theming layer.
+        return [
+            'dispersion_description' => [
+            'template' => 'description',
+            'variables' => [],
+            ],
+        ];
+    }
+
+    function get_results($id) {
+	    $res = array();
+
+        $query = db_select('registrados_an', 'r')                
+                ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                ->limit(15);
+        $query->join('adelantos_nomina', 'an', 'an.idregistro = r.idregistro');
+        $query
+            ->fields('r', ['nombre','primer_apellido','segundo_apellido','tipodocumento','documento'])
+            ->fields('an', ['idadelanto','numero_cuenta','banco','estado_desembolso','fecha_hora_desembolso','saldo_pendiente','estado_general_solicitud'])
+            ->condition('an.idadelanto',$id,'IN');
+        $results = $query->execute()->fetchAll();
+        $ret = [];
+        
+        foreach ($results as $row) {
+            
+            $ret[] = [
+                'referencia' => $row->idadelanto,
+                'nombres'=>  $row->nombre ,
+                'apellidos' => $row->primer_apellido,
+                'tipoDocumento' => $row->tipodocumento,
+                'documento' => $row->documento,
+                'banco' => $row->banco,
+                'numeroProducto' => $row->numero_cuenta,
+                'estadoDesembolso' => $row->estado_desembolso,
+                'fechaDesembolso' => $row->fecha_hora_desembolso,
+                'saldo' => $row->saldo_pendiente,
+                'estadoSolicitud' => $row->estado_general_solicitud,
+            ];
+        }
+        return $ret;
+    }
+
+
+

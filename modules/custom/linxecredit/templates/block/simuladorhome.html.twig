@@ -1,0 +1,48 @@
+                            <div class="cont-form d-flex w-100" id="simulador">
+                                <div class="formulario d-flex flex-column w-100" id="homesimulador" name="simulador">
+                                    <div class="form-element d-flex flex-column pt-md-3 pt-2 cuanto-necesita bb margin">
+                                        <label for="cantidad">¿Cuanto Necesitas?</label>
+                                        <div class="form-item d-flex">
+                                            <button type="button" id="btnMenos" class="btnMenos">
+                                                <i class="boto-icon">&#xe801;</i>
+                                                <div class="rangos" id="r_min_cantidad"></div>
+                                            </button>
+                                            <div class="valor">
+                                                <span class="unidad mr-2">$</span>
+                                                <span class="num" id="catidadVal"></span>
+                                            </div>
+                                            <button type="button" id="btnMas" class="btnMas">
+                                                <i class="boto-icon">&#xe800;</i>
+                                                <div class="rangos" id="r_max_cantidad"></div>
+                                            </button>
+                                        </div>
+                                        <input type="number" name="cantidad" id="cantidad" class="d-none" />
+                                    </div>
+                                    <div class="form-element plazo bb margin">
+                                        <label for="plazo">¿A qué plazo?</label>
+                                        <div class="valor">
+                                            <span class="num mr-2" id="plazoVal"></span>
+                                            <span class="unidad">MESES</span>
+                                        </div>
+                                        <div class="newRange">
+                                            <input type="range" id="plazo" class="custom-range" name="plazo" min="{{gl_meses_min}}"
+                                                max="{{gl_meses_max}}" />
+                                        </div>
+                                        <!--
+                                        <div class="form-item">
+                                            <div class="rangos" id="r_min_meses"></div>
+                                            <div class="rangos" id="r_max_meses"></div>
+                                        </div>
+                                        -->
+                                    </div>
+                                    <div class="form-element border-bottom-0 cuota margin">
+                                        <label for="cuota">Tu cuota mensual</label>
+                                        <div class="valor">
+                                            <span class="unidad mr-2">$</span>
+                                            <span class="num" id="cuotaVal"></span>
+                                        </div>
+                                        <input type="text" name="cuota" id="cuota" class="d-none" />
+                                    </div>
+                                    <a href="/registerform" class="btn1 w-100 mt-auto">¡Solicítalo Aquí!</a>
+                                </div>
+                            </div>

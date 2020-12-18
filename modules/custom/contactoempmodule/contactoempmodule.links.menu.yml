@@ -1,0 +1,7 @@
+contactoempmodule.admin:
+  title: 'Contacto Empresas Linxe Module Configuration'
+  description: 'Opciones de configuración módulo de contacto empresas'
+  parent: system.admin_config_development
+  # menu_name: main
+  route_name: contactoempmodule.config
+  weight: 1

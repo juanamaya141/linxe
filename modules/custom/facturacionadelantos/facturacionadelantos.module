@@ -1,0 +1,491 @@
+<?php
+
+/**
+ * @file
+ * Contains linxecredit.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function facturacionadelantos_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the linxecredit module.
+    case 'help.page.linxecredit':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This show the code package generated.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function facturacionadelantos_theme() {
+  return $theme;
+}
+
+
+/**
+* Implements hook_cron().
+*/
+function facturacionadelantos_cron(){
+  //$config = $this->config('linxecredit.settings');
+  $paththeme = base_path().drupal_get_path('theme', 'linxe');
+  $basepath = base_path();  
+
+  $interes_mora = \Drupal::config('linxecredit.settings')->get('linxecredit.adelanto_intereses_mora');
+  $adelanto_dias_anteriores_corte_para_facturacion = \Drupal::config('linxecredit.settings')->get('linxecredit.adelanto_dias_anteriores_corte_para_facturacion');
+
+  $fecha_actual = date("Y-m-d");
+  //$fecha_actual = "2020-11-16";
+  
+  //sumo 1 día, para obtener el día de mañana
+  $diaManana = date("j",strtotime($fecha_actual."+ ".$adelanto_dias_anteriores_corte_para_facturacion." days")); //día del mes sin ceros iniciales
+  $fechaManana = date("Y-m-d",strtotime($fecha_actual."+ ".$adelanto_dias_anteriores_corte_para_facturacion." days")); //fecha de mañana el día del corte de la empresa
+  //buscar empresas con convenio
+  
+  $db_or = db_or();
+  $db_or->condition('emp.fecha_corte_1',$diaManana,'=');
+  $db_or->condition('emp.fecha_corte_2',$diaManana,'=');
+
+  $db_or2 = db_or();
+  $db_or2->condition('emp.fecha_ultimo_corte_facturado', $fechaManana, "<");
+  $db_or2->isNull('emp.fecha_ultimo_corte_facturado');
+
+  $query =  db_select('empresas','emp')
+                ->fields('emp')
+                ->condition('emp.estado_convenio', "aceptado" )
+                ->condition($db_or)
+                ->condition($db_or2)
+                ->execute();
+  
+  $empresasArray = $query->fetchAll();
+  
+  
+  foreach ($empresasArray as $empresa) {
+    
+    $idempresa = $empresa->idempresa;
+    
+    $periodicidad_pago = $empresa->periodicidad_pago; //quincenal o mensual
+
+    $diaCorte1 = $empresa->fecha_corte_1;
+    if($periodicidad_pago == "quincenal")
+    {
+      $diaCorte2 = $empresa->fecha_corte_2;
+    }else{
+      $diaCorte2 = 0;
+    }
+
+    if($diaManana == $diaCorte2)
+      $diaSeleccionado = $diaCorte2;
+    else
+      $diaSeleccionado = $diaCorte1;
+
+    $fechaHoraActual =  date("Y-m-d")." 00:00:00";  //se tienen en cuenta las solicitudes  con la fecha actual a las 0 horas, es decir un dia antes del corte de la empresa
+    //$fechaHoraActual =  "2020-11-16 00:00:00";
+    $arrayEstadosPermitidos = ["desembolsado","en_proceso_liquidacion"];
+
+    $query = db_select('adelantos_nomina','an');
+    $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+    $query->fields('an');
+    $query->fields('reg',["tipodocumento","documento","nombre","primer_apellido","segundo_apellido"]);
+    $query->condition('an.estado_general_solicitud',$arrayEstadosPermitidos,"in");
+    $query->condition('an.fecha_hora_desembolso',$fechaHoraActual,"<=");
+    
+    $query->condition('reg.idempresa',$idempresa);
+    $result = $query->execute();
+
+    foreach($result as $solicitudAN){
+
+      $idadelanto = $solicitudAN->idadelanto;
+      $saldo_pendiente = $solicitudAN->saldo_pendiente;
+      $cuotas_pactadas = $solicitudAN->cuotas_pactadas;
+      $cuota_actual = $solicitudAN->cuota_actual;
+
+      if(!is_numeric($cuotas_pactadas))
+      {
+        $cuotas_pactadas = 0;
+      }
+
+      if(!is_numeric($cuota_actual))
+      {
+        $cuota_actual = 0;
+      }
+
+      
+
+      //Creamos la cuota nueva a facturar
+      if($cuotas_pactadas == 0)
+      {
+        if($periodicidad_pago == "quincenal"){
+          $cuotas_pactadas_new = 2;
+        }else {
+          $cuotas_pactadas_new = 1;
+        }
+      }else{
+        $cuotas_pactadas_new = $cuotas_pactadas;
+      }
+
+      
+
+
+      $cuota_a_facturar = $cuota_actual + 1;
+      $fecha_hora_facturacion = date("Y-m-d H:i:s");
+      //$fecha_hora_facturacion = "2020-11-16 08:00:00";
+      //calculo el valor a pagar en la cuota
+      if($cuota_actual==0)
+      {
+        $valor_cuota = ceil($saldo_pendiente/$cuotas_pactadas_new);
+      }else if($cuota_actual < $cuotas_pactadas_new){
+        $valor_cuota = ceil($saldo_pendiente/($cuotas_pactadas_new - $cuota_actual));
+      }else{
+        $valor_cuota = ceil($saldo_pendiente);
+      }
+      
+        //calculo de los intereses de mora
+      if($cuota_a_facturar > $cuotas_pactadas_new) //2 es el máximo permitido para el adelanto de nómina cuando se paga quincenal
+      {
+        $valor_intereses = $valor_cuota * $interes_mora / 100;
+        $valor_cuota += $valor_intereses ;//actualizo el valor de la cuota con los intereses incluidos
+      }
+
+      $valor_pagado = 0;
+      $valor_conciliado = 0;
+      $estado = "facturado" ;
+
+
+      ////
+      $arrayFields=[];
+      $arrayFields["idempresa"] = $idempresa;
+      $arrayFields["idsolicitud"] = $idadelanto;
+      $arrayFields["num_cuota"] = $cuota_a_facturar;
+      $arrayFields["fecha_hora_facturacion"] = $fecha_hora_facturacion;
+      $arrayFields["valor"] = $valor_cuota;
+      $arrayFields["intereses_mora"] = $valor_intereses;
+      $arrayFields["valor_pagado"] = $valor_pagado;
+      $arrayFields["valor_conciliado"] = $valor_conciliado;
+      $arrayFields["estado"] = $estado;
+
+      // Create an object of type Select.
+			$query = db_select('liquidaciones_an', 'liq');
+			$cantidad = $query->condition('liq.idempresa', $idempresa , '=')
+                        ->condition('liq.idsolicitud', $idadelanto , '=')
+                        ->condition('liq.num_cuota', $cuota_a_facturar , '=')
+                        ->countQuery()->execute()->fetchField();
+			if($cantidad > 0)
+			{
+				
+				$update = db_update('liquidaciones_an')
+							->fields($arrayFields)
+							->condition('idempresa', $idempresa , '=')
+              ->condition('idsolicitud', $idadelanto , '=')
+              ->condition('num_cuota', $cuota_a_facturar , '=')
+							->execute();
+				if($update > 0)
+				{
+          // Logs a notice
+          $message = "Liquidacion de AN Actualizada : ".json_encode($arrayFields);
+          \Drupal::logger('facturacionadelantos')->notice($message);
+
+          //una vez procesada la facturación debemos actualizar el adelanto de nomina correspondiente
+          $arrayAdelantoNomina["estado_liquidacion"] = "en_proceso_liquidacion";
+          $arrayAdelantoNomina["estado_general_solicitud"] = "en_proceso_liquidacion";
+          $arrayAdelantoNomina["fecha_hora_liquidacion"] = $fecha_hora_facturacion;
+          $arrayAdelantoNomina["cuotas_pactadas"] = $cuotas_pactadas_new;
+          $arrayAdelantoNomina["cuota_actual"] = $cuota_a_facturar;
+
+
+          $updateAN  = db_update('adelantos_nomina')
+                                ->fields($arrayAdelantoNomina)
+                                ->condition('idadelanto', $idadelanto , '=')
+                                ->execute();
+          if($updateAN > 0)
+          {
+            $message = "Adelanto de nomina Actualizado Correctamente : ".json_encode($arrayAdelantoNomina);
+            \Drupal::logger('facturacionadelantos')->notice($message);
+
+            //y por ultimo actualizamos la fecha de la última facturación para la empresa
+            
+            $arrayEmpresaUpdate["fecha_ultimo_corte_facturado"] = $fechaManana;
+            $updateEmpresa  = db_update('empresas')
+                                ->fields($arrayEmpresaUpdate)
+                                ->condition('idempresa', $idempresa , '=')
+                                ->execute();
+            if($updateAN > 0)
+            {
+              $message = "Empresa ".$idempresa." Fecha ultimo corte facturado Actualizado correctamente : ".json_encode($arrayEmpresaUpdate);
+              \Drupal::logger('facturacionadelantos')->notice($message);
+            }else{
+              $message = "Error Actualizacion Fecha ultimo corte facturado Empresa ".$idempresa." : ".json_encode($arrayEmpresaUpdate);
+              \Drupal::logger('facturacionadelantos')->error($message);
+            }
+          }else{
+            $message = "Error Actualizacion Adelanto de nomina : ".json_encode($arrayAdelantoNomina);
+            \Drupal::logger('facturacionadelantos')->error($message);
+          }
+				}else{
+					$message = "Error Actualizacion Liquidacion de AN : ".json_encode($arrayFields);
+          \Drupal::logger('facturacionadelantos')->error($message);
+				}
+			}else{
+				$insert = db_insert('liquidaciones_an')->fields($arrayFields)->execute();
+				if($insert)
+				{
+					$message = "Liquidacion de AN Creada Satisfactoriamente : ".json_encode($arrayFields);
+          \Drupal::logger('facturacionadelantos')->notice($message);
+
+          //una vez procesada la facturación debemos actualizar el adelanto de nomina correspondiente
+          $arrayAdelantoNomina["estado_liquidacion"] = "en_proceso_liquidacion";
+          $arrayAdelantoNomina["estado_general_solicitud"] = "en_proceso_liquidacion";
+          $arrayAdelantoNomina["fecha_hora_liquidacion"] = $fecha_hora_facturacion;
+          $arrayAdelantoNomina["cuotas_pactadas"] = $cuotas_pactadas_new;
+          $arrayAdelantoNomina["cuota_actual"] = $cuota_a_facturar;
+
+
+          $updateAN  = db_update('adelantos_nomina')
+                                ->fields($arrayAdelantoNomina)
+                                ->condition('idadelanto', $idadelanto , '=')
+                                ->execute();
+          if($updateAN > 0)
+          {
+            $message = "Adelanto de nomina Actualizado Correctamente : ".json_encode($arrayAdelantoNomina);
+            \Drupal::logger('facturacionadelantos')->notice($message);
+
+            //y por ultimo actualizamos la fecha de la última facturación para la empresa
+            
+            $arrayEmpresaUpdate["fecha_ultimo_corte_facturado"] = $fechaManana;
+            $updateEmpresa  = db_update('empresas')
+                                ->fields($arrayEmpresaUpdate)
+                                ->condition('idempresa', $idempresa , '=')
+                                ->execute();
+            if($updateAN > 0)
+            {
+              $message = "Empresa ".$idempresa." Fecha ultimo corte facturado Actualizado correctamente : ".json_encode($arrayEmpresaUpdate);
+              \Drupal::logger('facturacionadelantos')->notice($message);
+            }else{
+              $message = "Error Actualizacion Fecha ultimo corte facturado Empresa ".$idempresa." : ".json_encode($arrayEmpresaUpdate);
+              \Drupal::logger('facturacionadelantos')->error($message);
+            }
+          }else{
+            $message = "Error Actualizacion Adelanto de nomina : ".json_encode($arrayAdelantoNomina);
+            \Drupal::logger('facturacionadelantos')->error($message);
+          }
+				}else{
+					$message = "Error Creación Liquidacion de AN : ".json_encode($arrayFields);
+          \Drupal::logger('facturacionadelantos')->error($message);
+				}
+			}
+      /////
+
+
+    }
+
+
+    //envio de notificación a la empresa de las novedades de descuento
+
+    sendNotificationNovedadesDescuento($empresa);
+
+  }
+
+
+  /* //para enviar solo la notificacion
+  $query =  db_select('empresas','emp')
+                ->fields('emp')
+                ->condition('emp.idempresa', 226 )
+                ->execute();
+  
+  $empresasArray = $query->fetchAll();
+  foreach ($empresasArray as $empresa) {
+    sendNotificationNovedadesDescuento($empresa);
+  }*/
+  
+
+}
+
+function sendNotificationNovedadesDescuento($empresa){
+
+  require_once 'sites/default/libraries/phpexcel/Classes/PHPExcel.php';
+  require_once 'sites/default/libraries/phpexcel/Classes/PHPExcel/Writer/Excel2007.php';
+
+
+  $idempresa = $empresa->idempresa;
+
+  
+
+  
+  $db = \Drupal::database();
+  $query = $db->select('liquidaciones_an','liq');
+  $query->join('adelantos_nomina', 'an', 'liq.idsolicitud = an.idadelanto');
+  $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+  $query->fields('liq');
+  $query->fields('an',["idadelanto","estado_general_solicitud","cuota_actual","cuotas_pactadas","estado_liquidacion","fecha_hora_liquidacion","fecha_hora_desembolso","saldo_pendiente","valor_solicitado","administracion","seguros","tecnologia","iva"]);
+  $query->fields('reg',["tipodocumento","documento","nombre","primer_apellido","segundo_apellido"]);
+  $query->condition('an.estado_general_solicitud',"en_proceso_liquidacion");
+  $query->condition('liq.estado',"facturado");
+  $query->condition('reg.idempresa',$idempresa);
+
+  
+  $result = $query->execute();
+  
+  // Populate the rows.
+  
+  $rowNumber = 2;
+
+  
+
+  if(count($result)>0)
+  {
+    
+
+    $objPHPExcel = new \PHPExcel();
+    $objPHPExcel->getActiveSheet()->setTitle('Reporte de Facturados');
+
+    $objPHPExcel->setActiveSheetIndex(0)
+              ->setCellValue('A1', 'Número de adelanto')
+              ->setCellValue('B1', 'Tipo de documento')
+              ->setCellValue('C1', 'Documento')
+              ->setCellValue('D1', 'Nombre Completo')
+              ->setCellValue('E1', 'Valor Adelanto de nómina')
+              ->setCellValue('F1', 'Saldo al corte')
+              ->setCellValue('G1', 'Número de cuota')
+              ->setCellValue('H1', 'Saldo en mora')
+              ->setCellValue('I1', 'Interés mora')
+              ->setCellValue('J1', 'Valor Facturado')
+              ->setCellValue('K1', 'Fecha hora facturación');
+
+    $styleArrayHead = array(
+        'font' => array(
+            'bold' => true,
+            'color' => array('rgb' => '000000'),
+    ));
+    $worksheet = $objPHPExcel->getActiveSheet();
+    $worksheet->getStyle('A1:K1')->applyFromArray($styleArrayHead);
+
+    foreach($result as $row){
+      
+      $valor_adelanto = $row->valor_solicitado + $row->administracion + $row->seguros + $row->tecnologia + $row->iva;
+
+      
+      if($row->intereses_mora==null)
+      {
+        $row->intereses_mora = 0;
+      }
+      $saldo_mora = 0;
+      if($row->intereses_mora > 0)
+      {
+        $saldo_mora = $row->valor - $row->intereses_mora;
+      }
+
+      $objPHPExcel->getActiveSheet()->setCellValue('A'.$rowNumber,$row->idadelanto);
+      $objPHPExcel->getActiveSheet()->setCellValue('B'.$rowNumber,$row->tipodocumento);
+      $objPHPExcel->getActiveSheet()->setCellValue('C'.$rowNumber,$row->documento);
+      $objPHPExcel->getActiveSheet()->setCellValue('D'.$rowNumber,$row->nombre.' '.$row->primer_apellido.' '.$row->segundo_apellido);
+      $objPHPExcel->getActiveSheet()->setCellValue('E'.$rowNumber,$valor_adelanto);
+      $objPHPExcel->getActiveSheet()->setCellValue('F'.$rowNumber,$row->saldo_pendiente);
+      $objPHPExcel->getActiveSheet()->setCellValue('G'.$rowNumber,$row->num_cuota);
+      $objPHPExcel->getActiveSheet()->setCellValue('H'.$rowNumber,$saldo_mora);
+      $objPHPExcel->getActiveSheet()->setCellValue('I'.$rowNumber,$row->intereses_mora);
+      $objPHPExcel->getActiveSheet()->setCellValue('J'.$rowNumber,$row->valor);
+      $objPHPExcel->getActiveSheet()->setCellValue('K'.$rowNumber,$row->fecha_hora_facturacion);
+      $rowNumber++;
+
+    }
+
+    foreach(range('A','K') as $columnID) {
+      $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
+          ->setAutoSize(true);
+    }
+    $objPHPExcel->getActiveSheet()->freezePane('A2');
+
+    // Save as an Excel BIFF (xls) file
+    $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        
+    $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $namef = 'reporte-'.substr(str_shuffle($permitted_chars), 0, 30).'.xls';
+    $path = 'sites/default/files/registros-facturados/';
+    $filename = $path . $namef;
+    $objWriter->save($filename);
+    
+    $message = "Se generó correctamente el archivo de novedades de adelanto de salario para la Empresa ".$empresa->razon_social." - File: ".$filename;
+    \Drupal::logger('facturacionadelantos')->notice($message);
+
+    //si guardó el excel generamos la notificación
+    $paththeme = base_path().drupal_get_path('theme', 'linxe');
+    $dominioactual = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+    
+    $titleMsg = "PLANILLA DE PAGOS";
+    $mensaje = "<p>Estimado/a ".$empresa->razon_social.": </p>";
+    
+    $mensaje .= "<p>Adjunto encontrará el archivo con las novedades de descuento correspondientes a los adelantos de salario que se desembolsaron a sus colaboradores.</p>";
+    $mensaje .= "<p>También puedes ingresar al siguiente link: "; 
+    $mensaje .= " <a href='".$dominioactual."/admin/pagaradelantosfacturados' target='_blank'>".$dominioactual."/admin/pagaradelantosfacturados</a> para descargar la información</p>"; 
+    
+    $mensaje .= "<p>Cordialmente.</p>";
+    $mensaje .= "<p>Equipo Linxe.</p>";
+    $emailto = $empresa->email;
+    $resultmail = sendNotEmpresa($titleMsg,$mensaje,$emailto,$filename,$namef,$empresa->razon_social);
+    
+
+
+  }
+  
+
+
+
+}
+ 
+function sendNotEmpresa($titleMsg,$mensaje,$emailto,$filepath,$filename,$nombreEmpresa)
+{
+  
+
+  $paththeme = base_path().drupal_get_path('theme', 'linxe');
+  $dominioactual = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+          
+  $template_str = '
+  <div >
+    <center>
+      <img src="'.$dominioactual.$paththeme.'/images/forms/exito.jpg" alt="LINXE"   width="130"/>
+      <h2 class="text1">'.$titleMsg.'</h2>
+      <div class="mensaje">
+      '.$mensaje.'
+      </div>
+    </center>
+  </div> ';
+
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'linxecredit';
+  $key = 'success_msg';
+  $to = $emailto;
+  //$params['Bcc'] = $config->get('contactopermodule.emailcc');;
+  $params['body'] = $template_str;
+  $params['subject'] = $titleMsg;
+
+  //Attaching a file to the email
+  $attachment = array(
+    'filepath' => $filepath,
+    'filename' => $filename,
+    'filemime' => 'application/xls'
+  );
+  $params['attachments'][] = $attachment;
+
+
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] !== true) {
+    $message = "Error, no fue posible generar la notificación con el archivo de novedades de adelanto de salario para la empresa:  ".$nombreEmpresa;
+    \Drupal::logger('facturacionadelantos')->error($message);
+    return false;
+  }else {
+    $message = "Se generó correctamente la notificación de novedades de adelanto de salario para la Empresa ".$nombreEmpresa;
+    \Drupal::logger('facturacionadelantos')->notice($message);
+    return true;
+  }
+
+}
+
+  
+

@@ -1,0 +1,5 @@
+name: Linxe Pagos de Adelantos de Salario - Empresas
+type: module
+description: Linxe Reportar o Conciliar Pagos de Adelantos de Salario por parte de las Empresas
+core: 8.x
+package: Linxe

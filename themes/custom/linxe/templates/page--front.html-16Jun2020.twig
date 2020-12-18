@@ -1,0 +1,161 @@
+    <header class="fixed-top">
+        <div class="topBar">
+          {{ page.infoheader }}
+        </div>
+        <div class="menuBar">
+              {{ page.logo }}
+            <button type="button" class="btnMenu" data-toggle="collapse" data-target="#collapsenav"
+                aria-expanded="false" aria-controls="collapsenav"><i class="fas fa-bars"></i></button>
+            <nav id="collapsenav" class="collapse">
+              {{ page.primary_menu }}
+            </nav>
+              {{ page.botoneslogin }}
+        </div>
+    </header> 
+
+
+    <main id="content">
+        <div class="main-wrap">
+            <!-- Slider principal -->
+            <div id="slider-home">
+                {{ page.newsliderhome }}
+
+                <div class="cotizador">
+                    <div class="col-12 d-flex justify-content-md-between justify-content-center flex-md-row flex-column w-100 px-md-3 px-0">
+                        <div class="d-flex mt-0 px-0 order-md-2 order-1">
+                            {{ page.main_simulador }}
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- Slider principal Fin-->
+
+            <!-- slider caracteristicas -->
+            
+            {{ page.dest_beneficios }}
+                
+            <!-- slider caracteristicas -->
+
+
+            <!-- banner uno -->
+            <div class="banner-uno" style="background: url({{ url_bannersecondary }}); background-size: cover;">
+                {{ page.banner_requisitos }}
+            </div>
+            <!-- banner uno fin -->
+
+            <!-- Requisitos -->
+            <div class="requisitos">
+                <div class="cont-requisitos">
+                    <div class="titulos">
+                        {{ page.texto_requisitos }}
+                    </div>
+                    
+                    <div class="carousel">
+                        {{ page.seccion_requisitos }}
+                    </div>
+                </div>
+
+                
+                {{ page.mockup_requisitos }}
+                
+            </div>
+            <!-- Requisitos fin -->
+
+            <!-- contratos -->
+            <div class="contratos" style="background: url({{ url_bannerthird }}); background-size: cover;">
+                {{ page.banner_contrato }}
+            </div>
+            <!-- contratos fin -->
+
+            <!-- como funcion -->
+            <div class="como-funciona">
+                <div class="titulos">
+                    {{ page.texto_comofunciona }}
+                </div>
+
+                <div class="tabbers">
+                    <ul>
+                        <li data-target="empleados" class="tab tab-active">
+                            EMPLEADOS
+                        </li>
+                        <li data-target="empresas" class="tab">
+                            EMPRESAS
+                        </li>
+                    </ul>
+
+                    <div class="tabs-cont">
+                        <div id="empleados" class="tab-c">
+                            {{ page.seccion_comofunciona }}
+                        </div>
+
+                        <div id="empresas" class="tab-c oculto">
+                            {{ page.seccion_comofunciona_empresa }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- como funcion fin -->
+
+            <!-- aliados -->
+            <div class="aliados">
+                <div class="titulos">
+                    {{page.texto_aliados}}
+                </div>
+
+                <div class="carousel">
+                    {{page.seccion_aliados}}
+                </div>
+            </div>
+            <!-- aliados fin -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="cont-footer">
+            {{ page.footer_menu }}
+
+            {{ page.footer_contacto }}
+        </div>
+
+        <div class="redes">
+            {{ page.footer_redes }}
+        </div>
+
+        <div class="copy-foot">
+            {{ page.footer_copyright }}
+        </div>
+    </footer>
+
+    <div id="loginformlayer" class="modal fade" role="dialog">
+        {{ page.login_form }}
+    </div>
+    <div id="rememberformlayer" class="modal fade" role="dialog">
+        {{ page.remember_form }}
+    </div>
+
+    <!-- modal -->
+
+    {% if page.popupwebinar_form %}
+        {% if cookie_enablePopupForm != 1%}
+            <div class="modal-linxe" >
+                <div class="black-box"></div>
+                <div class="cont-modal">
+                    <div class="title-modal">
+                        <a href="#" class="cerrar-modal">X</a>
+                        {{ page.popupwebinar_title }}
+                    </div>
+
+                    <div class="copy-modal">
+                        {{ page.popupwebinar_text }}
+                    </div>
+                    {{ page.popupwebinar_form }}
+                    
+                    <div class="img-modal">
+                        {{ page.popupwebinar_footerimage }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+    <!-- modal fin -->

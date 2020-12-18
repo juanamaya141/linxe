@@ -1,0 +1,5 @@
+name: Exportar registros facturados
+type: module
+description: Exportar registros facturados
+core: 8.x
+package: Linxe

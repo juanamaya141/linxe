@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2019 by original authors @ fontello.com</metadata>
+<defs>
+<font id="linxe-icons" horiz-adv-x="1000" >
+<font-face font-family="linxe-icons" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="mas" unicode="&#xe800;" d="M499-150c-128 0-255 49-354 145-194 194-194 513 0 707 194 195 513 195 707 0v0c194-194 194-513 0-707-95-96-223-145-353-145z m0 928c-113 0-221-44-302-125-168-168-168-438 0-606 168-168 438-168 606 0 168 168 168 438 0 606-81 81-188 125-304 125z m1-782c-20 0-37 18-37 38v635c0 20 17 37 37 37s38-17 38-37v-638c-3-20-17-35-38-35z m319 319h-638c-20 0-37 17-37 38s17 35 37 35h638c20 0 38-18 38-38s-18-35-38-35z" horiz-adv-x="1000" />
+
+<glyph glyph-name="menos" unicode="&#xe801;" d="M501-150c-134 0-258 52-354 148-194 194-194 513 0 707 194 194 513 194 707 0l0 0c194-194 194-513 0-707-95-96-220-148-353-148z m0 928c-111 0-221-41-302-125-81-81-125-188-125-301s44-221 125-302 189-125 302-125c113 0 220 44 301 125 168 168 168 438 0 606-84 78-191 122-301 122z m318-466h-638c-20 0-37 18-37 38s17 38 37 38h638c20 0 38-18 38-38s-18-38-38-38z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

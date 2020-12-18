@@ -1,0 +1,9 @@
+pdfterminos.terminos_condiciones:
+  path: '/admin/pdf/terminos-condiciones'
+  defaults:
+    _form: '\Drupal\pdfterminos\Form\RegistrarCliente'
+    _title: 'Términos y Condiciones'
+  requirements:
+    _permission: 'access terminos'
+  options:
+    no_cache: 'TRUE'

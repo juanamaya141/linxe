@@ -1,0 +1,218 @@
+
+                                  
+                                  <div class="form-row">
+                                        <div class="col-md-6 px-3">
+                                            <div class="form-group">
+                                                {{ form.nombre }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-3">
+                                            <div class="form-group">
+                                                {{ form.apellido }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 px-3">
+                                            <div class="form-group">
+                                                {{ form.apellidos }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-3">
+                                            <div class="doc">
+                                                <div class="form-group">
+                                                    {{ form.tipo_doc }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        
+                                        <div class="col-md-6 px-3">
+                                            <div class="form-group">
+                                                {{ form.documento }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-3">
+                                            <div class="form-group">
+                                                {{ form.feex }}
+                                                <input type="text" class="falseInput" id="nf-expedicion" name="nf-expedicion" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 px-3">
+                                            <div class="form-group">
+                                                {{ form.celular }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-3">
+                                            <div class="form-group">
+                                                {{ form.correo }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-12 px-3">
+                                            <div class="form-group">
+                                                {{ form.actividadEconomica }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-md-12 px-3">
+                                            <div class="form-group">
+                                                {{ form.empresa }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-md-6 px-3">
+                                            <div class="form-group">
+                                                {{ form.tipoproducto }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-3">
+                                            <div class="form-group">
+                                                <div class="des">
+                                                    {{ form.destino }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="layerOtro"  >
+                                        <div class="form-row">
+                                            <div class="col-md-12 px-3">
+                                                <div class="form-group">
+                                                    {{ form.nombre_empresa }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 px-3">
+                                                <div class="form-group">
+                                                    {{ form.nombre_contacto_rh }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 px-3">
+                                                <div class="form-group">
+                                                    {{ form.email_contacto_rh }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 px-3">
+                                                <div class="form-group">
+                                                    {{ form.telefono_contacto_rh }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="layerAdelanto" style="display:none" >
+                                        <div class="form-row">
+                                            <div class="col-md-12 px-3">
+                                                <div class="form-group">
+                                                    <div class="des">
+                                                        {{ form.eps_adelanto }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 px-3">
+                                                <div class="form-group">
+                                                    {{ form.afp_adelanto }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 px-3">
+                                                <div class="form-group">
+                                                    <label class="label2 pl-md-2 text-md-left text-center">¿HA COTIZADO LOS ÚLTIMOS 6 MESES A SEGURIDAD SOCIAL?</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 px-3 d-flex justify-content-center">
+                                                <div class="form-group d-flex justify-content-center">
+                                                    <div class="form-element custom-radio mr-md-4">
+                                                        {{ form.registra_pagos_6_meses1 }}
+                                                        <label class="form-check-label label" for="descuento1">Sí</label>
+                                                    </div>
+                                                    <div class="form-element custom-radio">
+                                                        {{ form.registra_pagos_6_meses2 }}
+                                                        <label class="form-check-label label" for="descuento2">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 px-3">
+                                                <div class="form-group">
+                                                    {{ form.rango_salario_adelanto }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="layerLibranza" style="display:none" >
+                                        
+                                        <div class="form-row">
+                                            <div class="col-md-6 px-3">
+                                                <div class="form-group">
+                                                    {{ form.fingreso }}
+                                                    <input type="text" class="falseInput" id="nf-ingreso" name="nf-ingreso" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 px-3">
+                                                <div class="form-group">
+                                                    {{ form.tipocontrato }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 px-3">
+                                                <div class="form-group">
+                                                    <label class="label2 pl-md-2 text-md-left text-center">¿TIENE ALGÚN DESCUENTO ADICIONAL A LO DE LEY?</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 px-3 d-flex justify-content-center">
+                                                <div class="form-group d-flex justify-content-center">
+                                                    <div class="form-element custom-radio mr-md-4">
+                                                        {{ form.descuento1 }}
+                                                        <label class="form-check-label label" for="descuento1">Sí</label>
+                                                    </div>
+                                                    <div class="form-element custom-radio">
+                                                        {{ form.descuento2 }}
+                                                        <label class="form-check-label label" for="descuento2">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-12 px-3">
+                                                <div class="form-group">
+                                                    {{ form.cargo }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row py-md-4 py-2">
+                                        <div class="col-12 px-3">
+                                            <div class="form-group">
+                                                <div class="form-element custom-check mr-0">
+                                                    {{ form.terminos }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row d-flex justify-content-center">
+                                        <div class="col-md-6 text-center">
+                                            {{ form.actions.submit }}
+                                            {{ form.form_build_id }}
+                                            {{ form.form_token }}
+                                            {{ form.form_id }}
+                                        </div>
+                                    </div>
+                                    <div id="errorMsj" class="errorMsj"></div>
+

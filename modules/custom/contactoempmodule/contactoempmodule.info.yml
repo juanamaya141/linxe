@@ -1,0 +1,5 @@
+name: Contacto Empresas Module
+type: module
+description: Formulario de Contacto Empresas Linxe
+core: 8.x
+package: Linxe

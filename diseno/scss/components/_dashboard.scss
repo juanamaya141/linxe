@@ -1,0 +1,567 @@
+.header-dashboard{
+    border-bottom: 2px solid $color2;
+    h2{
+        text-transform: none;
+        font-weight: 400;
+        margin-bottom: 0;
+        font-size: 2rem;
+        @media(max-width: $breakpoint-md){
+            font-size: 1.3rem;
+            &.hs{
+                font-size: 1rem; 
+                margin-bottom: .5rem;
+                background: rgba($color: $color4, $alpha: .2);
+                padding: .3rem .5rem;
+            }
+        }
+    }
+    .row#selected{
+        display: none;
+        .num{color: $color5;}
+        #plazo-selected{text-transform: uppercase; color: $color1; font-size: .9rem; font-weight: bold;}
+    }
+    .unidad{
+        color: $color4;
+        font-weight: bold;
+        font-size: 2rem;
+        @media(max-width: $breakpoint-md){
+            font-size: 1.5rem;
+        }
+    }
+    .num{
+        color: $color1;
+        font-weight: bold;
+        font-size: 2rem;
+        @media(max-width: $breakpoint-md){
+            font-size: 1.5rem;
+        }
+    }
+    ul.nav{
+        &.nav-tabs{border-bottom: none;}
+        li{
+            padding: 0;
+            margin-right: 1.5rem;
+            a{
+                padding: 0 .2rem 1rem .2rem;
+                border: none;
+                border-radius: 0;
+                font-size: .95rem;
+                font-weight: 600;
+                color: rgba($color: $color6 ,$alpha: .5 );
+                border-bottom: 2px solid $color2;
+                margin-bottom: -1px;
+                &.active{
+                    color: $color1;
+                    border-bottom-color: $color7;
+                    pointer-events: none;
+                }
+                &:hover{
+                    color: $color5;
+                    border-bottom-color: #eee;
+                }
+            }
+        }
+        @media(max-width: $breakpoint-md){
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            li{
+                /*width: 30%;*/
+                display: flex;
+                flex: 1;
+                text-align: center;
+                margin: 0 .1rem;
+                align-items: initial;
+                justify-content: center;
+                border-radius: .3rem .3rem 0 0;
+                overflow: hidden;
+                a{
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    justify-content: center;
+                    padding: .3rem;
+                    font-size: .8rem;
+                    font-weight: 300;
+                    border-bottom: none;
+                    margin-bottom: 0;
+                    color: rgba($color: $color6 ,$alpha: .7 );
+                    background: rgba($color: $color3 ,$alpha: .3);
+                    &.active{
+                        background: $color2;
+                        color: white;
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+}
+.tab-content{
+    padding: 3rem 0;
+    @media(max-width: $breakpoint-md){
+        padding: 2rem 0;
+    }
+   .instruccion{
+       display: flex;
+       color:$color2;
+       text-align: center;
+       font-size: 1.2rem;
+       font-weight: 300;
+       line-height: 1.3;
+       margin-bottom: 2.5rem;
+       @media(max-width: $breakpoint-md){
+           font-size: .9rem;
+           margin-bottom: 1rem;
+       }
+   } 
+   .dash-pasos{
+       display: flex;
+       justify-content: space-between;
+       .paso{
+           display: flex;
+           width: 4.7rem;
+           flex-direction: column;
+           justify-content: flex-end;
+           @media(max-width: $breakpoint-md){
+               width: 25%;
+           }
+           .tit-paso{
+               color: $color1;
+               font-size: .8rem;
+               font-weight: 300;
+               line-height: 1;
+               text-align: center;
+               @media(max-width: $breakpoint-md){
+                   font-size: .65rem;
+               }
+           }
+           .estado-paso{
+               width: 2rem;
+               height: 2rem;
+               border: 3px solid $color1;
+               border-radius: 50%;
+               background: $color4;
+               margin: .5rem auto -1rem;
+               position: relative;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               z-index: 9;
+               &.current{
+                   background: $color2;
+                   border-color: $color4;
+               }
+               &.check{
+                   background: $color1;
+                   border-color: $color4;
+                   &::after{
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    font-size: 1rem;
+                    content: "\f00c";
+                    color:white;
+                   }
+               }
+               @media(max-width: $breakpoint-md){
+                   width: 1.5rem;
+                   height: 1.5rem;
+                   border-width: 2px;
+                   margin-bottom: calc(-.75rem - 2px);
+                   &.check{
+                       &::after{font-size: .7rem;}
+                   }
+               }
+           }
+       }
+   }
+   .progress{
+       height: 4px;
+       background-color: $color2;
+       margin: 0 2.32rem;
+       .progress-bar{
+           background-color: $color1;
+       }
+       @media(max-width: $breakpoint-md){
+           height: 3px;
+       }
+   }
+   .cantidad{
+       display: flex;
+       justify-content: center;
+       background: $color4;
+       padding: 1rem;
+       @media(max-width: $breakpoint-md){
+           padding: .5rem .3rem;
+       }
+        .form-item{
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: .5rem;
+            @media(max-width: $breakpoint-md){
+                justify-content: space-between;
+                align-items: initial;
+                margin-bottom: .3rem;
+            }
+            .btnMas , .btnMenos{
+                i{color: $color2; transition: $over; font-size: 2.5rem;}
+                .rangos{color: white; font-size: .8rem; font-weight: bold; margin-bottom:0;}
+                &:hover{
+                    i{color: white; text-shadow: 1px 1px 2px rgba($color: #000, $alpha: .35);}
+                }
+                @media(max-width: $breakpoint-md){
+                    i{font-size: 1.5rem;}
+                    .rangos{font-size: .6rem; font-weight: 300;}
+                }
+                &.active{
+                    pointer-events: none;
+                    opacity: .5;
+                    i{opacity: .5; color: white;}
+                }
+            }
+            .valor{
+                font-size: 3.5rem;
+                line-height: 1.4;
+                font-weight: bold;
+                -moz-user-select: none; 
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                user-select: none; 
+                .unidad{color: $color5;}
+                .num{color: $color1; user-select: none;}
+                .label{text-align: center; color: white; font-size: .8rem; text-transform: uppercase;}
+                @media(max-width: $breakpoint-md){
+                    font-size: 1.6rem;
+                    display: block;
+                    .label{font-size: .6rem; font-weight: 300; align-self: flex-end;}
+                }
+            }
+        }
+   }
+   .indicador-row{
+       margin-bottom: .5rem;
+       .cont-indicador{
+           display: flex;
+           justify-content: center;
+           #indicador{
+               width: 0; height: 0;
+               border-width: 1rem 1rem 0;
+               border-style: solid;
+               border-color: $color4 transparent transparent;
+               @media(max-width: $breakpoint-md){
+                   border-width: .7rem .7rem 0;
+               }
+           }
+       }
+   }
+   .row-paso{display: flex;}
+   .cont-plazos{
+       .carousel-inner .carousel-item{margin-left:0;}
+       .carousel-inner{
+           @media(min-width: $breakpoint-md){
+               .carousel-item-left , .carousel-item-right{
+                    width:100%;
+                    display: flex;
+                }
+           }
+       }
+       .carousel-inner .active{display: flex;}
+       .cont-plazo{
+           @media(min-width: $breakpoint-md){
+                display: flex;
+           }
+           &.no-disponible{
+               .disable{
+               position: absolute;
+               width: 100%;
+               height: 100%;
+               top: 0; bottom: 0; left: 0; right: 0;
+               background: rgba($color: $color3, $alpha: .5);
+               z-index: 9;
+               cursor: no-drop;
+               & ~ div , & ~ button{
+                   filter: blur(3px);
+               }
+           }
+           }
+        }
+       .plazo-col{
+           position: relative;
+           width: calc(100% - 1.5rem);
+           overflow: hidden;
+           *{transition: $over;}
+           @media(max-width: $breakpoint-md){
+               width: 100%;
+           }
+          
+           .tit-plazo{
+               background: rgba($color: $color4, $alpha: .5);
+               padding: 1.3rem;
+               font-size: 1.2rem;
+               text-align: center;
+               color: $color1;
+               text-transform: uppercase;
+               @media(max-width: $breakpoint-md){
+                   padding: .8rem 1rem;
+                   font-size: 1rem;
+               }
+           }
+           .descripcion{
+               background: rgba($color: $color4, $alpha: .1);
+               padding: .5rem 1rem;
+               .item-desc{
+                   display: flex;
+                   justify-content: space-between;
+                   align-items: center;
+                   padding: .5rem 0;
+                   border-bottom: 2px dotted $color1;
+                   .name{
+                       color: $color6;
+                       font-size: .8rem;
+                       font-weight: 300;
+                       &[data-toggle="tooltip"]{cursor: pointer;}
+                       i{
+                           color: $color6;
+                       }
+                   }
+                   .valor{
+                       color: $color4;
+                       font-size: 1rem;
+                       font-weight: bold;
+                   }
+                   &:nth-child(7){
+                       .valor{color:$color1;}
+                   }
+                   &:last-child{
+                       border-bottom: none;
+                       .valor{
+                           color: $color2;
+                           font-size: 1.4rem;
+                       }
+                   }
+               }
+           }
+           .terminos{
+               background: rgba($color: $color4, $alpha: .1);
+               padding: 0 1rem 1.5rem;
+               .form-element{
+                   &.custom-check{
+                    margin-bottom:0 !important;
+                    padding: 0 !important;
+                    label.label{
+                        margin-left: 1rem;
+                        display: flex;
+                        align-items: center;
+                    }
+                    }
+                }
+           }
+           button.btn-submit:disabled{
+               pointer-events: none;
+               cursor: none;
+               color: white;
+               background: $color3;
+               border-color: $color3;
+           }
+       }
+       .current .plazo-col{
+            box-shadow: 2px 2px 10px rgba($color: #000, $alpha: .35);
+            @media(max-width: $breakpoint-md){
+                box-shadow: 0 2px 5px rgba($color: #000, $alpha: .4);
+            }
+        }
+   }
+
+    .cont-pdf{
+        display: none;
+        height: 70vh;
+        #contrato{
+            width: 100%;
+            height: 100%;
+        }
+        @media(max-width: $breakpoint-md){
+            height: 80vh;
+        }
+    }
+
+   .cont-creditos{
+       .carousel-inner .carousel-item{margin-left:0;}
+       .carousel-inner{
+           @media(min-width: $breakpoint-md){
+               .carousel-item-left , .carousel-item-right{
+                    width:100%;
+                    display: flex;
+                }
+           }
+       }
+       .carousel-inner .active{display: flex;}
+       .credito-col{
+           position: relative;
+           width: calc(100% - 1.5rem);
+           overflow: hidden;
+           *{transition: $over;}
+           @media(max-width: $breakpoint-md){
+               width: 100%;
+           }
+           .tit-credito{
+               padding: 1.3rem .8rem 1.3rem 1.3rem;
+               text-align: center;
+               color: white;
+               display: flex;
+               flex-wrap: wrap;
+               width: 100%;
+               align-items: center;
+               @media(max-width: $breakpoint-md){
+                   padding: .8rem .5rem .8rem .8rem;
+               }
+               .tit{
+                   display: flex;
+                   flex-direction: column;
+                   flex-grow: 1;
+                   .estado{
+                       text-transform: uppercase;
+                       font-size: 1.2rem;
+                       font-weight: 300;
+                       @media(max-width: $breakpoint-md){
+                           font-size: 1rem;
+                       }
+                   }
+                   .fecha-desembolso{
+                       font-size: .7rem;
+                       margin-top:.3rem;
+                       
+                   }
+               }
+               button{
+                   width: 1.5rem;
+                   height: 1.5rem;
+                   margin-left: .5rem;
+                   i{
+                       font-size: 1.5rem;
+                       color: white;
+                   }
+                   @media(max-width: $breakpoint-md){
+                       width: 1rem;
+                       height: 1rem;
+                       i{
+                           font-size: 1rem;
+                       }
+                   }
+               }
+           }
+           .descripcion{
+               background: rgba($color: $color4, $alpha: .1);
+               padding: .5rem 1rem;
+               .item-desc{
+                   display: flex;
+                   justify-content: space-between;
+                   align-items: center;
+                   padding: .5rem 0;
+                   border-bottom: 2px dotted $color1;
+                   .name{
+                       color: $color6;
+                       font-size: .8rem;
+                       font-weight: 300;
+                   }
+                   .valor{
+                       color: $color4;
+                       font-size: 1rem;
+                       font-weight: bold;
+                   }
+                   &:nth-child(7){
+                       .valor{color:$color1;}
+                   }
+                   &:last-child{
+                       border-bottom: none;
+                       .valor{
+                           color: $color2;
+                           font-size: 1.4rem;
+                       }
+                   }
+               }
+           }
+           .info-credito{
+               background: $color4;
+               padding: .5rem 1rem;
+               .item-info{
+                   display: flex;
+                   justify-content: space-between;
+                   align-items: center;
+                   padding: .5rem 0;
+                   color: white;
+                   border-bottom: 2px dotted $color1;
+                   .name{
+                       font-size: .8rem;
+                       font-weight: 300;
+                   }
+                   .valor{
+                       font-size: 1rem;
+                       font-weight: bold;
+                   }
+               }
+           }
+           &.vigente{
+               .tit-credito{
+                   background: $color2;
+               }
+           }
+           &.pagado{
+               .tit-credito{
+                   background: $color1;
+                   .fecha-desembolso{
+                       color: $color3;
+                   }
+               }
+           }
+       }
+   }
+   #preferencias{
+       .card{
+           border:none;
+           .card-header{
+               padding: 0;
+                    background: rgba($color: $color7, $alpha: .15);
+               h2{
+                  button{
+                    font-size: 2.1rem;
+                    text-transform: uppercase;
+                    color: $color1;
+                    font-weight: 600;
+                    width: 100%;
+                    padding: .5rem 2.5rem;
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    &::after{
+                        content: "\f078";
+                        font-family: "Font Awesome 5 Free";
+                        font-weight: 900;
+                        font-size:1.5rem;
+                        position: absolute;
+                        right: 1rem; top: 0;
+                        transition: $over;
+                        display: flex;
+                        height: 100%; 
+                        align-items: center;
+                    }
+                    &[aria-expanded="true"]{
+                        &::after{
+                            transform: rotate(180deg);
+                        }
+                    }
+                    @media(max-width: $breakpoint-md){
+                        font-size: 1rem;
+                        &::after{font-size: 1rem;}
+                    }
+                  }
+               }
+           }
+           .custom-check label.label{
+               font-size: .65rem;
+               color: $color7;
+           }
+       }
+   }
+}

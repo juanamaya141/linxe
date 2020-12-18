@@ -1,0 +1,10 @@
+reportehistorico.ver_tabla:
+  path: '/admin/reportehistorico-nomina'
+  defaults:
+    _controller: '\Drupal\reportehistorico\Controller\DatosController::data'
+    _title: 'Reporte de histórico de Nómina'
+  requirements:
+    _permission: 'access reportehistorico'
+
+
+  

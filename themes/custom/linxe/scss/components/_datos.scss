@@ -1,0 +1,103 @@
+$color1: #0F4E57;
+$color2: #A71229;
+$color3: #D1CBC1;
+$color4:#72A9B4;
+$color5: #437A84;
+$color6: #49433D;
+$color7: #ada291;
+
+$error: #D32F2F;
+$over: all .3s ease;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+.text1{color: $color1;}
+.text2{color: $color2;}
+.text3{color: $color3;}
+.text4{color: $color4;}
+.text5{color: $color5;}
+.text6{color: $color6;}
+
+$enable-responsive-font-sizes:                true !default;
+
+$sizes: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$sizes: map-merge(
+  (
+    25: 25%,
+    40: 40%,
+    50: 50%,
+    75: 75%,
+    100: 100%,
+    auto: auto
+  ),
+  $sizes
+);
+
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25), 
+    2: ($spacer * .5), 
+    3: $spacer, 
+    4: ($spacer * 1.5), 
+    5: ($spacer * 2), 
+    6: ($spacer * 2.5), 
+    7: ($spacer * 3),
+    8: ($spacer * 3.5),
+    9: ($spacer * 4)
+  ),
+  $spacers
+);
+
+$custom-range-track-width:          100%;
+$custom-range-track-height:         .4rem;
+$custom-range-track-cursor:         pointer;
+$custom-range-track-bg:             $color4;
+$custom-range-track-border-radius:  1rem;
+$custom-range-track-box-shadow:      0 .25rem .25rem rgba(red, .1);
+$custom-range-thumb-width:                   1.5rem;
+$custom-range-thumb-height:                  $custom-range-thumb-width;
+$custom-range-thumb-bg:                      $color2;
+$custom-range-thumb-border:                  0;
+$custom-range-thumb-border-radius:           1rem;
+$custom-range-thumb-box-shadow:              0 0 2px 5px #000;
+$custom-range-thumb-focus-box-shadow:        0 0 0 5px $color1, $color1;
+$custom-range-thumb-active-bg:               $color2;
+$custom-range-thumb-disabled-bg:             $color6;
+$modal-backdrop-bg:                 $color1 !default;
+$modal-backdrop-opacity:            .7 !default;
+$modal-content-border-radius: 0;
+
+
+
+$carousel-control-color:             $color2 !default;
+$carousel-control-width:             2rem !default;
+$carousel-control-opacity:           .5 !default;
+$carousel-control-hover-opacity:     .9 !default;
+$carousel-control-transition:        opacity .15s ease !default;
+
+$carousel-indicator-width:           30px !default;
+$carousel-indicator-height:          3px !default;
+$carousel-indicator-hit-area-height: 10px !default;
+$carousel-indicator-spacer:          3px !default;
+$carousel-indicator-active-bg:       transparent !default;
+$carousel-indicator-transition:      opacity .6s ease !default;
+
+$carousel-caption-width:             70% !default;
+$carousel-caption-color:             white !default;
+
+$carousel-control-icon-width:        2rem !default;
+
+$carousel-control-prev-icon-bg:      none !default;
+$carousel-control-next-icon-bg:      none !default;
+
+$modal-xl:                          1140px !default;
+$modal-lg:                          800px !default;
+$modal-med:                         700px !default;
+$modal-md:                          500px !default;
+$modal-sm:                          300px !default;

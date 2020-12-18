@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>LINXE | Registro</title>
+        <meta name="description" content="Libranzas en línea">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+        <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body class="nuevo_registro box">
+        <header class="fixed-top">
+            <div class="topBar">
+                <img src="images/header/icon-contact.png" alt="Contáctanos" />
+                <a href="tel:+(57) 315 384 7859">+(57) 315 384 7859</a> | <a href="mailto:contacto@linxe.com">contacto@linxe.com</a>
+            </div>
+            <div class="menuBar">
+                <div class="cont-logo pl-md-4">
+                    <h1><a href="index.html">
+                        <img class="img-fluid" src="images/header/logo.png" alt="Logo LINXE" />
+                    </a></h1>
+                </div>
+                <button type="button" class="btnMenu d-md-none d-block" data-toggle="collapse" data-target="#collapsenav" aria-expanded="false" aria-controls="collapsenav"><i class="fas fa-bars"></i></button>
+                <nav id="collapsenav" class="collapse">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                       <li><a href="beneficios.html">Beneficios</a></li>
+                        <li><a href="linxe.html">¿Cómo Funciona?</a></li>
+                        <li><a href="ayuda.html">Ayuda</a></li>
+                        <li><a href="contacto.html">Contáctanos</a></li>
+                        <li class="lising"><a class="singin modal-btn" data-modal="login-form">Ingresa</a></li>
+                        <li class="lising"><a href="registro.html" class="singup">Regístrate</a></li>
+                    </ul>
+                </nav>
+                <div class="cont-login">
+                    <button type="button" class="singin modal-btn" data-modal="login-form">Ingresa</button>
+                    <a href="registro.html" class="singup">Regístrate</a>
+                </div>
+            </div>
+        </header>
+        
+        <main class="pb-md-6 pb-4">
+            <div class="main-wrap mt-md-6 mt-4">
+        <div class="container">
+            <div class="row d-flex justify-content-center pt-md-7 pt-3 pb-md-5 pb-2">
+                <div class="col-12">
+                    <h2 class="text1 mb-md-4">Información Personal</h2>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-center">Importante:  Todos los campos son obligatorios y serán confirmados con tu empleador.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container pb-md-7 pb-4">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-7 cont-form">
+                        <form class="formularioin" action="" name="form_registro" id="registro">
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="nombre" name="nombre" data-msj="Nombre, es un dato obligatorio"/>
+                                        <label class="label" for="nombre">Primer Nombre:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="apellido" name="apellido" data-msj="Apellido, es un dato obligatorio"/>
+                                        <label class="label" for="apellido">Primer Apellido:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <select id="tipo_doc" name="tipo_doc" data-msj="Tipo de documento, es un dato obligatorio">
+                                            <option value=""></option>
+                                            <option value="cc">C.C.</option>
+                                            <option value="ce">C.E.</option>
+                                        </select>
+                                        <label class="label" for="tipo_doc">Tipo de Documento:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="number" id="doc" name="documento"  data-msj="Número de documento, es un dato obligatorio"/>
+                                        <label class="label" for="doc">Número de Documento:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="tel" id="celular" name="celular" data-msj="Celular, es un dato obligatorio"/>
+                                        <label class="label" for="celular">Celular:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="email" id="correo" name="correo" data-msj="Correo electrónico, es un dato obligatorio" />
+                                        <label class="label" for="correo">Correo Electrónico:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <select id="destino" name="destino" data-msj="Destino de tu préstamo, es un dato obligatorio">
+                                            <option value=""></option>
+                                            <option value="Vacaciones">Vacaciones</option>
+                                            <option value="Mejoras hogar">Mejoras hogar</option>
+                                            <option value="Pagar deudas">Pagar deudas</option>
+                                            <option value="Servicios médicos">Servicios médicos</option>
+                                            <option value="Electrodomésticos">Electrodomésticos</option>
+                                            <option value="Educación">Educación</option>
+                                            <option value="Servicios odontológicos">Servicios odontológicos</option>
+                                            <option value="Para Moto">Para Moto</option>
+                                            <option value="Para Vehículo">Para Vehículo</option>
+                                            <option value="Libre inversión">Libre inversión</option>
+                                        </select>
+                                        <label class="label" for="destino">Destino de tu préstamo:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <select id="empresa" name="empresa" data-msj="Debes seleccionar el nombre de tu empresa">
+                                            <option value=""></option>
+                                            <option value="Alcaldia de Villavicencio">Alcaldia de Villavicencio</option>
+                                            <option value="Gobernación del Guaviare">Gobernación del Guaviare</option>
+                                            <option value="Cormacarena">Cormacarena</option>
+                                            <option value="Tauramena">Tauramena</option>
+                                            <option value="Gobernación Guainía">Gobernación Guainía</option>
+                                            <option value="San José del Guaviare">San José del Guaviare</option>
+                                        </select>
+                                        <label class="label" for="empresa">Selecciona tu empresa:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="date" id="f-ingreso" name="f-ingreso" data-msj="Fecha de ingreso, es un dato obligatorio"/>
+                                        <label class="label" for="f-ingreso">Fecha de Ingreso:</label>
+                                        <input type="text" class="falseInput" id="nf-ingreso" name="nf-ingreso" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <select id="tipo-contrato" name="tipo-contrato" data-msj="Tipo de contrato, es un dato obligatorio">
+                                            <option value=""></option>
+                                            <option value="Fijo">Fijo</option>
+                                            <option value="Indefinido">Indefinido</option>
+                                            <option value="Obra o labor">Obra o labor</option>
+                                        </select>
+                                        <label class="label" for="tipo-contrato">Tipo de Contrato:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label2 pl-md-2 text-md-left text-center">¿TIENE ALGÚN DESCUENTO ADICIONAL A LO DE LEY?</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3 d-flex justify-content-center">
+                                    <div class="form-group d-flex justify-content-center">
+                                        <div class="form-element custom-radio mr-md-4">
+                                            <input class="form-check-input" type="radio" name="descuento" id="descuento1" value="si" checked/><span class="checkmark"></span>
+                                            <label class="form-check-label label" for="descuento1">Sí</label>
+                                        </div>
+                                        <div class="form-element custom-radio">
+                                            <input class="form-check-input" type="radio" name="descuento" id="descuento2" value="no" /><span class="checkmark"></span>
+                                            <label class="form-check-label label" for="descuento2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 px-3">
+                                    <div class="form-group">
+                                        <select id="cargo" name="cargo" data-msj="Debes seleccionar tu cargo actual">
+                                            <option value=""></option>
+                                            <option value="analista">analista</option>
+                                            <option value="auxiliar">auxiliar</option>
+                                            <option value="jefe area">jefe area</option>
+                                            <option value="profesional">profesional</option>
+                                            <option value="gerente">gerente</option>
+                                            <option value="otro">otro</option>
+                                        </select>
+                                        <label class="label" for="cargo">¿Cuál es tu cargo actual?:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row py-md-4 py-2">
+                                <div class="col-12 px-3">
+                                    <div class="form-group">
+                                        <div class="form-element custom-check mr-0">
+                                            <input type="checkbox" id="terminos" name="terminos" class="form-check-input" value="" data-msj="Debes aceptar los términos y condiciones"/>
+                                            <span class="checkmark"></span>
+                                            <label class="label" for="terminos"><a href="#">Acepto términos y condiciones</a></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-md-6 text-center">
+                                    <input type="submit" id="btn-submit" class="btn1 mt-2 w-100" value="Ingresar a Linxe" />
+                                </div>
+                            </div>
+                            <div id="errorMsj"></div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+
+        <div class="container pb-md-6 pb-4">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-11 pt-md-0 pt-2">
+                    <p class="nota">Al hacer click en “INGRESAR A LINXE”, usted (i) acepta y está de acuerdo con recibir llamadas y mensajes, incluyendo llamadas re-grabadas para propósitos de mercadeo, desde LINXE o de cualquiera de sus representantes o agentes al número telefónico proporcionado arriba (incluyendo número de teléfono móvil), bajo el entendimiento que ninguna de las actividades descritas son garantía de recibir un préstamo o servicio de crédito por parte de LINXE; y (ii) usted acepta que ha leído y entendido las Condiciones de uso del sitio Web, los Términos y condiciones de uso LINXE y Autorización para el tratamiento de datos personales.</p>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+    
+        </main>
+
+        <footer>
+            <div class="container-fluid wrap">
+                <div class="row d-flex justify-content-center py-md-6 py-5 px-md-5 px-3">
+                    <div class="col-md-3 col-12 mb-md-0 mb-4">
+                        <ul>
+                            <li><a href="beneficios.html"><i class="fas fa-arrow-alt-circle-right"></i> Beneficios</a></li>
+                        <li><a href="linxe.html"><i class="fas fa-arrow-alt-circle-right"></i> ¿Cómo funciona?</a></li>
+                        <li><a href="ayuda.html"><i class="fas fa-arrow-alt-circle-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-alt-circle-right"></i> Políticas de Privacidad</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-alt-circle-right"></i> Políticas de Seguridad en Internet</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-alt-circle-right"></i> Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Contáctanos</h4>
+                        <ul>
+                            <li><a href="tel:(57) 315 384 7859"><i class="fas fa-mobile-alt"></i> +(57) 315 384 7859</a></li>
+                            <li><a href="mailto:contacto@linxe.com" target="_blank"><i class="fas fa-envelope"></i> contacto@linxe.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 d-md-flex justify-content-md-end justify-content-start">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-dropbox"></i> Dropbox</a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footerBar">Copyright &copy; 2019, LINXE</div>
+        </footer>
+
+
+        <!--////Scripts externos\\\\-->
+        <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/jquery.mousewheel.min.js"></script>
+        <script src="js/linxe.js"></script>
+    </body>
+</html>

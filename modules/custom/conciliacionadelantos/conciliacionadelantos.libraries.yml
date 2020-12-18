@@ -1,0 +1,8 @@
+conciliacion_adelantos:
+  version: 1.x
+  js:
+    js/ejemplo.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery-once
+    - core/jquery-form

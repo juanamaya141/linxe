@@ -1,0 +1,16 @@
+
+                        <form class="formularioin" action="" name="form_login" id="form_login">
+                            <div class="form-group">
+                                {{ form.usuario }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password }}
+                                <button id="show_password" class="btn-showp" type="button"> <span class="fa fa-eye icon"></span> </button>
+                            </div>
+                            <div class="ayuda"><a id="ayudaIngresar">¿Tienes problemas para ingresar?</a></div>
+                            {{ form.actions.submit }}
+                            {{ form.form_build_id }}
+                            {{ form.form_token }}
+                            {{ form.form_id }}
+                            <div id="errorMsj"></div>
+                        </form>

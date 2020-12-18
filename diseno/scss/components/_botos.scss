@@ -1,0 +1,139 @@
+a, .btn1 , button, input[type="submit"]{
+    transition: $over;
+    outline: none !important;
+    &:hover{
+        text-decoration: none;
+    }
+}
+.btn1{
+    background: $color1;
+    color: white;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    border: 3px solid $color5;
+    &.small{
+        padding: 1rem;
+        font-size: .9rem;
+    }
+    &:hover{
+        color: $color1;
+        background: #E5E5E5;
+        border-color: $color1;
+        box-shadow: inset 0 0 5px rgba($color: $color1 , $alpha: .7);
+    }
+    @media(max-width: $breakpoint-md){
+        padding: .7rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+.btnSec{
+    background: $color4;
+    color: white;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    display: block;
+    line-height: 1;
+    text-align: center;
+    font-weight: 600;
+    border: 3px solid white;
+    &.small{
+        padding: 1rem;
+        font-size: .9rem;
+    }
+    &:hover{
+        border-color: $color4;
+        color: $color4;
+        background: white;
+    }
+}
+
+.btn2{
+    background: $color2;
+    color: white;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    line-height: 1;
+    font-weight: 600;
+    border: 3px solid $color2;
+    &.small{
+        padding: 1rem;
+        font-size: .9rem;
+    }
+    &:hover{
+        color: white;
+        background: $color1;
+        border-color: $color1;
+    }
+    @media(max-width: $breakpoint-md){
+        padding: .7rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+.btnLight{
+    background: white;
+    color: $color1;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    line-height: 1;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba($color: $color3 , $alpha: .5);
+    position: relative;
+    &::before{
+        content: "";
+        position: absolute;
+        left: 100%;
+        top: 0;
+        width: 0; height: 0;
+        border-width: 1.6rem;
+        border-style: solid;
+        border-color: transparent transparent transparent white;
+        transition: $over;
+    }
+    &:hover{
+        background: $color1;
+        color: white;
+        box-shadow: 2px 2px 4px rgba($color: #000 , $alpha: .6);
+        text-shadow: 1px 1px 2px rgba($color: $color5 , $alpha: .5);
+        &::before{border-color: transparent transparent transparent $color1;}
+    }
+}
+.btn-showp{
+    background: rgba($color: $color3 , $alpha: .3);
+    color: $color4;
+    border-radius: 0;
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    width: 2.2rem;
+    height: 2rem;
+    &:hover{
+        background: $color1;
+        color: white;
+    }
+}
+button.close{
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    right: 0;
+    z-index: 99;
+}
+
+.modal-btn{cursor: pointer;}
+
+.btn-collapse{
+    transition: $over;
+    i{transition: $over;}
+    &[aria-expanded="true"]{
+        i{
+            transform: rotate(180deg);
+        }
+    }
+}

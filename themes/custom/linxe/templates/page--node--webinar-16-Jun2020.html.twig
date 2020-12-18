@@ -1,0 +1,56 @@
+    <header class="fixed-top">
+        <div class="topBar">
+          {{ page.infoheader }}
+        </div>
+        <div class="menuBar">
+              {{ page.logo }}
+            <button type="button" class="btnMenu" data-toggle="collapse" data-target="#collapsenav"
+                aria-expanded="false" aria-controls="collapsenav"><i class="fas fa-bars"></i></button>
+            <nav id="collapsenav" class="collapse">
+              {{ page.primary_menu }}
+            </nav>
+              {{ page.botoneslogin }}
+        </div>
+    </header>
+
+    <main id="content">
+        <div class="main-wrap">
+            {{ page.messages }}
+            <!-- introduccion -->
+            {{ page.titulo_sup_webinar }}
+
+            {{ page.content }}
+            
+        </div>
+    </main>
+
+    <footer>
+        <div class="cont-footer">
+            {{ page.footer_menu }}
+
+            {{ page.footer_contacto }}
+        </div>
+
+        <div class="redes">
+            {{ page.footer_redes }}
+        </div>
+
+        <div class="copy-foot">
+            {{ page.footer_copyright }}
+        </div>
+    </footer>
+    <div id="loginformlayer" class="modal fade" role="dialog">
+        {{ page.login_form }}
+    </div>
+    <div id="rememberformlayer" class="modal fade" role="dialog">
+        {{ page.remember_form }}
+    </div>
+
+    <!-- modal -->
+
+    {% if page.popupwebinar_form %}
+        {% if cookie_enablePopupForm != 1%}
+            {{ page.popupwebinar_form }}
+        {% endif %}
+    {% endif %}
+    <!-- modal fin -->

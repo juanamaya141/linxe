@@ -1,0 +1,5 @@
+# Schema for the configuration files of the Aecsa theme.
+
+aecsa.settings:
+  type: theme_settings
+  label: 'Aecsa settings'

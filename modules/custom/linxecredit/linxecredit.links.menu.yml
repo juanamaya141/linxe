@@ -1,0 +1,7 @@
+linxecredit.admin:
+  title: 'Linxe Module Configuration'
+  description: 'Opciones de configuración módulo de Linxe'
+  parent: system.admin_config_development
+  # menu_name: main
+  route_name: linxecredit.config
+  weight: 1

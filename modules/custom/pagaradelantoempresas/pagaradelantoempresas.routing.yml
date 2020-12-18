@@ -1,0 +1,7 @@
+pagaradelantoempresas.pagaradelantosfacturados:
+  path: '/admin/pagaradelantosfacturados'
+  defaults:
+    _form: '\Drupal\pagaradelantoempresas\Form\PagarAdelantosFacturados'
+    _title: 'Pagar Adelantos de Salario Facturados'
+  requirements:
+    _permission: 'access pagaradelantoempresas'

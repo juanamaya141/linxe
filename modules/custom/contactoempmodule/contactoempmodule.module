@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Contains contactoempmodule.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function contactoempmodule_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the contactoempmodule module.
+    case 'help.page.contactoempmodule':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This show the code package generated.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function contactoempmodule_theme() {
+  $theme['contactoempmodule_form'] = [
+    'render element' => 'form',
+    'arguments'      => array('vector' => NULL),
+    
+  ];
+  return $theme;
+}
+
+/**
+* Implements hook_mail().
+*/
+function contactoempmodule_mail($key, &$message, $params) {
+   $options = array(
+     'langcode' => $message['langcode'],
+   );
+   switch ($key) {
+     case 'contacto_empresas':
+     $message['headers']['Bcc'] = $params['Bcc'];
+     $message['from'] = \Drupal::config('system.site')->get('mail');
+     $message['subject'] = t('@title', array('@title' => $params['subject']), $options);
+     $message['body'][] = $params['message'];
+     break;
+   }
+}

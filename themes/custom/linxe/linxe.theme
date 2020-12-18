@@ -1,0 +1,203 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the aecsa theme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Adds body classes if certain regions have content.
+ */
+function linxe_preprocess_html(&$variables) {
+  //print_r($variables['page']);
+  $system_path = \Drupal::service('path.current')->getPath();
+
+
+  //
+  // Add information about the number of sidebars.
+  if ($system_path=="/node/2" || $system_path=="/como-funciona"  || $system_path=="/preguntas-frecuentes") {
+    $variables['attributes']['class'][] = 'institucional box';
+  }
+  else if($system_path=="/node") {
+    $variables['attributes']['class'][] = 'layout-no-sidebars home box';
+    $variables['attributes']['id'][] = 'home';
+  }else if($system_path=="/contacto") {
+    $variables['attributes']['class'][] = 'contacto institucional box';
+  }else if($system_path=="/node/10" ) {
+    $variables['attributes']['class'][] = 'contacto institucional box message_animation';
+  }else if( $system_path=="/node/12") {
+    $variables['attributes']['class'][] = ' institucional box scrollable autohide message_animation';
+  }else if( $system_path=="/node/17") {
+    $variables['attributes']['class'][] = ' institucional box scrollable autohide message_animation';
+  }else if( $system_path=="/response-message") {
+    $variables['attributes']['class'][] = ' institucional box scrollable autohide message_animation';
+  }else if( $system_path=="/dashboard/seleccion" || $system_path=="/dashboard/contrato" || $system_path=="/dashboard/desembolso" || $system_path=="/dashboard/miscreditos" || $system_path=="/dashboard/informacionpersonal" || $system_path=="/dashboard/adelanto" || $system_path=="/dashboard/datos-empresa" || $system_path=="/dashboard/desembolso-adelanto") {
+    $variables['attributes']['class'][] = ' dashboard box ';
+  }else if( $system_path=="/dashboard/adelanto" || $system_path=="/dashboard/misadelantos") {
+    $variables['attributes']['class'][] = ' dashboard box ';
+  }else if($variables['node_type']=="webinar"){
+    $variables['attributes']['class'][] = 'home box';
+    $variables['attributes']['id'][] = 'home';
+  }else {
+    $variables['attributes']['class'][] = 'contacto institucional box';
+  }
+
+
+  if (!empty($variables['page']['featured_top'])) {
+    $variables['attributes']['class'][] = 'has-featured-top';
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function linxe_preprocess_page_title(&$variables) {
+  // Since the title and the shortcut link are both block level elements,
+  // positioning them next to each other is much simpler with a wrapper div.
+  if (!empty($variables['title_suffix']['add_or_remove_shortcut']) && $variables['title']) {
+    // Add a wrapper div using the title_prefix and title_suffix render
+    // elements.
+    $variables['title_prefix']['shortcut_wrapper'] = [
+      '#markup' => '<div class="shortcut-wrapper clearfix">',
+      '#weight' => 100,
+    ];
+    $variables['title_suffix']['shortcut_wrapper'] = [
+      '#markup' => '</div>',
+      '#weight' => -99,
+    ];
+    // Make sure the shortcut link is the first item in title_suffix.
+    $variables['title_suffix']['add_or_remove_shortcut']['#weight'] = -100;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for maintenance-page.html.twig.
+ */
+function linxe_preprocess_maintenance_page(&$variables) {
+  // By default, site_name is set to Drupal if no db connection is available
+  // or during site installation. Setting site_name to an empty string makes
+  // the site and update pages look cleaner.
+  // @see template_preprocess_maintenance_page
+  if (!$variables['db_is_active']) {
+    $variables['site_name'] = '';
+  }
+
+  // aecsa has custom styling for the maintenance page.
+  $variables['#attached']['library'][] = 'aecsa/maintenance_page';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ */
+function linxe_preprocess_node(&$variables) {
+  // Remove the "Add new comment" link on teasers or when the comment form is
+  // displayed on the page.
+  if ($variables['teaser'] || !empty($variables['content']['comments']['comment_form'])) {
+    unset($variables['content']['links']['comment']['#links']['comment-add']);
+  }
+
+  // Allowed view modes
+  $view_mode = $variables['view_mode']; // Retrieve view mode
+  $allowed_view_modes = ['full']; // Array of allowed view modes (for performance so as to not execute on unneeded nodes)
+  
+  
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for block.html.twig.
+ */
+/*
+function linxe_preprocess_block(&$variables) {
+  // Add a clearfix class to system branding blocks.
+  if ($variables['plugin_id'] == 'system_branding_block') {
+    $variables['attributes']['class'][] = 'clearfix';
+  }
+}*/
+
+/**
+ * Implements hook_preprocess_HOOK() for menu.html.twig.
+ */
+function linxe_preprocess_menu(&$variables) {
+  $variables['attributes']['class'][] = 'clearfix';
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ */
+function linxe_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  if ($variables['element']['#form_id'] == 'search_block_form') {
+    $suggestions[] = 'form__search_block_form';
+  }
+  
+}
+
+/**
+ * Implements hook_form_alter() to add classes to the search form.
+ */
+function linxe_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (in_array($form_id, ['search_block_form', 'search_form'])) {
+    $key = ($form_id == 'search_block_form') ? 'actions' : 'basic';
+    if (!isset($form[$key]['submit']['#attributes'])) {
+      $form[$key]['submit']['#attributes'] = new Attribute();
+    }
+    $form[$key]['submit']['#attributes']->addClass('search-form__submit');
+  }
+
+  if ($form_id == 'linxelogin_form') {
+    
+    $form['#attributes']['class'][] = 'formularioin';
+  }
+}
+
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ */
+function linxe_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  // Add content type suggestions.
+  if (($node = \Drupal::request()->attributes->get('node')) && (strpos($_SERVER['REQUEST_URI'], "revisions") == false)) {
+    array_splice($suggestions, 1, 0, 'page__node__' . $node->getType());
+  }
+}
+/**
+ * Implements hook__preprocess_page().
+ */
+function linxe_preprocess_page(&$variables) {
+  $fid = theme_get_setting('url_bannermain');
+
+//  print_r($fid);
+  if(!is_null($fid[0])){
+    $file = \Drupal\file\Entity\File::load($fid[0]);
+    $variables['url_bannermain'] = file_url_transform_relative(file_create_url($file->url()));
+  }else{
+    $variables['url_bannermain'] = "";
+  }
+  
+
+  $fid = theme_get_setting('url_bannersecondary');
+  if(!is_null($fid[0])){
+    $file = \Drupal\file\Entity\File::load($fid[0]);
+    $variables['url_bannersecondary'] = file_url_transform_relative(file_create_url($file->url()));
+  }else{
+    $variables['url_bannersecondary'] = "";
+  }
+
+  $fid = theme_get_setting('url_bannerthird');
+  if(!is_null($fid[0])){
+    $file = \Drupal\file\Entity\File::load($fid[0]);
+    $variables['url_bannerthird'] = file_url_transform_relative(file_create_url($file->url()));
+  }else{
+    $variables['url_bannerthird'] = "";
+  }
+  
+  $variables['cookie_enablePopupForm'] = $_COOKIE["enablePopupForm"];
+
+  
+}
+ 

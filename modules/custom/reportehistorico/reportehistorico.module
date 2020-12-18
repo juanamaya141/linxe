@@ -1,0 +1,177 @@
+<?php
+
+/**
+ * @file
+ * Contains reportehistorico.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
+use Drupal\Core\Routing;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormBase;
+use Symfony\Component\HttpFoundation\Response;
+/**
+ * Implements hook_help().
+ */
+
+
+    function reportehistorico_theme() {
+    // We use a template file to allow for translation of blocks of content.
+    // Therefore we need to add this content at the theming layer.
+        return [
+            'reportehistorico_description' => [
+            'template' => 'description',
+            'variables' => [],
+            ],
+        ];
+    }
+
+    function get_reportehistorico($opt,$empresas,$estado,$desde,$hasta) {
+        $current_user = \Drupal::currentUser();
+        $roles = $current_user->getRoles();
+        $uid = \Drupal::currentUser()->id();  //obtenemos el uid del usuario logueado
+
+        $desde = $desde.' 00:00:00';
+        $hasta = $hasta.' 23:59:59';
+	    $res = array();
+
+        if($opt == "All"){	
+
+
+                $query = db_select('adelantos_nomina','an')
+                            ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                            ->limit(15);
+                $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+                $query->fields('an');
+                $query->fields('reg');
+                if($roles[1] == "empresa_linxe"){
+                    //CHECK EMPRESA
+                    $select = db_select('empresas', 'e')
+                                ->condition('e.iduser', $uid)
+                                ->fields('e');
+                    $resultado = $select->execute()->fetchObject();
+
+                    $query->condition('reg.idempresa',$resultado->idempresa);
+                }
+
+                $results = $query->execute()->fetchAll();
+                $ret = [];
+
+        }else{
+                $query = db_select('adelantos_nomina','an')
+                            ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                            ->limit(15);
+                $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+                $query->fields('an');
+                $query->fields('reg');
+                if($estado !== ""){
+                    $query->condition('an.estado_general_solicitud',$estado);
+                }
+                if($empresas !== ""){
+                    $query->condition('reg.idempresa',$empresas);
+                }
+
+                if($estado == "seleccion_monto"){
+                    $query->condition('an.fecha_hora_acepta_terminos',[$desde,$hasta],'BETWEEN');
+                }elseif($estado == "validacion_desembolso"){
+                    $query->condition('an.fecha_hora_datosempresa',[$desde,$hasta],'BETWEEN');
+                }elseif($estado == "en_proceso_desembolso" || $estado == "desembolsado"){
+                    $query->condition('an.fecha_hora_desembolso',[$desde,$hasta],'BETWEEN');
+                }elseif($estado == "en_proceso_liquidacion" || $estado == "liquidado"){
+                    $query->condition('an.fecha_hora_liquidacion',[$desde,$hasta],'BETWEEN');
+                }else{
+                    $query->condition('an.fecha_solicitud',[$desde,$hasta],'BETWEEN');
+                }
+                        
+
+                $results = $query->execute()->fetchAll();
+                $ret = [];
+        }
+        foreach ($results as $row) {
+            
+            $ret[] = [
+                'idregistro'=> $row->idregistro ,
+                'iduser' => $row->iduser,
+                'tipodocumento' => $row->tipodocumento,
+                'documento' => $row->documento,
+                'fecha_expedicion' => $row->fecha_expedicion,
+                'nombres' => $row->nombre.' '. $row->primer_apellido,
+                'celular' => $row->celular,
+                'email' => $row->email,
+                'actividad_economica' => $row->actividad_economica,
+                'destino_prestamo' => $row->destino_prestamo,
+                'eps' => $row->eps,
+                'afp' => $row->afp,
+                'registra_pagos_6_meses' => $row->registra_pagos_6_meses,
+                'convenio_empresa' => $row->convenio_empresa,
+                'nit_empresa' => $row->nit_empresa,
+                'idempresa' => $row->idempresa,
+                'rango_salarial'=>  $row->rango_salarial,
+                'acepto_terminos' => $row->acepto_terminos,
+                'registerdate' => $row->registerdate,
+                'estado_creacion_datascoring' => $row->estado_creacion_datascoring,
+                'respuesta_creacion_datascoring' => $row->respuesta_creacion_datascoring,
+                'fecha_creacion_datascoring' => $row->fecha_creacion_datascoring,
+                'idadelanto' => $row->idadelanto,
+                'idempresa_adelanto' => $row->idempresa,
+                'idregistro_adelanto' => $row->idregistro,
+                'fecha_solicitud' => $row->fecha_solicitud,
+                'estado_solicitud' => $row->estado_solicitud,
+                'envio_notificacion' => $row->envio_notificacion_aprobacion,
+                'monto_maximo_aprobado' => $row->monto_maximo_aprobado,
+                'valor_solicitado' => $row->valor_solicitado,
+                'administracion' => $row->administracion,
+                'seguros' => $row->seguros,
+                'tecnologia'=>  $row->tecnologia,
+                'iva' => $row->iva,
+                'acepto_terminos' => $row->acepto_terminos,
+                'fecha_hora_acepta_terminos' => $row->fecha_hora_acepta_terminos,
+                'ip_address' => $row->ip_address,
+                'mareigua_consulta_id' => $row->mareigua_consulta_id,
+                'mareigua_respuesta_id' => $row->mareigua_respuesta_id,
+                'mareigua_eps' => $row->mareigua_eps,
+                'mareigua_afp' => $row->mareigua_afp,
+                'mareigua_empresa_tipo_identificacion' => $row->mareigua_empresa_tipo_identificacion,
+                'mareigua_empresa_identificacion' => $row->mareigua_empresa_identificacion,
+                'mareigua_razon_social' => $row->mareigua_razon_social,
+                'mareigua_nivel_riesgo' => $row->mareigua_nivel_riesgo,
+                'mareigua_promedio_ingresos' => $row->mareigua_promedio_ingresos,
+                'mareigua_mediana_ingresos' => $row->mareigua_mediana_ingresos,
+                'mareigua_maximo' => $row->mareigua_maximo,
+                'mareigua_minimo'=>  $row->mareigua_minimo,
+                'mareigua_pendiente' => $row->mareigua_pendiente,
+                'mareigua_tendencia' => $row->mareigua_tendencia,
+                'mareigua_meses_continuidad' => $row->mareigua_meses_continuidad,
+                'mareigua_cantidad_aportantes' => $row->mareigua_cantidad_aportantes,
+                'estado_pagare' => $row->estado_pagare,
+                'respuesta_deceval_girador' => $row->respuesta_deceval_girador,
+                'cuentaGirador' => $row->cuentaGirador,
+                'respuesta_deceval_creacion_pagare' => $row->respuesta_deceval_creacion_pagare,
+                'numpagarentidad' => $row->numpagarentidad,
+                'iddocumentopagare' => $row->iddocumentopagare,
+                'fecha_hora_creacion_pagare' => $row->fecha_hora_creacion_pagare,
+                'respuesta_deceval_firmar_pagare' => $row->respuesta_deceval_firmar_pagare,
+                'fecha_hora_firma_pagare' => $row->fecha_hora_firma_pagare,
+                'otp' => $row->otp,
+                'fecha_hora_generacion_otp' => $row->fecha_hora_generacion_otp,
+                'contacto_empresa_nombre'=>  $row->contacto_empresa_nombre,
+                'contacto_empresa_apellido' => $row->contacto_empresa_apellido,
+                'contacto_empresa_telefono' => $row->contacto_empresa_telefono,
+                'contacto_empresa_email' => $row->contacto_empresa_email,
+                'fecha_hora_datosempresa' => $row->fecha_hora_datosempresa,
+                'tipo_cuenta' => $row->tipo_cuenta,
+                'numero_cuenta' => $row->numero_cuenta,
+                'banco' => $row->banco,
+                'autorizacion_desembolso_empresa' => $row->autorizacion_desembolso_empresa,
+                'estado_desembolso' => $row->estado_desembolso,
+                'saldo_pendiente' => $row->saldo_pendiente,
+                'estado_general_solicitud' => $row->estado_general_solicitud
+            ];
+        }
+        return $ret;
+    }
+
+
+

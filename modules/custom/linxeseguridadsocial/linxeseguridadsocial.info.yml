@@ -1,0 +1,5 @@
+name: CRUD de Seguridad Social
+type: module
+description: CRUD de Seguridad Social
+core: 8.x
+package: Linxe

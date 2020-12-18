@@ -1,0 +1,109 @@
+linxecreditstyles:
+  version: 8.0.0
+  css:
+    layout:
+      css/dropdowns.css: {}
+      https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css: { type: external , crossorigin: "anonymous" }
+      https://formden.com/static/cdn/bootstrap-iso.css: { type: external , crossorigin: "anonymous" }
+      https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css: { type: external , crossorigin: "anonymous" }
+  js:
+    js/modulo.js: {}
+    https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js: { type: external  }
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+librarydashboard:
+  version: 8.0.0
+  js:
+    js/dashboardlib.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+librarydashboard_adelanto:
+  version: 8.0.0
+  js:
+    js/dashboardlib_adelanto.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+librarycontrato:
+  version: 8.0.0
+  js:
+    js/contratolib.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+librarydesembolso:
+  version: 8.0.0
+  js:
+    js/desembolsolib.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+librarymiscreditos:
+  version: 8.0.0
+  js:
+    js/miscreditoslib.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+libraryinformacionpersonal:
+  version: 8.0.0
+  js:
+    js/informacionpersonal.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+librarybotoneslogin:
+  version: 8.0.0
+  js:
+    js/botoneslogin.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+librarypopupwebinar:
+  version: 8.0.0
+  js:
+    js/popupwebinar.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+librarymisadelantos:
+  version: 8.0.0
+  js:
+    js/misadelantoslib.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+librarypagare:
+  version: 8.0.0
+  js:
+    js/pagarelib.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+librarydatosempresa:
+  version: 8.0.0
+  css:
+    layout:
+      css/dropdowns.css: {}
+      https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css: { type: external , crossorigin: "anonymous" }
+      https://formden.com/static/cdn/bootstrap-iso.css: { type: external , crossorigin: "anonymous" }
+      https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css: { type: external , crossorigin: "anonymous" }
+  js:
+    js/datosempresalib.js: {}
+    https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js: { type: external  }    
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+librarydesembolsoadelanto:
+  version: 8.0.0
+  js:
+    js/desembolsoadelantolib.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

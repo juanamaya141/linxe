@@ -1,0 +1,223 @@
+<?php
+
+/**
+ * @file
+ * Contains adelanto.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
+use Drupal\Core\Routing;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormBase;
+use Symfony\Component\HttpFoundation\Response;
+/**
+ * Implements hook_help().
+ */
+
+
+    function adelanto_theme() {
+    // We use a template file to allow for translation of blocks of content.
+    // Therefore we need to add this content at the theming layer.
+        return [
+            'adelanto_description' => [
+            'template' => 'description',
+            'variables' => [],
+            ],
+        ];
+    }
+
+    function get_adelanto($opt,$filtro) {
+	    $res = array();
+        if($opt == "All"){	
+            $query = db_select('registrados_an', 'r')                
+                    ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                    ->limit(15);
+            $query->join('adelantos_nomina', 'an', 'an.idregistro = r.idregistro');
+            $query->join('empresas', 'e', 'r.idempresa = e.idempresa');
+            $query
+                ->fields('r', ['nombre','primer_apellido','segundo_apellido','tipodocumento','documento'])
+                ->fields('e', ['identificacion','razon_social'])
+                ->fields('an', ['fecha_solicitud','monto_maximo_aprobado','valor_solicitado','administracion','seguros','tecnologia','iva','tipo_cuenta','numero_cuenta','banco','estado_general_solicitud'])
+                ->condition('an.estado_general_solicitud', ['aprobacion_empresa','en_proceso_desembolso'], 'IN');
+
+            $results = $query->execute()->fetchAll();
+            $ret = [];
+        }else{
+            $query = db_select('registrados_an', 'r')                
+                    ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                    ->limit(15);
+            $query->join('adelantos_nomina', 'an', 'an.idregistro = r.idregistro');
+            $query->join('empresas', 'e', 'r.idempresa = e.idempresa');
+
+            $query
+                ->fields('r', ['nombre','primer_apellido','segundo_apellido','tipodocumento','documento'])
+                ->fields('e', ['identificacion','razon_social'])
+                ->fields('an', ['fecha_solicitud','monto_maximo_aprobado','valor_solicitado','administracion','seguros','tecnologia','iva','tipo_cuenta','numero_cuenta','banco','estado_general_solicitud'])
+                ->condition('an.estado_general_solicitud',$filtro);
+
+            $results = $query->execute()->fetchAll();
+            $ret = [];
+        }
+        foreach ($results as $row) {
+            
+            $ret[] = [
+                'nombres'=>  $row->nombre ,
+                'primerApellido' => $row->primer_apellido,
+                'segundoApellido' => $row->segundo_apellido,
+                'tipoDocumento' => $row->tipodocumento,
+                'documento' => $row->documento,
+                'fechaAdelantoNomina' => $row->fecha_solicitud,
+                'nit' => $row->identificacion,
+                'nombreEmpresa' => $row->razon_social,
+                'maximoMonto' => $row->monto_maximo_aprobado,
+                'valor' => $row->valor_solicitado,
+                'administracion' => $row->administracion,
+                'seguros' => $row->seguros,
+                'tecnologia' => $row->tecnologia,
+                'iva' => $row->iva,
+                'tipoCuenta' => $row->tipo_cuenta,
+                'numeroCuenta' => $row->numero_cuenta,
+                'banco' => $row->banco,
+                'estadoSolicitud' => $row->estado_general_solicitud
+            ];
+        }
+        return $ret;
+    }
+
+    function updateNomina($filtro) {
+        $field  = array(
+            'estado_general_solicitud'   => 'en_proceso_desembolso',
+            'estado_desembolso'   => 'en_proceso_desembolso',
+            'fecha_hora_desembolso'   => date("Y-m-d H:i:s"),
+        );
+        $query = \Drupal::database();
+        return $update = $query->update('adelantos_nomina')
+            ->fields($field)
+            ->condition('estado_general_solicitud', $filtro)
+            ->execute();
+    }
+
+    function getCodigo($banco) {
+        switch($banco){
+            case 'BANCO DE BOGOTÁ':
+                $codigo = 1;
+                break;
+            case 'BANCO POPULAR':
+                $codigo = 2;
+                break;
+            case 'ITAÚ CORPBANCA COLOMBIA S.A.':
+                $codigo = 6;
+                break;
+            case 'BANCOLOMBIA S.A.':
+                $codigo = 7;
+                break;
+            case 'CITIBANK COLOMBIA':
+                $codigo = 9;
+                break;
+            case 'GNB SUDAMERIS S.A.':
+                $codigo = 12;
+                break;
+            case 'BBVA COLOMBIA':
+                $codigo = 13;
+                break;
+            case 'BANCO DE OCCIDENTE':
+                $codigo = 23;
+                break;
+            case 'BANCO CAJA SOCIAL - BCSC S.A.':
+                $codigo = 30;
+                break;
+            case 'BANCO DAVIVIENDA S.A.':
+                $codigo = 39;
+                break;
+            case 'COLPATRIA':
+                $codigo = 42;
+                break;
+            case 'BANCO AGRARIO DE COLOMBIA S.A.':
+                $codigo = 43;
+                break;
+            case 'BANCO AV VILLAS':
+                $codigo = 49;
+                break;
+            case 'BANCAMIA':
+                $codigo = 52;
+                break;
+            case 'BANCO W S.A.':
+                $codigo = 53;
+                break;
+            case 'BANCO PICHINCHA S.A.':
+                $codigo = 57;
+                break;
+            case 'BANCOOMEVA':
+                $codigo = 54;
+                break;
+            case 'CMR FALABELLA S.A.':
+                $codigo = 56;
+                break;
+            case 'BANCO FINANDINA S.A.':
+                $codigo = 55;
+                break;
+            case 'BANCO COOPERATIVO COOPCENTRAL':
+                $codigo = 58;
+                break;
+            case 'BANCO SANTANDER DE NEGOCIOS COLOMBIA S.A.':
+                $codigo = 59;
+                break;
+            case 'BANCO COMPARTIR S.A':
+                $codigo = 62;
+                break;
+            case 'BANCO SERFINANZA S.A':
+                $codigo = 63;
+                break;
+            case 'BANCO PROCREDIT':
+                $codigo = 51;
+                break;
+            case 'BANCO MUNDO MUJER S.A.':
+                $codigo = 60;
+                break;
+            case 'BANCO MULTIBANK S.A.':
+                $codigo = 61;
+                break;
+            case 'BANCO CREDIFINANCIERA S.A.C.F':
+                $codigo = 0;
+                break;
+            case 'SCOTIANBANK':
+                $codigo = 42;
+                break;
+            
+        }
+
+        return $codigo;
+    }
+
+    function getTipo($tipo) {
+        switch($tipo){
+            case 'ahorros':
+                $tipos = 'CA';
+                break;
+            case 'corriente':
+                $tipos = 'CC';
+                break;
+        }
+
+        return $tipos;
+    }
+
+    function getDocumento($tipo) {
+        switch($tipo){
+            case '1':
+                $doc = '01';
+                break;
+            case '3':
+                $doc = '02';
+                break;
+            case '4':
+                $doc = '04';
+                break;
+        }
+
+        return $doc;
+    }
+
+

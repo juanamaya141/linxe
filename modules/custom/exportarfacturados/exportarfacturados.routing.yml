@@ -1,0 +1,9 @@
+exportarfacturados.exportar:
+  path: '/admin/exportarfacturados'
+  defaults:
+    _form: '\Drupal\exportarfacturados\Form\Exportar'
+    _title: 'Guardar registros facturados'
+  requirements:
+    _permission: 'access exportarfacturados'
+  options:
+    no_cache: 'TRUE'

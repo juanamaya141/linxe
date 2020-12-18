@@ -1,0 +1,16 @@
+dispersion.importar:
+  path: '/admin/dispersion-nomina/importar'
+  defaults:
+    _form: '\Drupal\dispersion\Form\ImportarAdelanto'
+    _title: 'Importar dispersión de adelanto de nómina'
+  requirements:
+    _permission: 'access dispersion'
+  options:
+    no_cache: 'TRUE'
+dispersion.table_display:
+  path: '/admin/dispersion-nomina/resultados'
+  defaults:
+    _controller: '\Drupal\dispersion\Controller\TableController::mostrar'
+    _title: 'Resultados de la dispersión de nómina'
+  requirements:
+    _permission: 'access dispersion'

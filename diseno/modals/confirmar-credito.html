@@ -1,0 +1,73 @@
+       <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+                class="fas fa-times"></i></button>
+        <div class="modal-body">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12">
+                        <h2 class="text1 low">Estás a un paso de obtener tu dinero</h2>
+                    </div>
+                    <div class="col-11">
+                        <div class="text-center text2">Para finalizar la firma electrónica de los documentos, hemos enviado un código de seguridad al correo electrónico y al celular que verás a continuación:</div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 cont-form">
+                        <form class="formularioin" action="" name="confirma-codigo" id="confirma-codigo">
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <input type="number" id="codigo" name="codigo" data-msj="Ingresa el código" />
+                                        <label class="label" for="codigo">Código:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="subtitulo">Tu número celular registrado:</div>
+                                <div class="dato-conf" id="celular-conf"></div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="subtitulo">Tu correo electrónico registrado:</div>
+                                <div class="dato-conf" id="correo-conf"></div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="subtitulo">Ten presente:</div>
+                                <div class="dato-conf">
+                                    <p><span>*</span>El código tiene una vigencia de 10 minutos.</p>
+                                    <p><span>*</span>Si pasados 3 minutos no has recibido el código da clic <a href="#">aquí</a> para recibir uno nuevo.</p>
+                                </div>
+                            </div>
+
+                            <div class="check-abonos row">
+                                 <div class="col-12">
+                                    <h2 class="text1 low">¿Donde deseas que te abonemos tu dinero?</h2>
+                                </div>
+
+                                <div class="form-element custom-check mr-0 col-md-6" data-toggle="tooltip" data-placement="top" title="" data-original-title="Abonaremos el dinero directamente a tu cuenta de nómina, podrás disponer de él en las próximas 24 horas.">
+                                    <input type="radio" id="terminos" name="terminos" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                    <span class="checkmark"></span>
+                                    <label class="label" for="terminos">cuenta de<br>nómina actual</label>
+                                </div>  
+
+                                <div class="form-element custom-check mr-0 col-md-6" data-toggle="tooltip" data-placement="top" title="" data-original-title="Podrás contar con el dinero inmediatamente, gracias a nuestra alianza con Movii, si escoges esta opción, te enviaremos el dinero a tu cuenta de Movii, si no tienes cuenta aun, te enviaremos un mensaje de texto para que la abras fácilmente. Podrás retirar el dinero en la red de aliados con más de 6000 puntos y tendrá un costo de $2.000 pesos.">
+                                    <input type="radio" id="terminos2" name="terminos" class="form-check-input" value="">
+                                    <span class="checkmark"></span>
+                                    <label class="label" for="terminos2">cuenta electrónica <br>de Movil</label>
+                                </div>  
+                            </div>
+
+
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-md-9">
+                                    <input type="submit" id="btn-submit" class="btn1 mt-2 w-100" value="Firmar y Aceptar" />
+                                </div>
+                                <div id="errorMsj"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

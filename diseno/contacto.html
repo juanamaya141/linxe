@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>LINXE | Contacto</title>
+        <meta name="description" content="Libranzas en línea">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+        <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body class="contacto institucional box">
+        <header class="fixed-top">
+            <div class="topBar">
+                <img src="images/header/icon-contact.png" alt="Contáctanos" />
+                <a href="tel:+(57) 315 384 7859">+(57) 315 384 7859</a> | <a href="mailto:contacto@linxe.com">contacto@linxe.com</a>
+            </div>
+            <div class="menuBar">
+                <div class="cont-logo pl-md-4">
+                    <h1><a href="index.html">
+                        <img class="img-fluid" src="images/header/logo.png" alt="Logo LINXE" />
+                    </a></h1>
+                </div>
+                <button type="button" class="btnMenu d-md-none d-block" data-toggle="collapse" data-target="#collapsenav" aria-expanded="false" aria-controls="collapsenav"><i class="fas fa-bars"></i></button>
+                <nav id="collapsenav" class="collapse">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="beneficios.html">Beneficios</a></li>
+                        <li><a href="linxe.html">¿Cómo Funciona?</a></li>
+                        <li><a href="ayuda.html">Ayuda</a></li>
+                        <li><a href="contacto.html" class="active">Contáctanos</a></li>
+                        <li class="lising"><a class="singin modal-btn" data-modal="login-form">Ingresa</a></li>
+                        <li class="lising"><a href="registro.html" class="singup">Regístrate</a></li>
+                    </ul>
+                </nav>
+                <div class="cont-login">
+                    <button type="button" class="singin modal-btn" data-modal="login-form">Ingresa</button>
+                    <a href="registro.html" class="singup">Regístrate</a>
+                </div>
+            </div>
+        </header>
+        
+        <main class="pb-md-6 pb-4">
+            <div class="main-wrap mt-md-6 mt-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs" id="contactoTabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="personas-tab" data-toggle="tab" href="#personas" role="tab"
+                                        aria-controls="personas" aria-selected="true">Personas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="empresas-tab" data-toggle="tab" href="#empresas" role="tab"
+                                        aria-controls="empresas" aria-selected="false">Empresas</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center tab-content" id="contactoContent">
+                        <div class="col-md-7 tab-pane fade show active cont-form" id="personas" role="tabpanel" aria-labelledby="personas-tab">
+                            <form class="formularioin" action="" name="form_contacto_personas" id="contacto_personas">
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="nombre" name="nombre" data-msj="Nombre, es un dato obligatorio"/>
+                                        <label class="label" for="nombre">Primer Nombre:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="apellido" name="apellido" data-msj="Apellido, es un dato obligatorio"/>
+                                        <label class="label" for="apellido">Primer Apellido:</label>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="tel" id="celular" name="celular" data-msj="Celular, es un dato obligatorio"/>
+                                        <label class="label" for="celular">Celular:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="email" id="correo" name="correo" data-msj="Correo electrónico, es un dato obligatorio" />
+                                        <label class="label" for="correo">Correo Electrónico:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="empresa" name="empresa" data-msj="Empresa, es un dato obligatorio"/>
+                                        <label class="label" for="empresa">Empresa:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="asunto" name="asunto" data-msj="Asunto, es un dato obligatorio"/>
+                                        <label class="label" for="asunto">Asunto:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 px-3">
+                                    <div class="form-group">
+                                        <textarea id="mensaje" name="mensaje"></textarea>
+                                        <label class="label" for="mensaje">Mensaje:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-md-6 text-center">
+                                    <input type="submit" id="btn-submit" class="btn1 mt-2 w-100" value="Enviar" />
+                                </div>
+                            </div>
+                            <div id="errorMsj"></div>
+                        </form>
+                        </div>
+
+                        <div class="col-md-7 tab-pane fade cont-form" id="empresas" role="tabpanel" aria-labelledby="empresas-tab">
+                            <form class="formularioin" action="" name="form_contacto_empresas" id="contacto_empresas">
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="nombre" name="nombre" data-msj="Nombre, es un dato obligatorio"/>
+                                        <label class="label" for="nombre">Primer Nombre:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="apellido" name="apellido" data-msj="Apellido, es un dato obligatorio"/>
+                                        <label class="label" for="apellido">Primer Apellido:</label>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="tel" id="celular" name="celular" data-msj="Celular, es un dato obligatorio"/>
+                                        <label class="label" for="celular">Teléfono:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="email" id="correo" name="correo" data-msj="Correo electrónico, es un dato obligatorio" />
+                                        <label class="label" for="correo">Correo Electrónico:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="empresa" name="empresa" data-msj="Empresa, es un dato obligatorio"/>
+                                        <label class="label" for="empresa">Empresa:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="cargo" name="cargo" data-msj="Cargo, es un dato obligatorio"/>
+                                        <label class="label" for="cargo">Cargo:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 px-3">
+                                    <div class="form-group">
+                                        <select id="tamanho" name="tamanho" data-msj="Tamaño de la empresa, es un dato obligatorio">
+                                            <option value=""></option>
+                                            <option value="opcion1">1 a 19 empleados</option>
+                                            <option value="opcion2">20 a 49 empleados</option>
+                                            <option value="opcion3">50 a 99 empleados</option>
+                                            <option value="opcion4">100 a 499 empleados</option>
+                                            <option value="opcion5">500 a 999 empleados</option>
+                                            <option value="opcion6">Más de 1.000 empleados</option>
+                                        </select>
+                                        <label class="label" for="tamanho">Tamaño de la Empresa:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 px-3">
+                                    <div class="form-group">
+                                        <input type="text" id="asunto" name="asunto" data-msj="Asunto, es un dato obligatorio"/>
+                                        <label class="label" for="asunto">Asunto:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 px-3">
+                                    <div class="form-group">
+                                        <textarea id="mensaje" name="mensaje"></textarea>
+                                        <label class="label" for="mensaje">Mensaje:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-md-6 text-center">
+                                    <input type="submit" id="btn-submit" class="btn1 mt-2 w-100" value="Enviar" />
+                                </div>
+                            </div>
+                            <div id="errorMsj"></div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid wrap">
+                <div class="row d-flex justify-content-center py-md-6 py-5 px-md-5 px-3">
+                    <div class="col-md-3 col-12 mb-md-0 mb-4">
+                        <ul>
+                            <li><a href="beneficios.html"><i class="fas fa-arrow-alt-circle-right"></i> Beneficios</a></li>
+                        <li><a href="linxe.html"><i class="fas fa-arrow-alt-circle-right"></i> ¿Cómo funciona?</a></li>
+                        <li><a href="ayuda.html"><i class="fas fa-arrow-alt-circle-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-alt-circle-right"></i> Políticas de Privacidad</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-alt-circle-right"></i> Políticas de Seguridad en Internet</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-alt-circle-right"></i> Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Contáctanos</h4>
+                        <ul>
+                            <li><a href="tel:(57) 315 384 7859"><i class="fas fa-mobile-alt"></i> +(57) 315 384 7859</a></li>
+                            <li><a href="mailto:contacto@linxe.com" target="_blank"><i class="fas fa-envelope"></i> contacto@linxe.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 d-md-flex justify-content-md-end justify-content-start">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-dropbox"></i> Dropbox</a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footerBar">Copyright &copy; 2019, LINXE</div>
+        </footer>
+
+
+        <!--////Scripts externos\\\\-->
+        <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/jquery.mousewheel.min.js"></script>
+        <script src="js/linxe.js"></script>
+    </body>
+</html>

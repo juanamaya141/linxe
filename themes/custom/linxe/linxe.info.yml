@@ -1,0 +1,99 @@
+# This theme is marked as @internal. It is intended to evolve and change over
+# minor releases.
+# Change record https://www.drupal.org/node/2673014.
+# As the UI of Drupal improves between minor versions, the mark up and assets
+# in the Bartik theme will change. The Bartik theme is not backwards
+# compatible. If you wish to modify the output or assets of Bartik you can:
+# 1. Copy the whole of Bartik and rename it as your own theme. You will need to
+# manually manage your own updates if you want to stay up to date with Bartik's
+# bug fixes and feature support.
+#
+# 2. Sub-theme Bartik. This is only recommended if you want to make minor
+# tweaks and understand that Bartik could break your modifications as it
+# changes.
+name: Linxe
+type: theme
+base theme: classy
+description: 'Layout personalizado para el sitio web LINXE.'
+package: Core
+# version: VERSION
+# core: 8.x
+libraries:
+  - linxe/global-styling
+  - linxe/global-scripts
+regions:
+  infoheader: 'Información Header'
+  logo: 'Logo'
+  primary_menu: 'Primary menu'
+  header: Header
+  botoneslogin: "Botones Login"
+
+  main_slider: 'Slider home'
+  newsliderhome: "Nuevo slider principal home"
+  main_simulador: 'Simulador Home'
+  adelanto_simulador: 'Adelanto Simulador Home'
+  dest_beneficios: 'Destacados Beneficios'
+  carousel_beneficios: 'Carrusel Beneficios'
+  banner_requisitos: 'Banner Requisitos'
+  mockup_requisitos: 'Mockup Requisitos'
+  texto_requisitos: 'Texto Requisitos'
+  seccion_requisitos: 'Sección Requisitos'
+  carousel_requisitos: 'Carrusel Requisitos'
+  banner_contrato: 'Banner Contrato'
+  texto_comofunciona: 'Texto Cómo Funciona'
+  seccion_comofunciona: 'Sección Cómo Funciona'
+  seccion_comofunciona_empresa: 'Sección Cómo Funciona Empresas'
+  carousel_comofunciona: 'Carrusel Cómo Funciona'
+  texto_equipo: 'Texto Nuestros Sueños'
+  seccion_equipo: 'Sección Nuestros Sueños'
+
+  texto_aliados: 'Texto Aliados'
+  seccion_aliados: 'Sección Aliados'
+
+  content: Content
+  beneficios_personas: 'Sección Beneficios Personas'
+  beneficios_carouselpersonas: 'Sección Beneficios Carousel Personas'
+  beneficios_empresas: 'Sección Beneficios Empresas'
+  beneficios_carouselempresas: 'Sección Beneficios Carousel Empresas'
+  beneficios_titulovalores: 'Sección Beneficios Título Valores'
+  beneficios_valores: 'Sección Beneficios Valores'
+  beneficios_carouselvalores: 'Sección Beneficios Carousel Valores'
+
+  contactoempresas: 'Sección Formulario contacto empresas'
+
+  footer_menu: 'Footer menu'
+  footer_contacto: 'Footer contacto'
+  footer_redes: 'Footer redes'
+  footer_premios: 'Footer premios'
+  footer_aliados: 'Footer aliados'
+  footer_redes: 'Footer redes'
+  footer_copyright: 'Footer copyright'
+
+  login_form: 'Modal Login Form'
+  remember_form: 'Modal Remember Password Form'
+
+  registerform_title: 'Título formulario de registro'
+  registerform_texto: 'Texto formulario de registro'
+
+  modal_seleccion_credito: 'Modal Selección Crédito'
+  modal_firmacontrato: 'Modal Firma Contrato'
+  block_terminosycondiciones: 'Bloque detalle términos y condiciones'
+
+  ayuda_empresas: 'Ayuda empresas'
+  comofunciona_empresas: 'Como Funciona empresas'
+  comofunciona_empresas_carousel: 'Como Funciona empresas carrusel'
+
+  popupwebinar_form: 'Formulario Popup Webinar'
+  popupwebinar_footerimage: 'Footer imagen Popup Webinar'
+
+  titulo_sup_webinar: 'Texto Superior Webinar'
+
+  block_firmaterminosycondiciones: 'Bloque Firma términos y condiciones'
+
+  
+
+# Information added by Drupal.org packaging script on 2019-08-05
+version: '8.6.2'
+core: '8.x'
+project: 'drupal'
+datestamp: 1539816686

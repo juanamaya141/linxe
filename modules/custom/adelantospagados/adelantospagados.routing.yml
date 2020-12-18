@@ -1,0 +1,7 @@
+adelantospagados.results:
+  path: '/admin/pagaradelantosnomina-resultados'
+  defaults:
+    _controller: '\Drupal\adelantospagados\Controller\ResultadosController::resultados'
+    _title: 'Resultados de los adelantos de nómina pagados'
+  requirements:
+    _permission: 'access pagos'

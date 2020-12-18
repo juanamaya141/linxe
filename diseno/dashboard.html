@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LINXE | Dashboard</title>
+    <meta name="description" content="Libranzas en línea">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="dashboard box">
+    <header class="fixed-top">
+            <div class="topBar">
+                <img src="images/header/icon-contact.png" alt="Contáctanos" />
+                <a href="tel:+(57) 315 384 7859">+(57) 315 384 7859</a> | <a href="mailto:contacto@linxe.com">contacto@linxe.com</a>
+            </div>
+            <div class="menuBar">
+                <div class="cont-logo pl-md-4">
+                    <h1><a href="index.html">
+                        <img class="img-fluid" src="images/header/logo.png" alt="Logo LINXE" />
+                    </a></h1>
+                </div>
+                <button type="button" class="btnMenu" data-toggle="collapse" data-target="#collapsenav" aria-expanded="false" aria-controls="collapsenav"><i class="fas fa-bars"></i></button>
+                <nav id="collapsenav" class="collapse">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="beneficios.html">Beneficios</a></li>
+                        <li><a href="linxe.html">¿Cómo Funciona?</a></li>
+                        <li><a href="ayuda.html">Ayuda</a></li>
+                        <li><a href="contacto.html">Contáctanos</a></li>
+                        <li class="lising"><a class="singin modal-btn" data-modal="login-form">Ingresa</a></li>
+                        <li class="lising"><a href="registro.html" class="singup">Regístrate</a></li>
+                    </ul>
+                </nav>
+                <div class="cont-login">
+                    <button type="button" class="singin modal-btn" data-modal="login-form">Ingresa</button>
+                    <a href="registro.html" class="singup">Regístrate</a>
+                </div>
+            </div>
+        </header>
+
+    <main class="pb-md-6 pb-4">
+            <div class="main-wrap mt-1">
+            <div class="container-fluid header-dashboard">
+                <div class="row mx-md-3 pt-md-4 pb-md-0 pb-3">
+                    <div class="col-md-7 px-md-3 px-0">
+                        <h2 class="text-left text1 hs" id="username"></h2>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row" id="no-selected">
+                            <div class="col-12">
+                                <h2 class="text-md-right text-center text-uppercase text1">Monto Aprobado</h2>
+                            </div>
+                            <div class="col-12 text-md-right text-center">
+                                <span class="unidad mr-2">$</span><span class="num" id="tope"></span>
+                            </div>
+                        </div>
+                        <div class="row" id="selected">
+                            <div class="col-12">
+                                <h2 class="text-md-right text-center text-uppercase text1">Crédito Seleccionado</h2>
+                            </div>
+                            <div class="col-12 text-md-right text-center">
+                                <span class="unidad mr-2">$</span><span class="num" id="monto-selected"></span>
+                                <br/>
+                                <span id="plazo-selected"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mx-md-3">
+                    <div class="col-12 px-md-3 px-0">
+                        <ul class="nav nav-tabs" id="dashboardNav" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="seleccion-tab" data-toggle="tab" href="#seleccion" role="tab"
+                                    aria-controls="seleccion" aria-selected="true">Selecciona tu Crédito</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="creditos-tab" data-toggle="tab" href="#creditos" role="tab"
+                                    aria-controls="creditos" aria-selected="false">Mis Creditos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
+                                    aria-selected="false">Información Personal</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="dashboardContent">
+                <!--TAB1-->
+                <div class="container tab-pane fade" id="seleccion" role="tabpanel" aria-labelledby="seleccion-tab">
+                    <div class="row d-flex justify-content-center" id="instrucciones">
+                        <div class="col-md-7 instruccion" data-step="paso2">
+                            Selecciona el plazo que se ajuste a tus necesidades y personaliza el valor de tu crédito.
+                        </div>
+                        <div class="col-md-7 instruccion" data-step="paso3">
+                            A continuación te mostramos que vas a firmar de forma electrónica, lee detenidamente el contenido, y si estas de acuerdo da clic en el botón HE LEÍDO y FIRMO.
+                        </div>
+                        <div class="col-md-7 instruccion" data-step="paso4">
+                           Has finalizado el proceso exitosamente, podrás contar con tu dinero en las próximas 24 horas en tu cuenta de nómina.
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center mb-md-6 mb-4">
+                        <div class="col-12 dash-pasos mx-0 px-md-0 px-2">
+                            <div class="paso">
+                                <div class="tit-paso">Registro</div>
+                                <div class="estado-paso check" data-state="paso1"></div>
+                            </div>
+                            <div class="paso">
+                                <div class="tit-paso">Selección<br />de Crédito</div>
+                                <div class="estado-paso current" data-state="paso2"></div>
+                            </div>
+                            <div class="paso">
+                                <div class="tit-paso">Contrato<br />Virtual</div>
+                                <div class="estado-paso" data-state="paso3"></div>
+                            </div>
+                            <div class="paso">
+                                <div class="tit-paso">Desembolso</div>
+                                <div class="estado-paso" data-state="paso4"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 mx-0 px-md-0 px-2">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0"
+                                    aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--PASO2-->
+                    <div class="row row-paso justify-content-center" data-step="paso2">
+                        <div class="col-12">
+                            <div class="row cantidad">
+                                <div class="col-12 cont-form px-0" id="simulador">
+                                    <div class="form-item">
+                                        <button type="button" id="btnMenos" class="btnMenos mr-md-3">
+                                            <i class="boto-icon">&#xe801;</i>
+                                            <div class="rangos" id="r_min_cantidad"></div>
+                                        </button>
+                                        <div class="valor">
+                                            <span class="unidad mr-md-2">$</span><span class="num" id="cantidadVal"></span>
+                                            <div class="label">Monto del crédito</div>
+                                        </div>
+                                        <button type="button" id="btnMas" class="btnMas ml-md-3">
+                                            <i class="boto-icon">&#xe800;</i>
+                                            <div class="rangos" id="r_max_cantidad"></div>
+                                        </button>
+                                    </div>
+                                    <input type="number" name="cantidad" id="cantidad" class="d-none" />
+                                </div>
+                            </div>
+                            <div class="row d-flex indicador-row">
+                                <div class="col-md-4 cont-indicador px-0">
+                                    <div id="indicador"></div>
+                                </div>
+                            </div>
+                            <!--CAROUSEL-->
+                            <div class="row d-flex justify-content-center cont-plazos px-md-0 px-3 d-none"></div>
+                        </div>
+                    </div>
+                    <!--PASO3-->
+                    <div class="row row-paso justify-content-center" data-step="paso3">
+                        <div class="col-md-8 mb-md-6 mb-4">
+                            <div class="cont-pdf">
+                                <object data="images/dashboard/prueba.pdf" type="application/pdf" id="contrato" typemustmatch>
+                                    <p>No tienes un complemento PDF, pero puedes <a href="images/dashboard/prueba.pdf">descargar el archivo PDF.</a></p>
+                                </object>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-4 mb-md-0 mb-3">
+                                    <button type="button" class="btnSec w-100" id="regresar">Regresar</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn2 w-100" id="confirmar-firma">He leído y firmo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--PASO4-->
+                    <div class="row row-paso justify-content-center" data-step="paso4">
+                        <div class="col-md-6 justify-content-center">
+                            <img src="images/dashboard/exito.jpg" alt="Crédito Aprobado" class="img-fluid" />
+                        </div>
+                        <div class="col-md-9 mt-md-5 mt-3">
+                            <h2 class="text1" id="felicitacion"></h2>
+                        </div>
+                    </div>
+                </div>
+                <!--TAB2-->
+                <div class="container tab-pane fade" id="creditos" role="tabpanel" aria-labelledby="creditos-tab">
+                    <!--CAROUSEL-->
+                    <div class="row d-flex justify-content-center cont-creditos px-md-0 px-3">
+                    </div>
+                </div>
+                <!--TAB3-->
+                <div class="container tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-6">
+                            <div class="instruccion d-block">Déjanos saber que te gustaría encontrar en nuestra plataforma para que podamos mejorar y ofrecerte lo que necesitas y buscas</div>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center accordion" id="preferencias">
+                        <div class="col-md-7 card">
+                            <div class="card-header" id="headingPreferencias">
+                                <h2 class="text1 mb-0">
+                                    <button type="button" data-toggle="collapse" data-target="#collapsePreferencias" aria-expanded="false" aria-controls="collapsePreferencias">Tus preferencias</button>
+                                </h2>
+                            </div>
+                            <div class="collapse" id="collapsePreferencias" aria-labelledby="headingPreferencias" data-parent="#preferencias">
+                                <div class="card-body cont-form">
+                                    <form class="formularioin" action="" name="set-preferencias" id="set-preferencias">
+                                        
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-6 px-3">
+                                                <div class="form-element custom-check mr-0">
+                                                    <input type="checkbox" name="cat1" class="form-check-input" value="cat1">
+                                                    <span class="checkmark"></span>
+                                                    <label class="label" for="cat1">Categoría 1</label>
+                                                </div>
+
+                                                <div class="form-element custom-check mr-0">
+                                                    <input type="checkbox" name="cat2" class="form-check-input" value="cat2">
+                                                    <span class="checkmark"></span>
+                                                    <label class="label" for="cat2">Categoría 2</label>
+                                                </div>
+
+                                                <div class="form-element custom-check mr-0">
+                                                    <input type="checkbox" name="cat3" class="form-check-input" value="cat3">
+                                                    <span class="checkmark"></span>
+                                                    <label class="label" for="cat3">Categoría 3</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 px-3">
+                                                <div class="form-element custom-check mr-0">
+                                                    <input type="checkbox" name="cat4" class="form-check-input" value="cat4">
+                                                    <span class="checkmark"></span>
+                                                    <label class="label" for="cat4">Categoría 4</label>
+                                                </div>
+
+                                                <div class="form-element custom-check mr-0">
+                                                    <input type="checkbox" name="cat5" class="form-check-input" value="cat5">
+                                                    <span class="checkmark"></span>
+                                                    <label class="label" for="cat5">Categoría 5</label>
+                                                </div>
+
+                                                <div class="form-element custom-check mr-0">
+                                                    <input type="checkbox" name="cat6" class="form-check-input" value="cat6">
+                                                    <span class="checkmark"></span>
+                                                    <label class="label" for="cat6">Categoría 6</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-12 px-3 pt-3">
+                                                <div class="form-group">
+                                                    <textarea id="mensaje" name="sugerencias"></textarea>
+                                                    <label class="label" for="mensaje">Sugerencias:</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row d-flex justify-content-center">
+                                            <div class="col-md-7 px-3 text-center">
+                                                <input type="submit" class="btn1 mt-2 w-100" value="Enviar" />
+                                            </div>
+                                            <div id="errorMsj"></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <hr class="my-7"/>
+
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-7 cont-form">
+                            <form class="formularioin" action="" name="edit_info" id="edit-info">
+                                <h2 class="text1">Información Personal</h2>
+                                <div class="form-row">
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            <input type="text" id="nombre" name="nombre" data-msj="Nombre, es un dato obligatorio" />
+                                            <label class="label" for="nombre">Primer Nombre:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            <input type="text" id="apellido" name="apellido" data-msj="Apellido, es un dato obligatorio" />
+                                            <label class="label" for="apellido">Primer Apellido:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            <select id="tipo_doc" name="tipo_doc" data-msj="Tipo de documento, es un dato obligatorio">
+                                                <option value=""></option>
+                                                <option value="C.C.">C.C.</option>
+                                                <option value="C.E.">C.E.</option>
+                                            </select>
+                                            <label class="label" for="tipo_doc">Tipo de Documento:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            <input type="number" id="doc" name="documento" data-msj="Número de documento, es un dato obligatorio" />
+                                            <label class="label" for="doc">Número de Documento:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            <input type="tel" id="celular" name="celular" data-msj="Celular, es un dato obligatorio" />
+                                            <label class="label" for="celular">Celular:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            <input type="email" id="correo" name="correo" data-msj="Correo electrónico, es un dato obligatorio" />
+                                            <label class="label" for="correo">Correo Electrónico:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2 class="text1">Contraseña</h2>
+
+                                <div class="form-row">
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            <input type="password" id="current-pass" name="current-pass" data-msj="Escribe tu contraseña actual" />
+                                            <label class="label" for="current-pass">Contraseña Actual:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 px-3">
+                                        <div class="form-group">
+                                            <input type="password" id="new-pass" name="new-pass" data-msj="Escribe una nueva contraseña" />
+                                            <label class="label" for="new-pass">Nueva Contraseña</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 px-3">
+                                        <div class="form-group">
+                                            <input type="password" id="conf-pass" name="conf-pass" data-msj="Confirma la nueva contraseña" />
+                                            <label class="label" for="conf-pass">Confirmar Contraseña</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row d-flex justify-content-center">
+                                    <div class="col-md-7 text-center">
+                                        <input type="submit" class="btn1 mt-2 w-100" value="Guardar" />
+                                    </div>
+                                    <div id="errorMsj"></div>
+                                </div>
+                            </form>
+                            </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container-fluid wrap">
+            <div class="row d-flex justify-content-center py-md-6 py-5 px-md-5 px-3">
+                <div class="col-md-3 col-12 mb-md-0 mb-4">
+                    <ul>
+                        <li><a href="beneficios.html"><i class="fas fa-arrow-alt-circle-right"></i> Beneficios</a></li>
+                        <li><a href="linxe.html"><i class="fas fa-arrow-alt-circle-right"></i> ¿Cómo funciona?</a></li>
+                        <li><a href="ayuda.html"><i class="fas fa-arrow-alt-circle-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-alt-circle-right"></i> Políticas de Privacidad</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-alt-circle-right"></i> Políticas de Seguridad en Internet</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-alt-circle-right"></i> Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>Contáctanos</h4>
+                    <ul>
+                        <li><a href="tel:(57) 315 384 7859"><i class="fas fa-mobile-alt"></i> +(57) 315 384 7859</a>
+                        </li>
+                        <li><a href="mailto:contacto@linxe.com" target="_blank"><i class="fas fa-envelope"></i>
+                                contacto@linxe.com</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 d-md-flex justify-content-md-end justify-content-start">
+                    <ul>
+                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-dropbox"></i> Dropbox</a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footerBar">Copyright &copy; 2019, LINXE</div>
+    </footer>
+
+
+    <!--////Scripts externos\\\\-->
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.mousewheel.min.js"></script>
+    <script src="js/linxe.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Contains linxecredit.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function pagaradelantoempresas_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the linxecredit module.
+    case 'help.page.linxecredit':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This show the code package generated.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+function pagaradelantoempresas_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'pagaradelantoempresas/pagaradelantoempresas';
+}
+
+function pagaradelantoempresas_theme() {
+  return $theme;
+}
+
+

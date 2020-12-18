@@ -1,0 +1,149 @@
+<?php
+
+/**
+ * @file
+ * Contains reporteadelanto.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
+use Drupal\Core\Routing;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormBase;
+use Symfony\Component\HttpFoundation\Response;
+/**
+ * Implements hook_help().
+ */
+
+
+    function reporteadelanto_theme() {
+    // We use a template file to allow for translation of blocks of content.
+    // Therefore we need to add this content at the theming layer.
+        return [
+            'reporteadelanto_description' => [
+            'template' => 'description',
+            'variables' => [],
+            ],
+        ];
+    }
+
+    function get_reporteadelanto($opt,$empresas,$estado,$desde,$hasta) {
+        $current_user = \Drupal::currentUser();
+        $roles = $current_user->getRoles();
+        $uid = \Drupal::currentUser()->id();  //obtenemos el uid del usuario logueado
+        $desde = $desde.' 00:00:00';
+        $hasta = $hasta.' 23:59:59';
+	    $res = array();
+        if($opt == "All"){	
+                $query = db_select('liquidaciones_an','liq')
+                            ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                            ->limit(15);
+                $query->join('adelantos_nomina', 'an', 'liq.idsolicitud = an.idadelanto');
+                $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+                $query->join('empresas', 'emp', 'reg.idempresa = emp.idempresa');
+                $query->fields('liq');
+                $query->fields('an',["idadelanto","estado_general_solicitud","cuota_actual","cuotas_pactadas","estado_liquidacion","fecha_hora_liquidacion","fecha_hora_desembolso","saldo_pendiente","valor_solicitado","administracion","seguros","tecnologia","iva"]);
+                $query->fields('reg',["tipodocumento","documento","nombre","primer_apellido","segundo_apellido"])
+                    ->fields('emp');
+                if($roles[1] == "empresa_linxe"){
+                    $query->condition('emp.iduser',$uid);
+                }
+
+                $results = $query->execute()->fetchAll();
+                $ret = [];
+        }else{
+            if($estado == "facturado"){
+                $query = db_select('liquidaciones_an','liq')
+                        ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                        ->limit(15);
+                $query->join('adelantos_nomina', 'an', 'liq.idsolicitud = an.idadelanto');
+                $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+                $query->join('empresas', 'emp', 'reg.idempresa = emp.idempresa');
+                $query->fields('liq');
+                $query->fields('an',["idadelanto","estado_general_solicitud","cuota_actual","cuotas_pactadas","estado_liquidacion","fecha_hora_liquidacion","fecha_hora_desembolso","saldo_pendiente","valor_solicitado","administracion","seguros","tecnologia","iva"]);
+                $query->fields('reg',["tipodocumento","documento","nombre","primer_apellido","segundo_apellido"])
+                        ->fields('emp')
+                        ->condition('liq.estado',$estado)
+                        ->condition('emp.razon_social',$empresas)
+                        ->condition('liq.fecha_hora_facturacion',[$desde,$hasta],'BETWEEN');
+
+                if($roles[1] == "empresa_linxe"){
+                    $query->condition('emp.iduser',$uid);
+                }
+
+                $results = $query->execute()->fetchAll();
+                $ret = [];
+
+
+            }elseif($estado == "pagado"){
+                $query = db_select('liquidaciones_an','liq')
+                        ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                        ->limit(15);
+                $query->join('adelantos_nomina', 'an', 'liq.idsolicitud = an.idadelanto');
+                $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+                $query->join('empresas', 'emp', 'reg.idempresa = emp.idempresa');
+                $query->fields('liq');
+                $query->fields('an',["idadelanto","estado_general_solicitud","cuota_actual","cuotas_pactadas","estado_liquidacion","fecha_hora_liquidacion","fecha_hora_desembolso","saldo_pendiente","valor_solicitado","administracion","seguros","tecnologia","iva"]);
+                $query->fields('reg',["tipodocumento","documento","nombre","primer_apellido","segundo_apellido"])
+                        ->fields('emp')
+                        ->condition('liq.estado',$estado)
+                        ->condition('emp.razon_social',$empresas)
+                        ->condition('liq.fecha_hora_pago',[$desde,$hasta],'BETWEEN');
+                if($roles[1] == "empresa_linxe"){
+                    $query->condition('emp.iduser',$uid);
+                }
+
+
+                
+                $results = $query->execute()->fetchAll();
+                $ret = [];
+
+            }else{
+                $query = db_select('liquidaciones_an','liq')
+                        ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                        ->limit(15);
+                $query->join('adelantos_nomina', 'an', 'liq.idsolicitud = an.idadelanto');
+                $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+                $query->join('empresas', 'emp', 'reg.idempresa = emp.idempresa');
+                $query->fields('liq');
+                $query->fields('an',["idadelanto","estado_general_solicitud","cuota_actual","cuotas_pactadas","estado_liquidacion","fecha_hora_liquidacion","fecha_hora_desembolso","saldo_pendiente","valor_solicitado","administracion","seguros","tecnologia","iva"]);
+                $query->fields('reg',["tipodocumento","documento","nombre","primer_apellido","segundo_apellido"])
+                        ->fields('emp')
+                        ->condition('liq.estado',$estado)
+                        ->condition('emp.razon_social',$empresas)
+                        ->condition('liq.fecha_hora_conciliacion',[$desde,$hasta],'BETWEEN');
+                if($roles[1] == "empresa_linxe"){
+                    $query->condition('emp.iduser',$uid);
+                }
+
+                $results = $query->execute()->fetchAll();
+                $ret = [];
+            }
+        }
+        foreach ($results as $row) {
+            
+            $ret[] = [
+                'idadelanto'=> $row->idadelanto,
+                'tipodocumento' => $row->tipodocumento,
+                'documento' => $row->documento,
+                'nombreCompleto' => $row->nombre.' '.$row->primer_apellido.' '.$row->segundo_apellido,
+                'valorAdelanto' => $row->valor_solicitado+$row->administracion+$row->seguros+$row->tecnologia+$row->iva,
+                'saldo_pendiente' => $row->saldo_pendiente,
+                'num_cuota' => $row->num_cuota,
+                'saldo_mora' => $row->valor-$row->intereses_mora,
+                'intereses_mora' => $row->intereses_mora,
+                'valor' => $row->valor,
+                'fecha_hora_facturacion' => $row->fecha_hora_facturacion,
+                'valor_pagado' => $row->valor_pagado,
+                'fecha_hora_pago' => $row->fecha_hora_pago,
+                'valor_conciliado' => $row->valor_conciliado,
+                'fecha_hora_conciliacion' => $row->fecha_hora_conciliacion,
+                'estado' => $row->estado
+            ];
+        }
+        return $ret;
+    }
+
+
+

@@ -1,0 +1,5 @@
+name: Adelanto Nómina
+type: module
+description: Adelanto Nómina de las empresas.
+core: 8.x
+package: Linxe

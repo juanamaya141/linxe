@@ -1,0 +1,12 @@
+                                    {% if islogin == true  %}
+                                        {% if tipoproducto == "adelanto"  %}
+                                        <a href="/dashboard/adelanto" class="singin">Mis Adelantos</a>
+                                        {% else %}  
+                                        <a href="/dashboard/seleccion" class="singin">Mis Créditos</a>
+                                        {% endif %}
+                                        <a href="/cerrarsesion" class="singup">Salir</a>
+                                    {% else %}     
+                                        <button type="button" class="singin modal-btn" data-modal="login-form">Ingresa</button>
+                                        <a href="/registerform" class="singup">Regístrate</a>
+                                    {% endif %}
+                                    

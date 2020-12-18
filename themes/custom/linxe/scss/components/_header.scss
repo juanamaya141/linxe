@@ -1,0 +1,227 @@
+header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: $over;
+    .topBar{
+        background: $color1;
+        justify-content: center;
+        align-items: center;
+        font-size: .8rem;
+        display: flex;
+        color: white;
+        padding: .3rem .5rem;
+        a{
+            color: $color3;
+            margin: 0 .3rem;
+        }
+        @media(max-width: $breakpoint-md){
+            font-size: .7rem;
+        }
+    }
+    .menuBar{
+        display: flex;
+        background: white;
+        justify-content: space-between;
+        box-shadow: 0 2px 4px rgba($color: #000 , $alpha: .4);
+        transition: $over;
+        .cont-logo{
+            width: 20vw;
+            transition: $over;
+            h1{
+                margin-bottom:0;
+                img{
+                    margin: 10px 0;
+                    transition: $over;
+                }
+            }
+        }
+        .btnMenu{
+            display: none;
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            margin: 0 1rem;
+            transition: $over;
+            transition-delay: .5s;
+            @media(min-width: $breakpoint-md){
+                &.collapse{display: flex !important;}
+            }
+            ul{
+                padding: 0;
+                list-style: none;
+                margin: 0 auto;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                transition: $over;
+                li{
+                    display: flex;
+                    align-items: center;
+                    padding: 0;
+                    a{
+                        text-transform: uppercase;
+                        text-align: center;
+                        color: $color2;
+                        font-size: calc(1rem + .1vw);
+                        margin: 0 1vw;
+                        @media(min-width: $breakpoint-md){
+                            &:hover{
+                                color: $color1;
+                            }
+                        }
+                        &.active{
+                            color: $color6;
+                            pointer-events: none;
+                        }
+                    }
+                    &.lising{display: none;}
+                }
+            }
+            @media(max-width: $breakpoint-md){
+                position: absolute;
+                align-items: flex-start;
+                width: 100%;
+                z-index: 94;
+                margin: 0;
+                border-top: 1px solid $color6;
+                background: rgba($color: $color1 , $alpha: .8);
+                transition: $over;
+                ul{
+                    background: white;
+                    display: block;
+                    box-shadow: 0 5px 8px 0 rgba($color: #000 , $alpha: .4);
+                    li{
+                        display: block;
+                        width: 100%;
+                        padding: 0;
+                        border-bottom: 1px solid $color4;
+                        &:last-child{border-bottom: none;}
+                        a{
+                            padding: 1rem;
+                            width: 100%;
+                            margin: 0;
+                            text-align: center;
+                            display: block;
+                            &.singin{
+                                background: #ddd;
+                                color: $color1;
+                            }
+                            &.singup{
+                                background: rgba($color: $color1 , $alpha: .7);
+                                color: white;
+                            }
+                            &.active{
+                                color: white;
+                                background: $color5;
+                            }
+                        }
+                        &.lising{display: block !important;}
+                    }
+                }
+            }
+        }
+        .cont-login{
+            display: flex;
+            justify-content: flex-end;
+            transition: $over;
+            button ,a{
+                text-transform: uppercase;
+                padding: 0 1vw;
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: $over;
+                font-size: calc(.9rem + .1vw);
+                &.singin{
+                    background: #ddd;
+                    color: $color1;
+                    &:hover{
+                        background: rgba($color: $color6 , $alpha: .6);
+                        color: white;
+                    }
+                }
+                &.singup{
+                    background: rgba($color: $color1 , $alpha: .7);
+                    color: white;
+                    &:hover{
+                        background: $color1;
+                    }
+                }
+            }
+            @media(max-width: $breakpoint-md){display: none !important;}
+        }
+        @media(max-width: $breakpoint-md){
+            display: block;
+            position: relative;
+                .cont-logo{
+                    display: inline-block;
+                    width: auto;
+                h1{
+                    margin: 0 auto;
+                    img{
+                        height: 45px;
+                        margin: 10px 0;
+                    }
+                }
+            }
+            .btnMenu{
+                display: block;
+                color: $color1;
+                font-size: 1.8rem;
+                cursor: pointer;
+                margin-right: 1.5rem;
+                margin-top: calc(32.5px - .9rem);
+                line-height: 1;
+                float: right;
+            }
+        }
+    }
+    &.sticky-menu{
+        .menuBar{background: rgba($color: white, $alpha: .9);}
+        .menuBar .cont-logo{width: 12vw;margin-right: auto;}
+        nav{
+            margin-left: auto;
+            ul{
+                li{
+                    a{
+                        font-size: calc(.8rem + .1vw);
+                    }
+                }
+            }
+        }
+        @media(max-width: $breakpoint-md){
+            .cont-logo{
+                    display: inline-block;
+                    width: auto !important;
+                h1{
+                    margin: 0 auto !important;
+                    img{
+                        height: 35px;
+                        margin: 10px 0;
+                    }
+                }
+            }
+            .btnMenu{
+                margin-top: calc(25px - .9rem);
+            }
+        }
+    } 
+}
+
+@media(max-width: $breakpoint-md){
+    .modal.fade.show{filter: none !important;}
+    .layer{
+        background: rgba($color: #000 , $alpha: .8);
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        z-index: 93;
+        & ~ div , & ~ footer{
+            filter: blur(3px);
+        }
+    }
+}

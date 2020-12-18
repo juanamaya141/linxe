@@ -1,0 +1,5 @@
+name: Adelantos Pagados de Nómina
+type: module
+description: Adelantos pagados de nómina
+core: 8.x
+package: Linxe

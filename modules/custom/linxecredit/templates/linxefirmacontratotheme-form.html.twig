@@ -1,0 +1,53 @@
+                        <form class="formularioin" action="" name="confirma-codigo" id="confirma-codigo">
+                            
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="subtitulo">Tu número celular registrado:</div>
+                                <div class="dato-conf" id="celular-conf">{{form['#myvars'].celular}}</div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="subtitulo">Tu correo electrónico registrado:</div>
+                                <div class="dato-conf" id="correo-conf">{{form['#myvars'].email}}</div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        {{ form.codigo }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="subtitulo">Ten presente:</div>
+                                <div class="dato-conf">
+                                    <p><span>*</span>El código tiene una vigencia de 10 minutos.</p>
+                                    <p><span>*</span>Si pasados 3 minutos no has recibido el código da clic <a href="#" id="link_lanzar_otp">aquí</a> para recibir uno nuevo.</p>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="check-abonos row">
+                                 <div class="col-12">
+                                    <h2 class="text1 low">¿Donde deseas que te abonemos tu dinero?</h2>
+                                </div>
+
+                                <div class="form-element custom-check mr-0 col-md-6" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{form['#myvars'].tooltip_nomina}}">
+                                    {{ form.tipoabono1 }}
+                                    <span class="checkmark"></span>
+                                    <label class="label" for="tipoabono1">Cuenta de<br>nómina actual <i class="fas fa-info-circle"></i></label>
+                                </div>  
+
+                                <div class="form-element custom-check mr-0 col-md-6" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{form['#myvars'].tooltip_movi}}">
+                                    {{ form.tipoabono2 }}
+                                    <span class="checkmark"></span>
+                                    <label class="label" for="tipoabono2">Cuenta electrónica <br>de Movii <i class="fas fa-info-circle"></i></label>
+                                </div>  
+                            </div>
+                            -->
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-md-9">
+                                    {{ form.actions.submit }}
+                                    {{ form.form_build_id }}
+                                    {{ form.form_token }}
+                                    {{ form.form_id }}
+                                </div>
+                                <div id="errorMsj"></div>
+                            </div>
+                        </form>

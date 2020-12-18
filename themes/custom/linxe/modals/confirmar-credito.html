@@ -1,0 +1,53 @@
+<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+                class="fas fa-times"></i></button>
+        <div class="modal-body">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12">
+                        <h2 class="text1 low">Estás a un paso de obtener tu dinero</h2>
+                    </div>
+                    <div class="col-11">
+                        <div class="text-center text2">Para finalizar la firma electrónica de los documentos, hemos enviado un código de seguridad al correo electrónico y al celular que verás a continuación:</div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 cont-form">
+                        <form class="formularioin" action="" name="confirma-codigo" id="confirma-codigo">
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <input type="number" id="codigo" name="codigo" data-msj="Ingresa el código" />
+                                        <label class="label" for="codigo">Código:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="subtitulo">Tu número celular registrado:</div>
+                                <div class="dato-conf" id="celular-conf"></div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="subtitulo">Tu correo electrónico registrado:</div>
+                                <div class="dato-conf" id="correo-conf"></div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="subtitulo">Ten presente:</div>
+                                <div class="dato-conf">
+                                    <p><span>*</span>El código tiene una vigencia de 10 minutos.</p>
+                                    <p><span>*</span>Si pasados 3 minutos no has recibido el código da clic <a href="#">aquí</a> para recibir uno nuevo.</p>
+                                </div>
+                            </div>
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="col-md-9">
+                                    <input type="submit" id="btn-submit" class="btn1 mt-2 w-100" value="Firmar y Aceptar" />
+                                </div>
+                                <div id="errorMsj"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

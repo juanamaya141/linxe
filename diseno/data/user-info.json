@@ -1,0 +1,13 @@
+[
+    {
+        "nombre": "Juan",
+        "apellido": "García",
+        "tipo_documento": "C.C.",
+        "numero_documento": 81741465,
+        "celular": "3014389677",
+        "correo": "juan.gar77@pmail.com",
+        "tope": 1100000,
+        "historial": "user-creditos.json",
+        "password": "12345"
+    }
+]

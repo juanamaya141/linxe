@@ -1,0 +1,6 @@
+contactopermodule-styles:
+  version: 8.0.0
+  js:
+    js/modulo.js: {}
+  dependencies:
+    - core/jquery

@@ -1,0 +1,20 @@
+                                    {% if islogin == true  %}
+                                    	<ul>
+					                        <li class="btn-ingresar">
+					                            <a href="/dashboard/seleccion" >MIS CRÉDITOS</a>
+					                        </li>
+					                        <li class="btn-registro">
+					                            <a href="/cerrarsesion" >SALIR</a>
+					                        </li>
+					                    </ul>
+                                    {% else %} 
+                                    	<ul>
+					                        <li class="btn-ingresar">
+					                        	<button type="button" class="singin modal-btn" data-modal="login-form">INGRESA</button>
+					                        </li>
+					                        <li class="btn-registro">
+					                            <a href="/registerform" >REGÍSTRATE</a>
+					                        </li>
+					                    </ul>   
+                                    {% endif %}
+                                    

@@ -1,0 +1,100 @@
+                       
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Nombre del Cliente:</label>
+                                        <span>{{infoObj.name}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Tipo de Documento:</label>
+                                        <span>{{infoObj.tipodoc}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Número de Documento:</label>
+                                        <span>{{infoObj.num_id|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Producto Solicitado:</label>
+                                        <span>Adelanto de Nómina</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Periodicidad Pago:</label>
+                                        <span>{{infoObj.periodicidad_pago}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Número Cuotas:</label>
+                                        <span>{{infoObj.num_cuotas}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Valor Adelanto:</label>
+                                        <span>$ {{infoObj.valormontoseleccionado|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Administración:</label>
+                                        <span>$ {{infoObj.valor_administracion|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Seguros:</label>
+                                        <span>$ {{infoObj.valor_seguro|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Tecnología:</label>
+                                        <span>$ {{infoObj.valor_tecnologia|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">IVA:</label>
+                                        <span>$ {{infoObj.valor_iva|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Valor a Pagar:</label>
+                                        <span>$ {{infoObj.valor_pagar|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Monto Cuota:</label>
+                                        <span>$ {{infoObj.monto_cuota|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Nombre Empresa Pagadora:</label>
+                                        <span>{{infoObj.empresa}}</span>
+                                    </div>
+                                </div>
+                            </div>

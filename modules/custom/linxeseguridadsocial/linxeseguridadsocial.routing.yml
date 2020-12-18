@@ -1,0 +1,28 @@
+linxeseguridadsocial.ver_seguridad:
+  path: '/admin/linxeseguridadsocial'
+  defaults:
+    _controller: '\Drupal\linxeseguridadsocial\Controller\SeguridadController::seguridad'
+    _title: 'Seguridad Social'
+  requirements:
+    _permission: 'access linxeseguridadsocial'
+linxeseguridadsocial.registrar_seguridad:
+  path: '/admin/linxeseguridadsocial/registrar-seguridad'
+  defaults:
+    _form: '\Drupal\linxeseguridadsocial\Form\RegistrarSeguridad'
+    _title: 'Crear o Editar Seguridad Social'
+  requirements:
+    _permission: 'access linxeseguridadsocial'
+  options:
+    no_cache: 'TRUE'
+linxeseguridadsocial.eliminar_Seguridad:
+  path: '/admin/linxeseguridadsocial/eliminar-seguridad/{id}'
+  defaults:
+    _form: '\Drupal\linxeseguridadsocial\Form\EliminarSeguridad'
+    _title: 'Eliminar Seguridad Social'
+  requirements:
+    _permission: 'access linxeseguridadsocial'
+  options:
+    no_cache: 'TRUE'
+
+
+  

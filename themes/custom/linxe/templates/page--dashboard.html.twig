@@ -1,0 +1,67 @@
+    <header class="fixed-top">
+        <div class="topBar">
+          {{ page.infoheader }}
+        </div>
+        <div class="menuBar">
+              {{ page.logo }}
+            <button type="button" class="btnMenu" data-toggle="collapse" data-target="#collapsenav"
+                aria-expanded="false" aria-controls="collapsenav"><i class="fas fa-bars"></i></button>
+            <nav id="collapsenav" class="collapse">
+              {{ page.primary_menu }}
+            </nav>
+              {{ page.botoneslogin }}
+        </div>
+    </header>
+
+    <main class="pb-md-6 pb-4">
+      <div class="main-wrap mt-1">
+          {{ page.content }}
+      </div>
+    </main>
+
+    <footer>
+        <div class="cont-footer">
+            {{ page.footer_menu }}
+
+            {{ page.footer_contacto }}
+        </div>
+
+        <div class="redes">
+            {{ page.footer_redes }}
+        </div>
+
+        <div class="copy-foot">
+            {{ page.footer_copyright }}
+        </div>
+    </footer>
+    <div id="loginformlayer" class="modal fade" role="dialog">
+        {{ page.login_form }}
+    </div>
+
+    <div id="modalSeleccionCredito" class="modal fade" role="dialog">       
+      <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+            class="fas fa-times"></i></button>
+          <div class="modal-body">
+              {{ page.modal_seleccion_credito }}   
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalFirmaContrato" class="modal fade" role="dialog">  
+      {{ page.modal_firmacontrato }}  
+    </div>
+
+    <div id="modalShowTerminos" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xl" >
+        <div class="modal-content" >
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+            class="fas fa-times"></i></button>
+          <div class="modal-body" style="overflow-y:scroll;">
+              <iframe id="iframeterms" height="100%" width="100%" ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>

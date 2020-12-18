@@ -1,0 +1,148 @@
+    <header class="fixed-top">
+        <div class="topBar">
+          {{ page.infoheader }}  
+        </div>
+        <div class="menuBar">
+              {{ page.logo }}
+            <button type="button" class="btnMenu" data-toggle="collapse" data-target="#collapsenav"
+                aria-expanded="false" aria-controls="collapsenav"><i class="fas fa-bars"></i></button>
+            <nav id="collapsenav" class="collapse">
+              {{ page.primary_menu }}
+            </nav>
+              {{ page.botoneslogin }}
+        </div>
+    </header>
+
+    <main>
+        <div class="main-wrap">
+            <div class="container-fluid banner pb-5" style="background: url({{ url_bannermain }}) no-repeat center center; background-size: cover;">
+                <div class="row w-100 mx-0 mt-4">
+                    <div class="col-12 d-flex justify-content-md-between justify-content-center flex-md-row flex-column w-100 px-md-3 px-0">
+                        {{ page.main_slider }}
+                        <div class="d-flex mt-0 px-0 order-md-2 order-1">
+                            {{ page.main_simulador }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{ page.dest_beneficios }}
+
+
+            <div class="container d-md-none d-flex">
+                <div id="carouselBeneficios" class="carousel slide d-flex w-100 py-6" data-ride="carousel">
+                    {{ page.carousel_beneficios }}
+                    <!--/INNER-->
+                    <a class="carousel-control-prev" href="#carouselBeneficios" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"><i
+                                class="fas fa-chevron-left"></i></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselBeneficios" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"><i
+                                class="fas fa-chevron-right"></i></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-end banner2" style="background: url({{ url_bannersecondary }}) no-repeat top center; background-size: cover;">
+                    <div class="col-md-6 text-md-right text-center d-flex flex-column align-items-md-end align-items-center">
+                      {{ page.banner_requisitos }}
+                    </div>
+                </div>
+                <div class="row bg1 d-flex justify-content-center">
+                    {{ page.mockup_requisitos }}
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-12">
+                              {{ page.texto_requisitos }}
+                            </div>
+                            {{ page.seccion_requisitos }}
+
+                            <div id="carouselRequisitos" class="col-12 d-md-none d-block carousel slide" data-ride="carousel">
+                                {{ page.carousel_requisitos }}
+                                <a class="carousel-control-prev" href="#carouselRequisitos" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"><i
+                                            class="fas fa-chevron-left"></i></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselRequisitos" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"><i
+                                            class="fas fa-chevron-right"></i></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row banner3" style="background: url({{ url_bannerthird }}) no-repeat top center; background-size: cover;">
+                      {{ page.banner_contrato }}
+                </div>
+            </div>
+            <div class="container py-7">
+                <div class="row">
+                      {{ page.texto_comofunciona }}
+                </div>
+                <div class="row">
+                    {{ page.seccion_comofunciona }}
+
+                    <div id="carouselFunciona" class="col-12 carousel slide justify-content-center d-md-none d-flex"
+                        data-ride="carousel">
+                        {{ page.carousel_comofunciona }}
+                        <a class="carousel-control-prev ml-3" href="#carouselFunciona" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"><i
+                                    class="fas fa-chevron-left"></i></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next mr-3" href="#carouselFunciona" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"><i
+                                    class="fas fa-chevron-right"></i></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid bg1">
+                <div class="row">
+                    <div class="col-12">
+                      {{ page.texto_equipo }}
+                    </div>
+                    <div class="col-12">
+                        {{ page.seccion_equipo }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container-fluid wrap">
+            <div class="row d-flex justify-content-center py-md-6 py-5 px-md-5 px-3">
+                <div class="col-md-3 col-12 mb-md-0 mb-4">
+                  {{ page.footer_menu }}
+                </div>
+                <div class="col-md-3">
+                  {{ page.footer_contacto }}
+                </div>
+                <div class="col-md-2">
+                  {{ page.footer_premios }}
+                </div>
+                <div class="col-md-2 d-md-flex justify-content-md-end justify-content-start">
+                  {{ page.footer_aliados }}
+                </div>
+            </div>
+        </div>
+        <div class="footerBar">{{ page.footer_copyright }}</div>
+    </footer>
+
+    <div id="loginformlayer" class="modal fade" role="dialog">
+        {{ page.login_form }}
+    </div>
+    <div id="rememberformlayer" class="modal fade" role="dialog">
+        {{ page.remember_form }}
+    </div>

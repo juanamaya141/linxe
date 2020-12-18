@@ -1,0 +1,19 @@
+contactopermodule.config:
+  path: '/admin/config/development/contactopermodule/config'
+  defaults:
+    _form: '\Drupal\contactopermodule\Form\ContactoPersonasConfigForm'
+    _title: 'Contacto Personas Module Configuration'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    no_cache: 'TRUE'
+    
+contactopermodule.contacto:
+  path: '/contacto'
+  defaults:
+    _form: '\Drupal\contactopermodule\Form\ContactPersonasForm'
+    _title: 'Contáctenos'
+  requirements:
+    _permission: 'access contactopermodule'
+  options:
+    no_cache: 'TRUE'

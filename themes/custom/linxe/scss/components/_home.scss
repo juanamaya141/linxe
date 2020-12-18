@@ -1,0 +1,251 @@
+.banner{
+    /*min-height: 75vh;
+    max-height: 90vh;*/
+    background: url(../images/home/banner_home.jpg) no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > .row{
+        max-height: calc(100vh - 2rem);
+    }
+    #simulador{
+        background: white;
+        min-width: 350px;
+        min-height: 60vh;
+        max-height: 85vh;
+        .formulario{
+            justify-content: space-between;
+        }
+        .form-element{
+            margin: auto 1rem ;
+            padding: 0 .5rem 1.5rem .5rem;
+            border-bottom: 1px solid $color1;
+            @media(max-width: $breakpoint-md){
+                margin: .7rem;
+                padding: 0 .4rem .8rem .4rem;
+            }
+            label{
+                color: $color2;
+                text-transform: uppercase;
+                font-size: 1.1rem;
+                width: 100%;
+                text-align: center;
+                margin: .5vh auto .8rem auto;
+                @media(max-width: $breakpoint-md){
+                    font-size: 1rem;
+                    margin: 0 auto .3rem;
+                }
+            }
+            .form-item{
+                display: flex;
+                justify-content: space-between;
+            }
+            .rangos{
+                color: $color3;
+                font-size: .75rem;
+                margin-top: .3rem;
+                margin-bottom: .2rem;
+                @media(max-width: $breakpoint-md){
+                    font-size: .65rem;
+                }
+            }
+            .valor{
+                display: flex;
+                justify-content: center;
+            }
+            .unidad{
+                color:$color4;
+                font-size: 1.8rem;
+                font-weight: bold;
+                pointer-events: none;
+                @media(max-width: $breakpoint-md){
+                    font-size: 1.3rem;
+                }
+            }
+            .num{
+                font-size: 1.8rem;
+                font-weight: bold;
+                color: $color1;
+                pointer-events: none;
+                @media(max-width: $breakpoint-md){
+                    font-size: 1.3rem;
+                }
+            }
+            input{
+                text-align: center;
+                width: 100%;
+                margin: 0 auto;
+            }
+            .btnMas , .btnMenos{
+                padding: .2rem .2rem 0 .2rem;
+                *{pointer-events: none;}
+                i{color: $color4; transition: $over;}
+                &.active{
+                    pointer-events: none;
+                    i{opacity: .5;}
+                }
+                &:hover{
+                    i{color: $color1; text-shadow: 1px 1px 2px rgba($color: #000, $alpha: .35);}
+                    .rangos{color: rgba($color: $color6, $alpha: .5);}
+                }
+            }
+            .newRange{
+                width: 90%;
+                margin: 1rem auto 0;
+                position: relative;
+            }
+        }
+    }
+    @media(max-width: $breakpoint-md){
+        height: auto;
+        form#simulador{
+            .form-element{
+                width: calc(100% - 1rem);
+                margin: .5rem auto;
+                padding: 0 .5rem .5rem .5rem;
+            }
+        }
+    }
+}
+.carouselHome{
+   /*height: 40vh;*/
+    align-items: center;
+    transition: $over;
+    .carousel{
+        width: 100%;
+        height: 100%;
+        transition: $over;
+        .carousel-inner{
+            height: 100%;
+            transition: $over;
+            .carousel-item{
+                height: 100%;
+                .item-inner{
+                    padding: 2rem 1rem;
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    img{height: auto;}
+                }
+            }
+        }
+    }
+}
+.mockup{
+    position: absolute;
+    top: -50%;
+    left: 10%;
+    @media(max-width: $breakpoint-md){
+        position: relative;
+        top: 0;
+        left: 0;
+        width: auto;
+        max-width: 100%;
+    }
+}
+.texto{
+    text-align: center;
+    font-size: 1rem;
+    width: 90%;
+    margin: 0 auto;
+    @media(max-width: $breakpoint-md){
+        width: 100%;
+        font-size: .9rem;
+    }
+}
+.banner2{
+    background: url(../images/home/banner_home_2.jpg) no-repeat top center;
+    background-size: cover;
+    min-height: 45vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 3rem 2rem;
+}
+.banner3{
+    background: url(../images/home/banner_home_3.jpg) no-repeat center center;
+    background-size: cover;
+    min-height: 45vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 3rem 2rem;
+}
+.bg1{
+    background: $color5;
+    color: white;
+    padding: 3rem 2rem;
+    @media(max-width: $breakpoint-md){
+        padding: 2rem 1rem;
+    }
+}
+.pasos{
+    width: 100%;
+    background: url(../images/home/bgline.jpg) repeat-x center center;
+    position: relative;
+    .paso{
+        color: $color2;
+        border: 2px solid $color1;
+        box-shadow: 0 0 0 10px white;
+        border-radius: 50%;
+        font-size: 2.5rem;
+        font-weight: 400;
+        width: 3.5rem;
+        height: 3.5rem;
+        text-align: center;
+        line-height: 3.2rem;
+        margin: 0 auto;
+        background: white;
+        position: relative;
+        z-index: 2;
+        @media(max-width: $breakpoint-md){
+            box-shadow: 0 0 0 8px white;
+            font-size: 2rem;
+            width: 3rem;
+            height: 3rem;
+            line-height: 2.7rem;
+        }
+    }
+    &.first::before{
+        content: "";
+        background: white;
+        width: 50%;
+        height: 10px;
+        position: absolute;
+        top: calc(50% - 5px);
+        left: 0;
+        z-index: 1;
+    }
+    &.last::after{
+        content: "";
+        background: white;
+        width: 50%;
+        height: 10px;
+        position: absolute;
+        top: calc(50% - 5px);
+        right: 0;
+        z-index: 1;
+    }
+}
+.nombreTest{
+    color: $color2;
+    margin-top: .8rem;
+    text-align: center;
+}
+.text-banner{
+    font-size: 3rem;
+    font-weight: 100;
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    em{
+        font-style: normal;
+        font-weight: bold;
+        color: $color4;
+    }
+    strong{font-weight: bold;}
+    @media(max-width: $breakpoint-md){
+        font-size: 2rem;
+        margin-bottom: .5rem;
+        text-align: center;
+    }
+}

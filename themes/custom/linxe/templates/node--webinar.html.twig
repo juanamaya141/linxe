@@ -1,0 +1,109 @@
+
+
+			<!-- introduccion fin-->
+            <!-- banner uno -->
+            <div class="banner-uno bg-planear">
+            	
+            	<div class="cont-banner-webinar">
+                    {{content.field_titulo_banner_landing.0}}
+            	</div>
+
+            	<div class="cont-banner">
+            		{{content.field_texto_banner_landing.0}}
+                    <div class="cont-btn">
+                        <a href="#" class="btn-general show-modal-webinar" onclick="mostrarpp()">SEPARA TU CUPO AQUÍ</a>
+                    </div>
+                </div>
+            </div>
+            <!-- banner uno fin -->
+
+            <!-- expositor  -->
+            <div class="expositor">
+                <div class="info-expo">
+                    <div class="foto-expo">
+                        <img src="{{content.field_imagen_expositor.0}}" alt="{{content.field_nombre_expositor.0}}" />
+                    </div>
+                    <ul class="redes-expo">
+                        <li>
+                            <a href="{{content.field_expositor_instagram.0}}" target="_Blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{content.field_expositor_linkedin.0}}" target="_Blank">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{content.field_expositor_facebook.0}}" target="_Blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h4>{{content.field_nombre_expositor.0}}</h4>
+                    <p>{{content.field_subtitulo_expositor.0}}</p>
+                </div>
+
+                <div class="descrip-expo">
+                    <p>{{content.field_descripcion_expositor.0}}</p>
+                </div>
+
+            </div>
+            <!-- expositor fin -->
+
+            <!-- webinar -->
+            <div class="requisitos webinar-gratuito">
+            	{{content.body.0}}
+            </div>
+            <!-- webinar fin -->
+
+            <!-- tiempo webinar -->
+            <div class="tiempo-webinar">
+                <h2>{{content.field_fecha_y_hora_webinar.0}}</h2>
+                <h3>{{content.field_zona_horaria.0}}</h3>
+                <div class="cont-btn">
+                    <a href="#" class="btn-general show-modal-webinar" onclick="mostrarpp()">SEPARA TU CUPO AQUÍ</a>
+                </div>
+
+				
+
+   				
+   				<br>
+   				
+				<div id="elem">
+
+				</div>
+                <div class="cols3">
+                    <div class="col">
+                        <div class="bg-tiempo">
+                            <p id="dias_class">03</p>
+                            <span>DÍAS</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="bg-tiempo">
+                            <p id="horas_class">10</p>
+                            <span>HORAS</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="bg-tiempo">
+                            <p id="minutos_class">50</p>
+                            <span>MINUTOS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- tiempo webinar fin-->
+            {% set event_start_date = content.field_fecha_y_hora_webinar.0["#attributes"]["datetime"] %}
+            <script type="text/javascript">
+
+            	var fechahora = "{{ event_start_date|date('M d Y H:m:s', 'America/Bogota') }} GMT-0500";
+            	
+            </script>
+
+
+
+	
+

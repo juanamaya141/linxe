@@ -1,0 +1,10 @@
+adelanto.display_table_controller_display:
+  path: '/admin/adelanto-nomina/empresas'
+  defaults:
+    _controller: '\Drupal\adelanto\Controller\DisplayTableController::display'
+    _title: 'Adelanto de Nómina'
+  requirements:
+    _permission: 'access adelanto'
+
+
+  

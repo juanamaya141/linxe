@@ -1,0 +1,29 @@
+linxeprocredit.import:
+  path: '/admin/linxeprocredit/importar'
+  defaults:
+    _form: '\Drupal\linxeprocredit\Form\ImportarProcredit'
+    _title: 'Importar Procréditos'
+  requirements:
+    _permission: 'access linxeprocredit'
+linxeprocredit.ver_procredit:
+  path: '/admin/linxeprocredit'
+  defaults:
+    _controller: '\Drupal\linxeprocredit\Controller\ProcreditController::procredit_data'
+    _title: 'Linxe Procréditos'
+  requirements:
+    _permission: 'access linxeprocredit'
+linxeprocredit.import_adelantos_nomina:
+  path: '/admin/linxeprocredit/importar-adelantos-nomina'
+  defaults:
+    _form: '\Drupal\linxeprocredit\Form\ImportarAdelantoLinxe'
+    _title: 'Generar registros desde adelantos de nómina'
+  requirements:
+    _permission: 'access linxeprocredit'
+linxeprocredit.delete_procredit:
+  path: '/admin/linxeprocredit/delete-procredit'
+  defaults:
+    _form: '\Drupal\linxeprocredit\Form\DeleteProcredit'
+    _title: 'Eliminar registros'
+  requirements:
+    _permission: 'access linxeprocredit'
+  

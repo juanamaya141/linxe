@@ -1,0 +1,85 @@
+        
+            <div class="container-fluid header-dashboard">
+                <div class="row mx-md-3 pt-md-4 pb-md-0 pb-3">
+                    <div class="col-md-7 px-md-3 px-0">
+                        <h2 class="text-left text1 hs" id="username" >Hola {{userObj.name}}</h2>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row" id="no-selected">
+                            <div class="col-12">
+                                <h2 class="text-md-right text-center text-uppercase text1">Monto Seleccionado</h2>
+                            </div>
+                            <div class="col-12 text-md-right text-center">
+                                <span class="unidad mr-2">$</span><span class="num" id="tope">{{valorseleccionado|number_format(0, ',', '.')}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row mx-md-3">
+                    <div class="col-12 px-md-3 px-0">
+                        <ul class="nav nav-tabs" id="dashboardNav" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="seleccion-tab" data-toggle="tab" href="#seleccion" role="tab"
+                                    aria-controls="seleccion" aria-selected="true">Selecciona tu Adelanto</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="creditos-tab"  href="/dashboard/misadelantos" >Mis Adelantos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="info-tab"  href="/dashboard/informacionpersonal" >Información Personal</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="dashboardContent">
+                <!--TAB1-->
+                <div class="container tab-pane fade" id="seleccion" role="tabpanel" aria-labelledby="seleccion-tab">
+                    <div class="row d-flex justify-content-center" id="instrucciones">
+                        <div class="col-md-7 instruccion" data-step="paso4">
+                            
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center mb-md-6 mb-4">
+                        <div class="col-12 dash-pasos mx-0 px-md-0 px-2">
+                            <div class="paso">
+                                <div class="tit-paso">Registro</div>
+                                <div class="estado-paso check" data-state="paso1"></div>
+                            </div>
+                            <div class="paso">
+                                <div class="tit-paso">Selección<br />de Crédito</div>
+                                <div class="estado-paso check" data-state="paso2"></div>
+                            </div>
+                            <div class="paso">
+                                <div class="tit-paso">Datos de<br /> tu Empresa</div>
+                                <div class="estado-paso check" data-state="paso3"></div>
+                            </div>
+                            <div class="paso">
+                                <div class="tit-paso">Desembolso</div>
+                                <div class="estado-paso check current" data-state="paso4"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 mx-0 px-md-0 px-2">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                                    aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--PASO4-->
+                    <div class="row row-paso justify-content-center" data-step="paso4">
+                        <div class="col-md-6 justify-content-center">
+                            <img src="{{imagenmsg}}" alt="Desembolso" class="img-fluid" />
+                        </div>
+                        <div class="col-md-9 mt-md-5 mt-3">
+                            <h2 class="text1" id="felicitacion">{{textomsg | raw}}</h2>
+                            <h2 class="text2">{{textomsg2 | raw}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            

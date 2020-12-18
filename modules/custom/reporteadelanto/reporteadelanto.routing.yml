@@ -1,0 +1,10 @@
+reporteadelanto.show_table:
+  path: '/admin/reporteadelanto-nomina'
+  defaults:
+    _controller: '\Drupal\reporteadelanto\Controller\TablaController::show'
+    _title: 'Reporte de adelanto de Nómina'
+  requirements:
+    _permission: 'access reporteadelanto'
+
+
+  

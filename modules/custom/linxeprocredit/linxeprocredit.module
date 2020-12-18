@@ -1,0 +1,493 @@
+<?php
+
+/**
+ * @file
+ * Contains linxeprocedit.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
+use Drupal\Core\Routing;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormBase;
+use Symfony\Component\HttpFoundation\Response;
+/**
+ * Implements hook_help().
+ */
+
+
+    function get_procredit($opt,$proveniente,$desde,$hasta) {
+
+	    $res = array();
+
+        if($opt == "All"){	
+
+                $query = db_select('linxeprocredit','lp')
+                            ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                            ->limit(15);
+                $query->fields('lp');
+
+                $results = $query->execute()->fetchAll();
+                $ret = [];
+
+        }else{
+                $query = db_select('linxeprocredit','lp')
+                            ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                            ->limit(15);
+                $query->fields('lp');
+                if($proveniente !== ""){
+                    $query->condition('lp.proveniente_de',$proveniente);
+                }
+
+                if($desde !== "" && $hasta !== "" ){
+                    $query->condition('lp.fecha_carga',[$desde,$hasta],'BETWEEN');
+                }
+                        
+
+                $results = $query->execute()->fetchAll();
+                $ret = [];
+        }
+        foreach ($results as $row) {
+            
+            $ret[] = [
+                'tipo_registro' => $row->tipo_registro,
+                'tipo_novedad' => $row->tipo_novedad,
+                'refinacion_reestructuracion' => getrefinacion_reestructuracion($row->refinacion_reestructuracion),
+                'fecha_corte_informacion' => $row->fecha_corte_informacion,
+                'seccional_afiliado' => getseccional($row->seccional_afiliado),
+                'consecutivo_afiliado' => $row->consecutivo_afiliado,
+                'codigo_sucursal_viejo' => $row->codigo_sucursal_viejo,
+                'tipo_documento_afiliado' => gettipodocumento($row->tipo_documento_afiliado),
+                'numero_documento_afiliado' => $row->numero_documento_afiliado,
+                'codigo_sucursal_nuevo' => $row->codigo_sucursal_nuevo,
+                'tipo_garante' => gettipogarante($row->tipo_garante),
+                'tipo_documento_cliente' => gettipodocumento($row->tipo_documento_cliente),
+                'numero_documento_cliente' => $row->numero_documento_cliente,
+                'primernombre_cliente_razonsocial' => $row->primernombre_cliente_razonsocial,
+                'segundonombre_cliente' => $row->segundonombre_cliente,
+                'primerapellido_cliente' => $row->primerapellido_cliente,
+                'segundoapellido_cliente' => $row->segundoapellido_cliente,
+                'nombre_comercial' => $row->nombre_comercial,
+                'pais' => $row->pais,
+                'departamento' => $row->departamento,
+                'ciudad' => $row->ciudad,
+                'tipo_direccion' => gettipodireccion($row->tipo_direccion),
+                'direccion' => $row->direccion,
+                'tipo_telefono' => gettipotelefono($row->tipo_telefono),
+                'telefono' => $row->telefono,
+                'extension' => $row->extension,
+                'tipo_ubicacion_electronica' => gettipoue($row->tipo_ubicacion_electronica),
+                'ubicacion_electronica' => $row->ubicacion_electronica,
+                'cupototal_aprobado_credito' => $row->cupototal_aprobado_credito,
+                'cupo_utilizado' => $row->cupo_utilizado,
+                'tipo_obligacion' => gettipoobligacion($row->tipo_obligacion),
+                'tipo_contrato' => gettipocontrato($row->tipo_contrato),
+                'numero_obligacion' => $row->numero_obligacion,
+                'fecha_obligacion' => $row->fecha_obligacion,
+                'periodicidad_pago' => $row->periodicidad_pago,
+                'termino_contrato' => getterminocontrato($row->termino_contrato),
+                'meses_celebrados' => $row->meses_celebrados,
+                'meses_clausula_permanencia' => $row->meses_clausula_permanencia,
+                'valor_obligacion' => $row->valor_obligacion,
+                'cargo_fijo' => $row->cargo_fijo,
+                'saldos_fecha_corte' => $row->saldos_fecha_corte,
+                'saldos_mora_fecha_corte' => $row->saldos_mora_fecha_corte,
+                'cuotas_pactadas' => $row->cuotas_pactadas,
+                'cuotas_pagadas' => $row->cuotas_pagadas,
+                'cuotas_mora' => $row->cuotas_mora,
+                'motivo_pago' => getmotivopago($row->motivo_pago),
+                'situacion_estado_titular' => getestadotitular($row->situacion_estado_titular),
+                'tipo_documento_soporte_obligacion_referenciado' => $row->tipo_documento_soporte_obligacion_referenciado,
+                'numero_obligacion_referenciada' => $row->numero_obligacion_referenciada,
+                'fecha_carga' => $row->fecha_carga,
+                'proveniente_de' => $row->proveniente_de
+            ];
+        }
+        return $ret;
+    }
+
+    function getrefinacion_reestructuracion($item) {
+        switch($item){
+            case '0':
+                $codigo = 'Refinanciación';
+                break;
+            case '1':
+                $codigo = 'Restructuración';
+                break;  
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function getmotivopago($item) {
+        switch($item){
+            case '0':
+                $codigo = 'Voluntario';
+                break;
+            case '1':
+                $codigo = 'Forzado';
+                break;  
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function getterminocontrato($item) {
+        switch($item){
+            case '0':
+                $codigo = 'Definido';
+                break;
+            case '1':
+                $codigo = 'Indefinido';
+                break;  
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function gettipocontrato($item) {
+        switch($item){
+            case '1':
+                $codigo = 'Venta';
+                break;
+            case '2':
+                $codigo = 'Prestación de Servicios';
+                break;  
+            case '3':
+                $codigo = 'Otro';
+                break;
+            case '4':
+                $codigo = 'Prestación de Servicios Financieros';
+                break; 
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function gettipoue($item) {
+        switch($item){
+            case '0':
+                $codigo = 'Correo Electrónico';
+                break;
+            case '1':
+                $codigo = 'Pagina Web';
+                break;  
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function getseccional($item) {
+        switch($item){
+            case '1':
+                $codigo = 'Antioquia';
+                break;
+            case '2':
+                $codigo = 'Bogotá';
+                break;  
+            case '3':
+                $codigo = 'Atlántico';
+                break;
+            case '4':
+                $codigo = 'Valle del Cauca';
+                break;
+            case '5':
+                $codigo = 'Tolima';
+                break;
+            case '6':
+                $codigo = 'Santander';
+                break;
+            case '8':
+                $codigo = 'Caldas';
+                break;
+            case '9':
+                $codigo = 'Bolívar';
+                break;
+            case '11':
+                $codigo = 'Magdalena';
+                break;
+            case '12':
+                $codigo = 'Villavicencio';
+                break;
+            case '14':
+                $codigo = 'Norte de Santander';
+                break;
+            case '15':
+                $codigo = 'Nariño';
+                break;
+            case '2':
+                $codigo = 'Bogotá';
+                break;
+            case '16':
+                $codigo = 'Quindío';
+                break;
+            case '17':
+                $codigo = 'Risaralda';
+                break;
+            case '18':
+                $codigo = 'Cesar – Valledupar';
+                break;
+            case '19':
+                $codigo = 'San Andrés';
+                break;
+            case '20':
+                $codigo = 'Huila';
+                break;
+            case '21':
+                $codigo = 'Sucre';
+                break;
+            case '22':
+                $codigo = 'Córdoba';
+                break;
+            case '23':
+                $codigo = 'Capitulo Cartago';
+                break;
+            case '32':
+                $codigo = 'Tulua';
+                break;
+            case '33':
+                $codigo = 'Boyacá';
+                break;
+            case '34':
+                $codigo = 'San Gil';
+                break;
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function gettipodocumento($item) {
+        switch($item){
+            case '1':
+                $codigo = 'Cedula Ciudadanía';
+                break;
+            case '2':
+                $codigo = 'Nit';
+                break;  
+            case '3':
+                $codigo = 'Cedula de Extranjería';
+                break;
+            case '4':
+                $codigo = 'Pasaporte';
+                break;
+            case '5':
+                $codigo = 'Pase Diplomático';
+                break;
+            case '6':
+                $codigo = 'Carnet Diplomático';
+                break;
+            case '7':
+                $codigo = 'Tarjeta de Identidad';
+                break;
+            case '8':
+                $codigo = 'Rut';
+                break;
+            case '9':
+                $codigo = 'Número único de Identificación Personal';
+                break;
+            case '10':
+                $codigo = 'Nit de Extranjería';
+                break;
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function gettipoobligacion($item) {
+        switch($item){
+            case '2':
+                $codigo = 'Cheque';
+                break;
+            case '3':
+                $codigo = 'Factura';
+                break;  
+            case '5':
+                $codigo = 'Venta por Club';
+                break;
+            case '6':
+                $codigo = 'Venta a Plazo por Cuenta Corriente';
+                break;
+            case '7':
+                $codigo = 'Pagaré';
+                break;
+            case '8':
+                $codigo = 'Letra de Cambio';
+                break;
+            case '11':
+                $codigo = 'Contrato';
+                break;
+            case '12':
+                $codigo = 'Libre Inversión';
+                break;
+            case '13':
+                $codigo = 'Crédito Vehículo';
+                break;
+            case '14':
+                $codigo = 'Tarjeta Crédito';
+                break;
+            case '15':
+                $codigo = 'Comercial';
+                break;
+            case '16':
+                $codigo = 'Consumo';
+                break;
+            case '17':
+                $codigo = 'Hipotecario';
+                break;
+            case '18':
+                $codigo = 'Microcredito';
+                break;
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+
+    function gettipogarante($item) {
+        switch($item){
+            case '1':
+                $codigo = 'Deudor';
+                break;
+            case '2':
+                $codigo = 'Codeudor';
+                break;  
+            case '3':
+                $codigo = 'Avalista';
+                break;
+            case '4':
+                $codigo = 'Fiador';
+                break;
+            case '5':
+                $codigo = 'Deudor Solidario';
+                break;
+            case '6':
+                $codigo = 'Co-Arrendatario';
+                break;
+            case '7':
+                $codigo = 'Otro';
+                break;
+            case '8':
+                $codigo = 'Co-Titular';
+                break;
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function gettipodireccion($item) {
+        switch($item){
+            case '1':
+                $codigo = 'Casa';
+                break;
+            case '2':
+                $codigo = 'Garaje';
+                break;  
+            case '3':
+                $codigo = 'Local';
+                break;
+            case '4':
+                $codigo = 'Lote';
+                break;
+            case '5':
+                $codigo = 'Oficina';
+                break;
+            case '6':
+                $codigo = 'Casa Familiar';
+                break;
+            case '7':
+                $codigo = 'Otro';
+                break;
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function gettipotelefono($item) {
+        switch($item){
+            case '1':
+                $codigo = 'Fijo';
+                break;
+            case '2':
+                $codigo = 'Celular';
+                break;  
+            case '3':
+                $codigo = 'Oficina';
+                break;
+            case '4':
+                $codigo = 'Línea Gratuita';
+                break;
+            case '5':
+                $codigo = 'Fax';
+                break;
+            case '6':
+                $codigo = 'Otro';
+                break;
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+    function getestadotitular($item) {
+        switch($item){
+            case '1':
+                $codigo = 'Normal';
+                break;
+            case '2':
+                $codigo = 'Concordato';
+                break;  
+            case '3':
+                $codigo = 'Liquidación Forzosa';
+                break;
+            case '4':
+                $codigo = 'Liquidación Voluntaria';
+                break;
+            case '5':
+                $codigo = 'Proceso de Reorganización';
+                break;
+            case '6':
+                $codigo = 'Otro';
+                break;
+            default:
+                $codigo = $item;
+                break;          
+        }
+
+        return $codigo;
+    }
+
+
+

@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Contains contactopermodule.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function contactopermodule_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the contactopermodule module.
+    case 'help.page.contactopermodule':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This show the code package generated.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function contactopermodule_theme() {
+  $theme['contactopermodule_form'] = [
+    'render element' => 'form',
+    'arguments'      => array('vector' => NULL),
+    
+  ];
+  return $theme;
+}
+
+/**
+* Implements hook_mail().
+*/
+function contactopermodule_mail($key, &$message, $params) {
+   $options = array(
+     'langcode' => $message['langcode'],
+   );
+   switch ($key) {
+     case 'contacto_personas':
+     $message['headers']['Bcc'] = $params['Bcc'];
+     $message['from'] = \Drupal::config('system.site')->get('mail');
+     $message['subject'] = t('@title', array('@title' => $params['subject']), $options);
+     $message['body'][] = $params['message'];
+     break;
+   }
+}

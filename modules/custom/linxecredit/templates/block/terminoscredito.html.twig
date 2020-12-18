@@ -1,0 +1,93 @@
+                       
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Nombre del Cliente:</label>
+                                        <span>{{infoObj.name}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Tipo de Documento:</label>
+                                        <span>{{infoObj.tipodoc}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Número de Documento:</label>
+                                        <span>{{infoObj.num_id|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Tipo de Crédito Solicitado:</label>
+                                        <span>Libranza</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Valor Crédito:</label>
+                                        <span>$ {{infoObj.valormontoseleccionado|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Valor Cuota:</label>
+                                        <span>$ {{infoObj.valorcuota|number_format(0, ',', '.')}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Número de Cuotas:</label>
+                                        <span>{{infoObj.plazo}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Frecuencia del pago de la cuota:</label>
+                                        <span>Mensual</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Tipo de tasa de Interes:</label>
+                                        <span>Tasa Fija</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Modalidad de Interes:</label>
+                                        <span>Vencido</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Tasa Nominal Anual Mes Vencida:</label>
+                                        <span>{{infoObj.gl_tasa_anual}} %</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Tasa Mora:</label>
+                                        <span>Máxima Permitida por Ley</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 px-3">
+                                    <div class="form-group">
+                                        <label class="label" for="nombre">Nombre Empresa Pagadora:</label>
+                                        <span>{{infoObj.empresa}}</span>
+                                    </div>
+                                </div>
+                            </div>

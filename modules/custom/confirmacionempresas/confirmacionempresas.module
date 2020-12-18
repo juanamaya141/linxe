@@ -1,0 +1,265 @@
+<?php
+
+/**
+ * @file
+ * Contains linxecredit.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function confirmacionempresas_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the linxecredit module.
+    case 'help.page.linxecredit':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This show the code package generated.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function confirmacionempresas_theme() {
+  return $theme;
+}
+
+
+/**
+* Implements hook_cron().
+*/
+function confirmacionempresas_cron(){
+  //$config = $this->config('linxecredit.settings');
+  $paththeme = base_path().drupal_get_path('theme', 'linxe');
+  $basepath = base_path();  
+
+  $fechaActual = date("Y-m-d");
+  echo $fechaActual;
+  //buscar empresas con convenio
+  $db_or = db_or();
+  $db_or->condition('emp.fecha_ultima_notificacion',$fechaActual,'<');
+  $db_or->isNull('emp.fecha_ultima_notificacion');
+
+  $query =  db_select('empresas','emp')
+                  ->fields('emp')
+                  ->condition('emp.estado_convenio', "aceptado" )
+                  ->condition($db_or)
+                  ->execute();
+
+  $empresasArray = $query->fetchAll();
+  
+  //if(is_array($transactionsArray))
+  /* PROCESO AUTOMATICO PARA APROBAR SOLICITUDES QUE NO FUERON RECHAZADAS POR LA EMPRESA*/
+  foreach ($empresasArray as $empresa) {
+    $idempresa = $empresa->idempresa;
+    echo $idempresa;
+    
+    $fecha_actual = date("Y-m-d H:i:s");
+    $fechaAyer = date("Y-m-d H:i:s",strtotime($fecha_actual."- 1 days")); 
+    
+    $db_or = db_or();
+    $db_or->condition('an.fecha_hora_datosempresa',$fechaAyer,'<=');
+    $db_or->isNull('an.fecha_hora_datosempresa');
+    
+    $query = db_select('adelantos_nomina','an');
+    $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+    $query->fields('an',["idadelanto"]);
+    $query->condition('an.estado_general_solicitud',"validacion_desembolso");
+    $query->condition($db_or);
+    $query->condition('reg.idempresa',$idempresa);
+
+    $result = $query->execute()->fetchAll();
+    $arrayIDsAdelanto = [];
+
+    print_r($result);
+    
+
+
+    foreach($result as $data){
+      $arrayIDsAdelanto[]=$data->idadelanto;
+    }
+    
+    
+    if(count($arrayIDsAdelanto)>0)
+    {
+      $currentDate = date("Y-m-d H:i:s");
+      $fields  = array(
+          'autorizacion_desembolso_empresa'   => 1,
+          'estado_desembolso'   => 'aprobacion_empresa',
+          'estado_general_solicitud'   => 'aprobacion_empresa',
+          'fecha_hora_desembolso'   => $currentDate
+      );
+      $update = db_update('adelantos_nomina')
+          ->fields($fields)
+          ->condition('idadelanto',$arrayIDsAdelanto,'in')
+          ->execute();
+      if($update > 0)
+      {
+          $message = "Adelantos de Salario aprobados satisfactoriamente ".json_encode($arrayIDsAdelanto);
+          \Drupal::logger('confirmacionempresas')->notice($message);
+          
+      }else{ 
+          $message = "Adelantos de salario no pudieron ser aprobados, inténtelo nuevamente. ".json_encode($arrayIDsAdelanto);
+          \Drupal::logger('confirmacionempresas')->error($message); 
+      }
+    }
+
+    
+  }
+  /**
+     * ENVÍO NOTIFICACIÓN
+  */
+  foreach ($empresasArray as $empresa) {
+    $idempresa = $empresa->idempresa;
+
+
+    if($empresa->requiere_notificacion=="si"){
+
+      $query = db_select('adelantos_nomina','an');
+      $query->join('registrados_an', 'reg', 'an.idregistro = reg.idregistro');
+      $query->fields('an');
+      $query->fields('reg',["tipodocumento","documento","nombre","primer_apellido","segundo_apellido"]);
+      $query->condition('an.estado_general_solicitud',"validacion_desembolso");
+      $query->condition('reg.idempresa',$idempresa);
+      $result = $query->execute()->fetchAll();
+  
+      // Populate the rows.
+      $rows = array();
+      foreach($result as $data){
+
+        $rows[] = array(
+          'nombre'=>    $data->nombre,
+          'primer_apellido' => $data->primer_apellido,
+          'segundo_apellido' => $data->segundo_apellido,
+          'tipo_documento' => $data->tipodocumento,
+          'documento' => $data->documento,
+          'cuotas_pactadas' => $data->cuotas_pactadas,
+          'fecha_solicitud' => $data->fecha_solicitud,
+          'valor_solicitado' => $data->valor_solicitado,
+          'valor_pagar' => ($data->valor_solicitado+$data->administracion+$data->seguros+$data->tecnologia+$data->iva),
+          'cuenta_bancaria' => $data->banco."   ".$data->tipo_cuenta." # ".$data->numero_cuenta.""
+        );
+
+      }
+
+      //enviamos la notificación
+      
+      if(count($rows)>0)
+        sendToEmpresa($empresa,$rows);
+
+
+    }
+
+    
+
+    
+
+  }
+ 
+
+  
+}
+
+function sendToEmpresa($empresa,$rows){
+
+  $arrayTipoDocs[0] = "";
+  $arrayTipoDocs[1] = "CC" ;
+  $arrayTipoDocs[2] = "N.I.T." ;
+  $arrayTipoDocs[3] = "CE" ;
+  $arrayTipoDocs[4] = "TI" ;
+  
+  $paththeme = base_path().drupal_get_path('theme', 'linxe');
+  $dominioactual = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+  
+  $titleMsg = "CONFIRMACIÓN DESEMBOLSO ADELANTOS";
+  $mensaje = "<p>Estimado/a ".$empresa->razon_social.": </p>";
+  $mensaje .= "<p>Los empleados relacionados a continuación, tienen aprobado y pendiente de desembolso un <b>Adelanto de Salario</b> con las siguientes condiciones:</p><br/>";
+  
+  $mensaje .= "<table border='1'>";
+  $mensaje .= "<tr>";
+  $mensaje .= " <th bgcolor='#cecece'>TIPO DOCUMENTO</th>";
+  $mensaje .= " <th bgcolor='#cecece'>DOCUMENTO</th>";
+  $mensaje .= " <th bgcolor='#cecece'>NOMBRE</th>";
+  $mensaje .= " <th bgcolor='#cecece'>NUM. CUOTAS</th>";
+  $mensaje .= " <th bgcolor='#cecece'>MONTO APROBADO</th>";
+  $mensaje .= " <th bgcolor='#cecece'>VALOR A PAGAR</th>";
+  $mensaje .= " <th bgcolor='#cecece'>CUENTA BANCARIA</th>";
+  $mensaje .= "</tr>";
+
+  if($empresa->periodicidad_pago=="quincenal")
+    $numcuotas=2;
+  else
+    $numcuotas=1;
+
+  foreach($rows as $row){
+
+    
+    $mensaje .= "<tr>";
+    $mensaje .= " <td>".$arrayTipoDocs[ $row["tipo_documento"] ]."</td>";
+    $mensaje .= " <td>".$row["documento"]."</td>";
+    $mensaje .= " <td>".$row["nombre"]." ".$row["primer_apellido"]." ".$row["segundo_apellido"]."</td>";
+    $mensaje .= " <td>".$numcuotas."</td>";
+    $mensaje .= " <td>$ ".number_format($row["valor_solicitado"],0,",",".")."</td>";
+    $mensaje .= " <td>$ ".number_format($row["valor_pagar"],0,",",".")."</td>";
+    $mensaje .= " <td>$ ".$row["cuenta_bancaria"]."</td>";
+    $mensaje .= "</tr>";
+  }
+  $mensaje .= "</table><br/>";
+
+
+  
+  $mensaje .= "<p>En caso de que no recibamos una respuesta en las próximas 24 horas, continuaremos con el proceso de desembolso de acuerdo a la solicitud del empleado";
+  $mensaje .= " y lo establecido en los artículos 4,5 y 6 de la Ley 1527 de 2012. Ingresa al siguiente link luego de loguearte con tu usuario y contraseña: "; 
+  $mensaje .= " <a href='".$dominioactual."/admin/confirmacionempresas' target='_blank'>".$dominioactual."/admin/confirmacionempresas</a></p>"; 
+  
+  $mensaje .= "<p>Cordialmente.</p>";
+  $mensaje .= "<p>Equipo Linxe.</p>";
+  $emailto = $empresa->email;
+  $resultmail = sendNotificationEmpresa($titleMsg,$mensaje,$emailto);
+
+  //actualización de la fecha última notificacion
+  $arrayEmpresa["fecha_ultima_notificacion"] = date("Y-m-d");
+  $update = db_update('empresas')
+              ->fields($arrayEmpresa)
+              ->condition('idempresa', $empresa->idempresa , '=')
+              ->execute();
+}
+
+
+function sendNotificationEmpresa($titleMsg,$mensaje,$emailto)
+{
+  
+
+  $paththeme = base_path().drupal_get_path('theme', 'linxe');
+  $dominioactual = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+          
+  $template_str = '
+  <div >
+    <center>
+      <img src="'.$dominioactual.$paththeme.'/images/forms/exito.jpg" alt="LINXE"   width="130"/>
+      <h2 class="text1">'.$titleMsg.'</h2>
+      <div class="mensaje">
+      '.$mensaje.'
+      </div>
+    </center>
+  </div> ';
+
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'linxecredit';
+  $key = 'success_msg';
+  $to = $emailto;
+  //$params['Bcc'] = $config->get('contactopermodule.emailcc');;
+  $params['body'] = $template_str;
+  $params['subject'] = $titleMsg;
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] !== true) {
+    return false;
+  }else {
+    return true;
+  }
+}

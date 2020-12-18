@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file
+ * Contains linxeseguridadsocial.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
+use Drupal\Core\Routing;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormBase;
+use Symfony\Component\HttpFoundation\Response;
+/**
+ * Implements hook_help().
+ */
+
+
+    function linxeseguridadsocial_theme() {
+    // We use a template file to allow for translation of blocks of content.
+    // Therefore we need to add this content at the theming layer.
+        return [
+            'linxeseguridadsocial_description' => [
+            'template' => 'description',
+            'variables' => [],
+            ],
+        ];
+    }
+
+    function get_linxeseguridadsocial() {
+
+	    $res = array();
+
+        $query = db_select('linxe_seguridadsocial','ss')
+                    ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+                    ->limit(15);
+        $query->fields('ss');
+
+        $results = $query->execute()->fetchAll();
+        $ret = [];
+
+        foreach ($results as $row) {
+
+            $eliminar = Url::fromUserInput('/admin/linxeseguridadsocial/eliminar-seguridad/'.$row->iden);
+            $editar   = Url::fromUserInput('/admin/linxeseguridadsocial/registrar-seguridad?iden='.$row->iden);
+            $ret[] = [
+                'iden'=> $row->iden ,
+                'tipo_entidad' => $row->tipo_entidad,
+                'nombre' => $row->nombre,
+                'alias' => $row->alias,
+                'estado' => getEstado($row->estado),
+                \Drupal::l('Editar', $editar),
+                \Drupal::l('Eliminar', $eliminar)
+                 
+            ];
+        }
+        return $ret;
+    }
+
+    function getEstado($estado) {
+        if($estado == 1){
+            $estados = 'Activo';
+        }else{
+            $estados = 'Inactivo';
+        }
+
+        return $estados;
+    }
+
+    function linxeseguridadsocial_crear(){
+        drupal_goto('/admin/linxeseguridadsocial/registrar-seguridad');
+    }
+
+
+

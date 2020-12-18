@@ -1,0 +1,47 @@
+        
+            <div class="container-fluid header-dashboard">
+                <div class="row mx-md-3 pt-md-4 pb-md-0 pb-3">
+                    <div class="col-md-7 px-md-3 px-0">
+                        <h2 class="text-left text1 hs" id="username" >Hola {{userObj.name}}</h2>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row" id="no-selected">
+                            <div class="col-12">
+                                <h2 class="text-md-right text-center text-uppercase text1">Monto Aprobado</h2>
+                            </div>
+                            <div class="col-12 text-md-right text-center">
+                                <span class="unidad mr-2">$</span><span class="num" id="tope">{{valormontoaprobado|number_format(0, ',', '.')}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row mx-md-3">
+                    <div class="col-12 px-md-3 px-0">
+                        <ul class="nav nav-tabs" id="dashboardNav" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="seleccion-tab"  href="/dashboard/seleccion" >Selecciona tu Crédito</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="creditos-tab" data-toggle="tab" href="#creditos" role="tab"
+                                    aria-controls="creditos" aria-selected="false">Mis Créditos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="info-tab"  href="/dashboard/informacionpersonal" >Información Personal</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="dashboardContent">
+                <!--TAB2-->
+                <div class="container tab-pane fade" id="creditos" role="tabpanel" aria-labelledby="creditos-tab">
+                    <!--CAROUSEL-->
+                    <div class="row d-flex justify-content-center cont-creditos px-md-0 px-3">
+                    <p align="center">Si ya firmaste el pagaré y recibiste un correo con los términos y condiciones de tu crédito, estamos en proceso de abonar el dinero a tu cuenta</p>
+                    </div>
+                </div>
+            </div>
+
+            

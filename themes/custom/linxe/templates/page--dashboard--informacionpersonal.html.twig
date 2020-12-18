@@ -1,0 +1,127 @@
+    <header class="fixed-top">
+        <div class="topBar">
+          {{ page.infoheader }}
+        </div>
+        <div class="menuBar">
+              {{ page.logo }}
+            <button type="button" class="btnMenu" data-toggle="collapse" data-target="#collapsenav"
+                aria-expanded="false" aria-controls="collapsenav"><i class="fas fa-bars"></i></button>
+            <nav id="collapsenav" class="collapse">
+              {{ page.primary_menu }}
+            </nav>
+              {{ page.botoneslogin }}
+        </div>
+    </header>
+
+    <main class="pb-md-6 pb-4">
+      <div class="main-wrap mt-1">
+
+            <div class="container-fluid header-dashboard">
+                <div class="row mx-md-3 pt-md-4 pb-md-0 pb-3">
+                    <div class="col-md-7 px-md-3 px-0">
+                        <h2 class="text-left text1 hs" id="username" ></h2>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row" id="no-selected">
+                            <div class="col-12">
+                                <h2 class="text-md-right text-center text-uppercase text1">Monto Aprobado</h2>
+                            </div>
+                            <div class="col-12 text-md-right text-center">
+                                <span class="unidad mr-2">$</span><span class="num" id="tope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row mx-md-3">
+                    <div class="col-12 px-md-3 px-0">
+                        <ul class="nav nav-tabs" id="dashboardNav" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link tabSeleccionProducto" id="seleccion-tab"  href="/dashboard/seleccion" >Selecciona tu Crédito</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link tabMisProductos" id="creditos-tab" href="/dashboard/miscreditos" >Mis Créditos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
+                                    aria-selected="true">Información Personal</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="dashboardContent">
+                
+                <!--TAB3-->
+                <div class="container tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-6">
+                            {{drupal_entity('block_content', '22') }}
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center accordion" id="preferencias">
+                        <div class="col-md-7 card">
+                            <div class="card-header" id="headingPreferencias">
+                                <h2 class="text1 mb-0">
+                                    <button type="button" data-toggle="collapse" data-target="#collapsePreferencias" id="collapsePreferenciasButton" aria-expanded="false" aria-controls="collapsePreferencias">Tus preferencias</button>
+                                </h2>
+                            </div>
+                            <div class="collapse" id="collapsePreferencias" aria-labelledby="headingPreferencias" data-parent="#preferencias">
+                                <div class="card-body cont-form">
+                                    {{ drupal_block('preferencias_block') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-7"/>
+
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-7 cont-form">
+                          {{ page.content }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+          
+      </div>
+    </main>
+
+    <footer>
+        <div class="cont-footer">
+            {{ page.footer_menu }}
+
+            {{ page.footer_contacto }}
+        </div>
+
+        <div class="redes">
+            {{ page.footer_redes }}
+        </div>
+
+        <div class="copy-foot">
+            {{ page.footer_copyright }}
+        </div>
+    </footer>
+    
+    <div id="loginformlayer" class="modal fade" role="dialog">
+        {{ page.login_form }}
+    </div>
+
+    <div id="modalSeleccionCredito" class="modal fade" role="dialog">       
+      <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+            class="fas fa-times"></i></button>
+          <div class="modal-body">
+              {{ page.modal_seleccion_credito }}   
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalFirmaContrato" class="modal fade" role="dialog">  
+      {{ page.modal_firmacontrato }}  
+    </div>

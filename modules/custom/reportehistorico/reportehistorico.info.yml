@@ -1,0 +1,5 @@
+name: Reporte de histórico de nómina
+type: module
+description: Reporte de histórico de nómina de las empresas.
+core: 8.x
+package: Linxe

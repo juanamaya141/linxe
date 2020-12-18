@@ -1,0 +1,36 @@
+
+                        
+		{% if form['#myvars'].titulo != ""  %}
+            <div class="modal-linxe" >
+                <div class="black-box"></div>
+                <div class="cont-modal">
+                    <div class="title-modal">
+                        <a href="#" class="cerrar-modal" onclick="closeppp()">X</a>
+                        {{drupal_entity('block_content', '29') }}
+                    </div>
+
+                    <div class="copy-modal">
+                    	<div id="block-textopopupwebinar">
+                    		{{form['#myvars'].textpopup | raw}}
+                    	</div>
+                    </div>
+
+                    	<div class="formclass">
+                            {{ form.name }}
+                            {{ form.email }}
+                            {{ form.webinar_id }}
+                            {{ form.webinar_schedule }}
+                            {{ form.actions.submit }}
+                            {{ form.form_build_id }}
+                            {{ form.form_token }}
+                            {{ form.form_id }}
+                            
+                            <div id="errorMsj"></div>
+                        </div>
+                    
+                    <div class="img-modal">
+                    	{{drupal_entity('block_content', '31') }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}

@@ -1,0 +1,69 @@
+ç    <header class="fixed-top">
+        <div class="topBar">
+          {{ page.infoheader }}
+        </div>
+        <div class="menuBar">
+              {{ page.logo }}
+            <button type="button" class="btnMenu" data-toggle="collapse" data-target="#collapsenav"
+                aria-expanded="false" aria-controls="collapsenav"><i class="fas fa-bars"></i></button>
+            <nav id="collapsenav" class="collapse">
+              {{ page.primary_menu }}
+            </nav>
+              {{ page.botoneslogin }}
+        </div>
+    </header>
+
+    <main class="pb-md-6 pb-4">
+      <div class="main-wrap mt-md-6 mt-4">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <ul class="nav nav-tabs" id="contactoTabs" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="personas-tab" data-toggle="tab" href="#personas" role="tab"
+                    aria-controls="personas" aria-selected="true">Personas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="empresas-tab" data-toggle="tab" href="#empresas" role="tab"
+                    aria-controls="empresas" aria-selected="false">Empresas</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="row d-flex justify-content-center tab-content" id="contactoContent">
+              <div class="col-md-7 tab-pane fade show active cont-form" id="personas" role="tabpanel" aria-labelledby="personas-tab">
+                {{ page.messages }}
+                {{ page.content }}
+              </div>
+
+              <div class="col-md-7 tab-pane fade cont-form" id="empresas" role="tabpanel" aria-labelledby="empresas-tab">
+                {{ page.contactoempresas }}
+              </div>
+            </div>
+          </div>
+      </div>
+    </main>
+
+    <footer>
+        <div class="cont-footer">
+            {{ page.footer_menu }}
+
+            {{ page.footer_contacto }}
+        </div>
+
+        <div class="redes">
+            {{ page.footer_redes }}
+        </div>
+
+        <div class="copy-foot">
+            {{ page.footer_copyright }}
+        </div>
+    </footer>
+    
+    <div id="loginformlayer" class="modal fade" role="dialog">
+        {{ page.login_form }}
+    </div>
+    <div id="rememberformlayer" class="modal fade" role="dialog">
+        {{ page.remember_form }}
+    </div>
