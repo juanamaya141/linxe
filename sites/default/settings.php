@@ -779,10 +779,10 @@ $settings['entity_update_backup'] = TRUE;
 # }
 $databases['default']['default'] = array (
   'database' => 'linxeDB',
-  'username' => 'linxeUser',
-  'password' => 'F8FMpU6a8dXfX',
+  'username' => 'admin',
+  'password' => 'Password*123xl',
   'prefix' => '',
-  'host' => 'localhost',
+  'host' => 'database-1.c9y1ag7xkrxe.us-east-2.rds.amazonaws.com',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
