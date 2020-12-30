@@ -1,0 +1,6 @@
+name: actualizacion saldo Module
+description: Crear modulo para actualizacion de saldos
+package: Custom
+
+type: module
+core: 8.x

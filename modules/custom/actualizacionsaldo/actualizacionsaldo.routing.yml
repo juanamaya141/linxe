@@ -1,0 +1,9 @@
+actualizacionsaldo.import:
+  path: '/admin/actualizacionsaldo'
+  defaults:
+    _form: '\Drupal\actualizacionsaldo\Form\Actualizar'
+    _title: 'Actualizar Saldo'
+  requirements:
+    _permission: 'access linxeprocredit'
+
+  

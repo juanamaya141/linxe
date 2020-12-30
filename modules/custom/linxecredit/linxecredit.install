@@ -930,6 +930,18 @@ function linxecredit_update_8102() {
         'default' => '',
         'description' => 'Envío notificación recordatorio terminos.',
       ),
+      'url_terms' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => 'URL Terms & Conditions.',
+      ),
+      'registro_garantia_fga' => array(
+        'type' => 'varchar',
+        'length' => 5,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Se registró garantía en FGA.',
+      ),
       
     ],
     'primary key' => ['idadelanto'],
@@ -1059,13 +1071,6 @@ function linxecredit_update_8103() {
         'description' => 'Ciudad Empresa.',
       ),
 
-      'num_empleados' => [
-        'description' => 'Número de empleados.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => FALSE,
-        'default' => 0,
-      ],
 
       'convenio_tipoproducto' => array(
         'type' => 'varchar',
@@ -1252,43 +1257,239 @@ function linxecredit_update_8104() {
   ]; 
   $schema = \Drupal\Core\Database\Database::getConnection()->schema();
   $schema->createTable('linxe_seguridadsocial', $spec);
+
 }
+
 /**
- * Add new table mareigua_consultas
+ * Add new table garantias fga
  */
-function linxecredit_update_8106() {
-  
+function linxecredit_update_8107() {
+  drupal_set_message('linxecredit_update_8107: It works!');
+  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
   $spec = [
-    'description' => 'Consultas Mareigua',
+    'description' => 'Garantias FGA',
     'fields' => [
-      'iden' => array(
+      'idgarantia' => array(
         'type' => 'serial',
         'not null' => TRUE,
         'description' => 'Primary Key: Unique ID.',
       ),
-      'fechahora_consulta' => array(
+      'tipo_solicitud' => array(
+        'type' => 'varchar',
+        'length' => 5,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Tipo de solicitud ( adelanto_nomina ).',
+      ),
+      'idsolicitud' => array(
+        'description' => 'Id solicitud Adelanto de Nómina asociado.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'basic_tipodoc' => array(
+        'type' => 'varchar',
+        'length' => 5,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Tipo documento.',
+      ),
+      'basic_numdoc' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Número documento.',
+      ),
+      'basic_nombre' => array(
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Nombres.',
+      ),
+      'basic_generocod' => array(
+        'description' => 'Genero Código.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'basic_direccion' => array(
+        'type' => 'varchar',
+        'length' => 80,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Dirección.',
+      ),
+      'basic_municipiocod' => array(
+        'description' => 'Municipio Código.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'basic_telefono1' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Teléfono 1.',
+      ),
+      'basic_telefono2' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Teléfono 2.',
+      ),
+      'basic_correo' => array(
+        'type' => 'varchar',
+        'length' => 80,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Correo electrónico.',
+      ),
+      'garantia_nit' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Garantia Nit.',
+      ),
+      'garantia_sucursalcod' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Garantia Código Sucursal.',
+      ),
+      'garantia_codciiu' => array(
+        'description' => 'Garantia Código Ciiu.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'garantia_refcredito' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Garantia Referencia Crédito.',
+      ),
+      'garantia_numpagare' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Garantia Número Pagaré.',
+      ),
+      'garantia_monto' => array(
+        'type' => 'varchar',
+        'mysql_type' => 'DOUBLE',
+        'not null' => FALSE,
+        'default' => 0,
+        'description' => 'Garantia Monto.',
+      ),
+      'garantia_fechadesembolso' => array(
         'type' => 'varchar',
         'mysql_type' => 'datetime',
         'not null' => FALSE,
-        'description' => 'Fecha consulta mareigua.',
+        'description' => 'Garantia Fecha Desembolso.',
       ),
-      'cc_consultado' => array(
+      'garantia_plazo' => array(
+        'description' => 'Garantia Plazo.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'garantia_fechavencimiento' => array(
         'type' => 'varchar',
-        'length' => 100,
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+        'description' => 'Garantia Fecha Vencimiento.',
+      ),
+      'garantia_periodogracia' => array(
+        'description' => 'Garantia Periodo de Gracia.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'garantia_convenio' => array(
+        'description' => 'Garantia Convenio.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'garantia_codigoproducto' => array(
+        'description' => 'Garantia Código Producto.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'garantia_funcionarioresponsable' => array(
+        'type' => 'varchar',
+        'length' => 50,
         'not null' => FALSE,
         'default' => '',
-        'description' => 'Cedula consultada.',
+        'description' => 'Garantia Funcionario Responsable.',
       ),
-      'respuesta_servicio' => array(
+      'garantia_extencion' => array(
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Garantia Extención.',
+      ),
+      'garantia_urlaceptacion' => array(
         'type' => 'text',
         'not null' => FALSE,
-        'description' => 'Respuesta servicio',
+        'description' => 'Garantia url de archivo aceptación.',
+      ),
+      'datos_demograficos' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => 'Datos Demográficos.',
+      ),
+      'fecha_creacion' => array(
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+        'description' => 'Fecha creacion.',
+      ),
+      'fecha_actualizacion' => array(
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+        'description' => 'Fecha actualizacion.',
+      ),
+      'estado_garantia' => array(
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => FALSE,
+        'default' => '',
+        'description' => 'Estado Garantía.',
+      ),
+      'servicio_request' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => 'Request Service.',
+      ),
+      'servicio_response' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => 'Response Service.',
       ),
 
-
     ],
-    'primary key' => ['iden'],
+    'primary key' => ['idgarantia'],
   ]; 
-  $schema = \Drupal\Core\Database\Database::getConnection()->schema();
-  $schema->createTable('mareigua_consultas', $spec);
+  $schema->createTable('garantias_fga', $spec);
+
 }
