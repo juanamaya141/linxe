@@ -1,0 +1,7 @@
+name: 'FGA module'
+type: module
+description: 'fga module'
+package: 'Custom'
+core: '8.x'
+dependencies:
+  - block

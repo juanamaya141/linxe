@@ -1,0 +1,7 @@
+fga-libraries:
+  version: 1.x
+  css:
+    component:
+      css/fga.css: {}
+  js:
+    js/fga.js: {}

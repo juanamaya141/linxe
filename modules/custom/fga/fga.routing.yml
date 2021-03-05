@@ -1,0 +1,23 @@
+fga.list:
+  path: '/admin/fga/list'
+  defaults:
+    _controller: '\Drupal\fga\Controller\WarrantyController::listWarranties'
+    _title: 'FGA page'
+  requirements:
+    _permission: 'access fga'
+fga.claim:
+  path: '/admin/fga/claim/{cid}'
+  defaults:
+    #_controller: '\Drupal\fga\Controller\WarrantyController::claimWarranty'
+    _form: '\Drupal\fga\Form\ClaimWarrantyForm'
+    _title: 'Reclamar Garantía'
+  requirements:
+    _permission: 'access fga'
+fga.update:
+  path: '/admin/fga/update/{cid}'
+  defaults:
+    #_controller: '\Drupal\fga\Controller\WarrantyController::claimWarranty'
+    _form: '\Drupal\fga\Form\UpdateWarrantyForm'
+    _title: 'Actualizar Garantía'
+  requirements:
+    _permission: 'access fga'

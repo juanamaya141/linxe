@@ -1,0 +1,64 @@
+<?php
+
+use Drupal\Core\Url;
+
+/**
+ * @file
+ * Contains fga.module.
+ */
+
+function get_warranties($opt, $estado)
+{
+    $res = array();
+    if ($opt == "All") {
+        $results = db_select('garantias_fga', 'gf')
+            ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+            ->limit(15);
+        $results->join('adelantos_nomina', 'an', 'gf.idsolicitud = an.idadelanto');
+        $results->join('registrados_an', 're', 're.idregistro = an.idregistro ');
+        $results->fields('gf');
+        $results->fields('an');
+        $results->fields('re');
+        $results->orderBy('gf.idgarantia', 'DESC');
+        $res = $results->execute()->fetchAll();
+    } else {
+
+        $results = db_select('garantias_fga', 'gf')
+            ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
+            ->limit(15);
+        $results->join('adelantos_nomina', 'an', 'gf.idsolicitud = an.idadelanto');
+        $results->join('registrados_an', 're', 're.idregistro = an.idregistro ');
+        $results->fields('gf');
+        $results->fields('an');
+        $results->fields('re');
+        $results->orderBy('gf.idgarantia', 'DESC');
+        $results->condition('an.estado_general_solicitud', $estado);
+        $res = $results->execute()->fetchAll();
+    }
+    foreach ($res as $row) {
+
+        $claim = Url::fromUserInput('/admin/fga/claim/' . $row->idgarantia);
+        $claim_link = \Drupal::l('Reclamar Garantía', $claim);
+        $update = Url::fromUserInput('/admin/fga/update/' . $row->idgarantia);
+        $update_link = \Drupal::l('Actualizar Garantía', $update);
+        $mainLink = t(
+            '@linkClaim <br/ > @linkUpdate', 
+            array(
+                '@linkClaim' => $claim_link,
+                '@linkUpdate' => $update_link
+            )
+        );
+
+        $ret[] = [
+            'id' => $row->idregistro,
+            'tipodocumento' => $row->tipodocumento,
+            'documento' => $row->documento,
+            'nombre' => $row->nombre,
+            'primer apellido' => $row->primer_apellido,
+            'segundo apellido' => $row->segundo_apellido,
+            'estado de la garantía' => $row->estado_general_solicitud,
+            'opt' => $row->estado_garantia!='reclamacion'?$mainLink:''
+        ];
+    }
+    return $ret;
+}
